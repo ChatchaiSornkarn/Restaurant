@@ -7,7 +7,6 @@ package restaurant;
 
 import java.sql.SQLException;
 import static restaurant.SQLFilter.*;
-import static restaurant.ResJframe.*;
 
 /**
  *
@@ -35,9 +34,6 @@ public class Main {
             System.out.println("Filter " + name[i]);
         }
         destroy();
-        
-        ResJframe frame = new ResJframe();
-        frame.frame.setVisible(true);
     }
     
 }
