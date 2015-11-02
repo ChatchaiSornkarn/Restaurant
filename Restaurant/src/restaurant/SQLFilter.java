@@ -24,7 +24,10 @@ public class SQLFilter extends SQLRestaurant{
         
         try{
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("select RESTAURANT.Rest_Name from RESTAURANT, CUISINE, RESTAURANT_has_CUISINE where CUISINE.cuisine = \"" + cuisine 
+            ResultSet rs = stmt.executeQuery("Select RestName from Restaurant "
+                    + "INNER JOIN Restaurant_Cuisine_Types USING (Restaurant_ID) "
+                    + "INNER JOIN Cuisine_Types USING (Cuisine_ID)"
+                    + "WHERE Cuisine = \"" + cuisine 
                     + "\"");
             
             int rowcount = 0;
@@ -38,9 +41,10 @@ public class SQLFilter extends SQLRestaurant{
             int i = 0;
             
 	    while(rs.next()){
-	        name[i] = rs.getString("Rest_Name");
+	        name[i] = rs.getString("RestName");
 	        i++;
             }
+            
             close(stmt);
         }
         catch(Exception e){

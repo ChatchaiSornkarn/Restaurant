@@ -19,20 +19,20 @@ public class Main {
      */
     public static void main(String[] args) throws SQLException {
         dbconnecting();
-        String[] name = selectResName();
-        String[] cuisine = selectCuisine();
+//        String[] name = selectResName();
+//        
+//        //print all name
+//        for (int i = 0; i < name.length; i++) {
+//            System.out.println(name[i]);
+//        }
         
-        //print all name and cuisine
-        for (int i = 0; i < name.length; i++) {
-            System.out.println(name[i]);
-        }
-        System.out.println("");
-        name = selectFilterCuisine("fastfood");
+        String [] name = selectFilterCuisine("Indian");
         
         //print name of all pizza cuisine
         for (int i = 0; i < name.length; i++) {
             System.out.println("Filter " + name[i]);
         }
+        
         destroy();
     }
     

@@ -21,7 +21,7 @@ public class SQLRestaurant extends DBConnection{
         String[] name = null;
         try{
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("select Rest_Name from RESTAURANT ORDER BY Rest_Name");
+            ResultSet rs = stmt.executeQuery("select Name from Restaurant ORDER BY Name");
             
             int rowcount = 0;
             
@@ -34,7 +34,7 @@ public class SQLRestaurant extends DBConnection{
             int i = 0;
             
 	    while(rs.next()){
-                name[i] = rs.getString("Rest_Name");
+                name[i] = rs.getString("Name");
                 i++;
             }
             close(stmt);
@@ -67,7 +67,7 @@ public class SQLRestaurant extends DBConnection{
             int i = 0;
             
 	    while(rs.next()){
-	        cuisine[i] = rs.getString("CUISINE");
+	        cuisine[i] = rs.getString("Name");
 	        i++;
             }
             close(stmt);
