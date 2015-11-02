@@ -80,7 +80,7 @@ public class Restaurants {
 			}
                         
 		});
-		ResButton.setIcon(new ImageIcon("//restaurant/UtensilDefault1.png"));
+		ResButton.setIcon(new ImageIcon(getClass().getResource("/restaurant/UtensilDefault1.png")));
 		ResButton.setBounds(311, 135, 172, 182);
 		panel.add(ResButton);
 
@@ -111,12 +111,12 @@ public class Restaurants {
 				ExitTool.setCursor(cur1);
 			}
 		});
-		ExitTool.setIcon(new ImageIcon("/restaurant/closeButton.png"));
+		ExitTool.setIcon(new ImageIcon(getClass().getResource("/restaurant/closeButton.png")));
 		ExitTool.setBounds(762, 11, 32, 23);
 		panel.add(ExitTool);
 
 		JLabel Background = new JLabel("New label");
-		Background.setIcon(new ImageIcon("/restaurant/FinalBack.png"));
+		Background.setIcon(new ImageIcon(getClass().getResource("/restaurant/FinalBack.png")));
 		// lblNewLabel.setBounds(31, 48, 653, 358);
 		Background.setSize(800, 437);
 		panel.add(Background);
