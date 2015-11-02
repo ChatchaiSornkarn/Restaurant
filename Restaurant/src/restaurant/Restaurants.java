@@ -14,6 +14,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JFormattedTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 public class Restaurants {
 
@@ -49,9 +50,11 @@ public class Restaurants {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setResizable(false);
-		frame.setSize(800, 459);
+		frame.setSize(800, 433);
 		// frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setUndecorated(true);
+		frame.setLocationRelativeTo(null);
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.X_AXIS));
 
 		JPanel panel = new JPanel();
@@ -97,10 +100,16 @@ public class Restaurants {
 		JButton EnterLogin = new JButton("Enter");
 		EnterLogin.setBounds(280, 6, 89, 23);
 		panel.add(EnterLogin);
-
+                EnterLogin.addMouseListener(new MouseAdapter() {
+                    
+			@Override
+			public void mouseClicked(MouseEvent e) {
+                            JOptionPane.showMessageDialog(null, "This action is not yet applicable");
+			}
+		});
 		JLabel ExitTool = new JLabel("");
 		ExitTool.addMouseListener(new MouseAdapter() {
-			
+                    
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				System.exit(0);
@@ -118,7 +127,7 @@ public class Restaurants {
 		JLabel Background = new JLabel("New label");
 		Background.setIcon(new ImageIcon(getClass().getResource("/restaurant/FinalBack.png")));
 		// lblNewLabel.setBounds(31, 48, 653, 358);
-		Background.setSize(800, 437);
+		Background.setSize(800, 433);
 		panel.add(Background);
 	}
 }
