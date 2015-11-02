@@ -1,5 +1,6 @@
 package restaurant;
 
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.EventQueue;
 import java.awt.Graphics;
@@ -88,17 +89,21 @@ public class Restaurants {
 		panel.add(ResButton);
 
 		JFormattedTextField UserLogin = new JFormattedTextField();
-		UserLogin.setText("Username/Email");
+		UserLogin.setText(" Username/Email");
 		UserLogin.setBounds(10, 7, 122, 20);
 		panel.add(UserLogin);
 
 		PassLogin = new JPasswordField();
 		PassLogin.setBounds(142, 7, 128, 20);
+                PassLogin.setBackground(Color.BLACK);
+                PassLogin.setForeground(Color.WHITE);
 		PassLogin.setText("jjjjjjjjjjjj");
 		panel.add(PassLogin);
 
 		JButton EnterLogin = new JButton("Enter");
 		EnterLogin.setBounds(280, 6, 89, 23);
+                UserLogin.setBackground(Color.BLACK);
+                UserLogin.setForeground(Color.WHITE);
 		panel.add(EnterLogin);
                 EnterLogin.addMouseListener(new MouseAdapter() {
                     
