@@ -34,6 +34,9 @@ public class Main {
         }
         
         destroy();
+        
+          Restaurants form = new Restaurants();
+          form.frame.setVisible(true);
     }
     
 }
