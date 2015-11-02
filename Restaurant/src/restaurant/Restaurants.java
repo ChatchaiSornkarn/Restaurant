@@ -90,6 +90,8 @@ public class Restaurants {
 
 		JFormattedTextField UserLogin = new JFormattedTextField();
 		UserLogin.setText(" Username/Email");
+                UserLogin.setBackground(Color.BLACK);
+                UserLogin.setForeground(Color.WHITE);
 		UserLogin.setBounds(10, 7, 122, 20);
 		panel.add(UserLogin);
 
@@ -102,8 +104,6 @@ public class Restaurants {
 
 		JButton EnterLogin = new JButton("Enter");
 		EnterLogin.setBounds(280, 6, 89, 23);
-                UserLogin.setBackground(Color.BLACK);
-                UserLogin.setForeground(Color.WHITE);
 		panel.add(EnterLogin);
                 EnterLogin.addMouseListener(new MouseAdapter() {
                     
