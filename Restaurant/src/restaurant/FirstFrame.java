@@ -12,12 +12,15 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFormattedTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
-public class Restaurants {
+public class FirstFrame {
 
 	public JFrame frame;
 	public JPasswordField PassLogin;
@@ -29,7 +32,7 @@ public class Restaurants {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Restaurants window = new Restaurants();
+					FirstFrame window = new FirstFrame();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -41,7 +44,7 @@ public class Restaurants {
 	/**
 	 * Create the application.
 	 */
-	public Restaurants() {
+	public FirstFrame() {
 		initialize();
 	}
 
@@ -78,9 +81,13 @@ public class Restaurants {
                         }
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JFrame test = new JFrame("test");
-				test.setSize(500, 500);
-				test.setVisible(true);
+				MainFrame mainframe = null;
+                            try {
+                                mainframe = new MainFrame();
+                            } catch (SQLException ex) {
+                                Logger.getLogger(FirstFrame.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                                mainframe.frame.setVisible(true);
 			}
                         
 		});

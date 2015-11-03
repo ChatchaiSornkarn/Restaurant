@@ -19,8 +19,8 @@ public class Main {
      */
     public static void main(String[] args) throws SQLException {
         DBConnection.dbconnecting();
-        MainFrame mainframe = new MainFrame();
-        mainframe.frame.setVisible(true);
+        FirstFrame form = new FirstFrame();
+        form.frame.setVisible(true);
     }
     
 }
