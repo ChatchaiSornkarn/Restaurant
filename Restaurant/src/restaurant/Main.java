@@ -6,7 +6,7 @@
 package restaurant;
 
 import java.sql.SQLException;
-import static restaurant.SQLFilter.*;
+
 
 /**
  *
@@ -18,25 +18,9 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws SQLException {
-        dbconnecting();
-//        String[] name = selectResName();
-//        
-//        //print all name
-//        for (int i = 0; i < name.length; i++) {
-//            System.out.println(name[i]);
-//        }
-        
-        String [] name = selectFilterCuisine("Indian");
-        
-        //print name of all pizza cuisine
-        for (int i = 0; i < name.length; i++) {
-            System.out.println("Filter " + name[i]);
-        }
-        
-        destroy();
-        
-          Restaurants form = new Restaurants();
-          form.frame.setVisible(true);
+        DBConnection.dbconnecting();
+        MainFrame mainframe = new MainFrame();
+        mainframe.frame.setVisible(true);
     }
     
 }
