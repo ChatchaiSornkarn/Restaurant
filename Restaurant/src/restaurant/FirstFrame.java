@@ -19,6 +19,7 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import restaurant.MainFrame;
 
 public class FirstFrame {
 
@@ -71,12 +72,12 @@ public class FirstFrame {
 			public void mouseEntered(MouseEvent arg0) {
 				Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
 				ResButton.setCursor(cur1);
-                                ImageIcon II = new ImageIcon(getClass().getResource("/restaurant/UtensilHover1.png"));
+                                ImageIcon II = new ImageIcon(getClass().getResource("/resources/UtensilHover1.png"));
                                 ResButton.setIcon(II); 
 			       // code
 			}
                         public void mouseExited(MouseEvent arg0){
-                            ImageIcon III = new ImageIcon(getClass().getResource("/restaurant/UtensilDefault1.png"));
+                            ImageIcon III = new ImageIcon(getClass().getResource("/resources/UtensilDefault1.png"));
                             ResButton.setIcon(III);
                         }
 			@Override
@@ -93,15 +94,15 @@ public class FirstFrame {
 		});
                 
                 JLabel searchText = new JLabel("");
-		searchText.setIcon(new ImageIcon(getClass().getResource("/restaurant/ResSearch.png")));
+		searchText.setIcon(new ImageIcon(getClass().getResource("/resources/ResSearch.png")));
 		searchText.setBounds(180, 29, 464, 400);
 		panel.add(searchText);
                 
-		ResButton.setIcon(new ImageIcon(getClass().getResource("/restaurant/UtensilDefault1.png")));
+		ResButton.setIcon(new ImageIcon(getClass().getResource("/resources/UtensilDefault1.png")));
 		ResButton.setBounds(311, 135, 172, 182);
 		panel.add(ResButton);
                 
-		ResButton.setIcon(new ImageIcon(getClass().getResource("/restaurant/UtensilDefault1.png")));
+		ResButton.setIcon(new ImageIcon(getClass().getResource("/resources/UtensilDefault1.png")));
 		ResButton.setBounds(311, 135, 172, 182);
 		panel.add(ResButton);
 
@@ -142,12 +143,12 @@ public class FirstFrame {
 				ExitTool.setCursor(cur1);
 			}
 		});
-		ExitTool.setIcon(new ImageIcon(getClass().getResource("/restaurant/closeButton.png")));
+		ExitTool.setIcon(new ImageIcon(getClass().getResource("/resources/closeButton.png")));
 		ExitTool.setBounds(762, 11, 32, 23);
 		panel.add(ExitTool);
 
 		JLabel Background = new JLabel("New label");
-		Background.setIcon(new ImageIcon(getClass().getResource("/restaurant/FinalBack.png")));
+		Background.setIcon(new ImageIcon(getClass().getResource("/resources/FinalBack.png")));
 		// lblNewLabel.setBounds(31, 48, 653, 358);
 		Background.setSize(800, 433);
 		panel.add(Background);
