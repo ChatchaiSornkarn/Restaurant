@@ -64,23 +64,27 @@ public class Restaurants {
 
 		JLabel ResButton = new JLabel("");
 		ResButton.addMouseListener(new MouseAdapter() {// code later
+                    
 			@Override
-			public void mouseEntered(MouseEvent arg0) {
-				Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
-				ResButton.setCursor(cur1);
+			public void mouseEntered(MouseEvent e) {
                                 ImageIcon II = new ImageIcon(getClass().getResource("/restaurant/UtensilHover1.png"));
-                                ResButton.setIcon(II); 
+                                ResButton.setIcon(II);    
+                                Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
+				ResButton.setCursor(cur1);
 			       // code
 			}
-                        public void mouseExited(MouseEvent arg0){
+                        @Override
+                        public void mouseExited(MouseEvent e){
                             ImageIcon III = new ImageIcon(getClass().getResource("/restaurant/UtensilDefault1.png"));
                             ResButton.setIcon(III);
+                           
                         }
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				JFrame test = new JFrame("test");
 				test.setSize(500, 500);
 				test.setVisible(true);
+                                
 			}
                         
 		});
@@ -104,18 +108,41 @@ public class Restaurants {
                 UserLogin.setForeground(Color.WHITE);
 		UserLogin.setBounds(10, 6, 122, 20);
 		panel.add(UserLogin);
+                UserLogin.addMouseListener(new MouseAdapter() {   
+                    
+                    @Override
+                    public void mouseClicked(MouseEvent e){
+                    UserLogin.setText("");
+                    }
+                }); 
+                
 
-		PassLogin = new JPasswordField();
+		PassLogin = new JPasswordField("");
 		PassLogin.setBounds(142, 6, 128, 20);
                 PassLogin.setBackground(Color.BLACK);
                 PassLogin.setForeground(Color.WHITE);
 		PassLogin.setText("jjjjjjjjjjjj");
 		panel.add(PassLogin);
-
+                
+                PassLogin.addMouseListener(new MouseAdapter() {   
+                    
+                    @Override
+                    public void mouseClicked(MouseEvent e){
+                    PassLogin.setText("");
+                    }
+                    
+                }); 
+               
 		JButton EnterLogin = new JButton("Enter");
 		EnterLogin.setBounds(280, 4, 89, 23);
 		panel.add(EnterLogin);
                 EnterLogin.addMouseListener(new MouseAdapter() {
+                    
+                         @Override
+                    public void mouseEntered(MouseEvent e){
+                        Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
+                        EnterLogin.setCursor(cur1);
+                    }
                     
 			@Override
 			public void mouseClicked(MouseEvent e) {
