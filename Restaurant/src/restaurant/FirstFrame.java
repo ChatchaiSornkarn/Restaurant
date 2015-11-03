@@ -12,12 +12,15 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFormattedTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
-public class Restaurants {
+public class FirstFrame {
 
 	public JFrame frame;
 	public JPasswordField PassLogin;
@@ -29,7 +32,7 @@ public class Restaurants {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Restaurants window = new Restaurants();
+					FirstFrame window = new FirstFrame();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -41,7 +44,7 @@ public class Restaurants {
 	/**
 	 * Create the application.
 	 */
-	public Restaurants() {
+	public FirstFrame() {
 		initialize();
 	}
 
@@ -64,27 +67,27 @@ public class Restaurants {
 
 		JLabel ResButton = new JLabel("");
 		ResButton.addMouseListener(new MouseAdapter() {// code later
-                    
 			@Override
-			public void mouseEntered(MouseEvent e) {
-                                ImageIcon II = new ImageIcon(getClass().getResource("/restaurant/UtensilHover1.png"));
-                                ResButton.setIcon(II);    
-                                Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
+			public void mouseEntered(MouseEvent arg0) {
+				Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
 				ResButton.setCursor(cur1);
+                                ImageIcon II = new ImageIcon(getClass().getResource("/restaurant/UtensilHover1.png"));
+                                ResButton.setIcon(II); 
 			       // code
 			}
-                        @Override
-                        public void mouseExited(MouseEvent e){
+                        public void mouseExited(MouseEvent arg0){
                             ImageIcon III = new ImageIcon(getClass().getResource("/restaurant/UtensilDefault1.png"));
                             ResButton.setIcon(III);
-                           
                         }
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JFrame test = new JFrame("test");
-				test.setSize(500, 500);
-				test.setVisible(true);
-                                
+				MainFrame mainframe = null;
+                            try {
+                                mainframe = new MainFrame();
+                            } catch (SQLException ex) {
+                                Logger.getLogger(FirstFrame.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                                mainframe.frame.setVisible(true);
 			}
                         
 		});
@@ -108,41 +111,18 @@ public class Restaurants {
                 UserLogin.setForeground(Color.WHITE);
 		UserLogin.setBounds(10, 6, 122, 20);
 		panel.add(UserLogin);
-                UserLogin.addMouseListener(new MouseAdapter() {   
-                    
-                    @Override
-                    public void mouseClicked(MouseEvent e){
-                    UserLogin.setText("");
-                    }
-                }); 
-                
 
-		PassLogin = new JPasswordField("");
+		PassLogin = new JPasswordField();
 		PassLogin.setBounds(142, 6, 128, 20);
                 PassLogin.setBackground(Color.BLACK);
                 PassLogin.setForeground(Color.WHITE);
 		PassLogin.setText("jjjjjjjjjjjj");
 		panel.add(PassLogin);
-                
-                PassLogin.addMouseListener(new MouseAdapter() {   
-                    
-                    @Override
-                    public void mouseClicked(MouseEvent e){
-                    PassLogin.setText("");
-                    }
-                    
-                }); 
-               
+
 		JButton EnterLogin = new JButton("Enter");
 		EnterLogin.setBounds(280, 4, 89, 23);
 		panel.add(EnterLogin);
                 EnterLogin.addMouseListener(new MouseAdapter() {
-                    
-                         @Override
-                    public void mouseEntered(MouseEvent e){
-                        Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
-                        EnterLogin.setCursor(cur1);
-                    }
                     
 			@Override
 			public void mouseClicked(MouseEvent e) {

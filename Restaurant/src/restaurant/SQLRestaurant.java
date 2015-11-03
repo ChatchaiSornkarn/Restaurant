@@ -17,11 +17,11 @@ public class SQLRestaurant extends DBConnection{
      * select id and name from Restaurant
      * @return name[] array
      */
-    public static String[] selectResName() throws SQLException{
+    public static String[] selectRestName() throws SQLException{
         String[] name = null;
         try{
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("select Name from Restaurant ORDER BY Name");
+            ResultSet rs = stmt.executeQuery("select RestName from Restaurant ORDER BY RestName");
             
             int rowcount = 0;
             
@@ -34,7 +34,7 @@ public class SQLRestaurant extends DBConnection{
             int i = 0;
             
 	    while(rs.next()){
-                name[i] = rs.getString("Name");
+                name[i] = rs.getString("RestName");
                 i++;
             }
             close(stmt);
@@ -76,6 +76,62 @@ public class SQLRestaurant extends DBConnection{
         System.err.println(e.getMessage());
         }
         return cuisine;
+    }
+    
+    public static String[] selectRestTel() throws SQLException{
+        String[] name = null;
+        try{
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("select Telephone from Restaurant ORDER BY RestName");
+            
+            int rowcount = 0;
+            
+            if (rs.last()) {
+            rowcount = rs.getRow();
+            rs.beforeFirst();
+            }
+            
+            name = new String[rowcount];
+            int i = 0;
+            
+	    while(rs.next()){
+                name[i] = rs.getString("Telephone");
+                i++;
+            }
+            close(stmt);
+        }
+        catch(Exception e){
+        System.err.println(e.getMessage());
+        }
+        return name;
+    }
+    
+    public static String[] selectRestAddress() throws SQLException{
+        String[] name = null;
+        try{
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("select Address from Restaurant ORDER BY RestName");
+            
+            int rowcount = 0;
+            
+            if (rs.last()) {
+            rowcount = rs.getRow();
+            rs.beforeFirst();
+            }
+            
+            name = new String[rowcount];
+            int i = 0;
+            
+	    while(rs.next()){
+                name[i] = rs.getString("Address");
+                i++;
+            }
+            close(stmt);
+        }
+        catch(Exception e){
+        System.err.println(e.getMessage());
+        }
+        return name;
     }
     
 }
