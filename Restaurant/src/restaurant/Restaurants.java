@@ -84,6 +84,16 @@ public class Restaurants {
 			}
                         
 		});
+                
+                JLabel searchText = new JLabel("");
+		searchText.setIcon(new ImageIcon(getClass().getResource("/restaurant/ResSearch.png")));
+		searchText.setBounds(180, 29, 464, 400);
+		panel.add(searchText);
+                
+		ResButton.setIcon(new ImageIcon(getClass().getResource("/restaurant/UtensilDefault1.png")));
+		ResButton.setBounds(311, 135, 172, 182);
+		panel.add(ResButton);
+                
 		ResButton.setIcon(new ImageIcon(getClass().getResource("/restaurant/UtensilDefault1.png")));
 		ResButton.setBounds(311, 135, 172, 182);
 		panel.add(ResButton);
@@ -92,18 +102,18 @@ public class Restaurants {
 		UserLogin.setText(" Username/Email");
                 UserLogin.setBackground(Color.BLACK);
                 UserLogin.setForeground(Color.WHITE);
-		UserLogin.setBounds(10, 7, 122, 20);
+		UserLogin.setBounds(10, 6, 122, 20);
 		panel.add(UserLogin);
 
 		PassLogin = new JPasswordField();
-		PassLogin.setBounds(142, 7, 128, 20);
+		PassLogin.setBounds(142, 6, 128, 20);
                 PassLogin.setBackground(Color.BLACK);
                 PassLogin.setForeground(Color.WHITE);
 		PassLogin.setText("jjjjjjjjjjjj");
 		panel.add(PassLogin);
 
 		JButton EnterLogin = new JButton("Enter");
-		EnterLogin.setBounds(280, 6, 89, 23);
+		EnterLogin.setBounds(280, 4, 89, 23);
 		panel.add(EnterLogin);
                 EnterLogin.addMouseListener(new MouseAdapter() {
                     
