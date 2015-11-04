@@ -15,33 +15,35 @@ public class ResultPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public  ResultPanel(String name, String address, String tel) {
-		this.name = name;
-                this.address = address;
-                this.tel = tel;
+	public ResultPanel(String name, String address,String tel) {
+		this.name=name;
+		this.address=address;
+		this.tel=tel;
 		setLayout(null);
 		
 		JTextPane txtpnName = new JTextPane();
-		txtpnName.setFont(new Font("Lucida Handwriting", Font.PLAIN, 14));
+		txtpnName.setFont(new Font("Century", Font.PLAIN, 14));
 		txtpnName.setBackground(SystemColor.control);
 		txtpnName.setEditable(false);
-		txtpnName.setText("Name:\r\nAddress:\r\nTel:");
+		txtpnName.setText("Name:\r\nTelephone:\r\nAddress:");
 		txtpnName.setBounds(0, 0, 72, 66);
 		add(txtpnName);
 		
 		JTextPane txtpnFfdfd = new JTextPane();
-		txtpnFfdfd.setBackground(SystemColor.control);
+                txtpnFfdfd.setBackground(SystemColor.control);
 		txtpnFfdfd.setEditable(false);
-		txtpnFfdfd.setFont(new Font("Lucida Handwriting", Font.PLAIN, 14));
-		txtpnFfdfd.setText(name+"\r\n"+address+"\r\n"+tel);
+		txtpnFfdfd.setFont(new Font("Century", Font.PLAIN, 14));
+		txtpnFfdfd.setText("   "+name+"\r\n   "+address+"\r\n   "+tel);
 		txtpnFfdfd.setBounds(72, 0, 378, 66);
 		add(txtpnFfdfd);
 		
-		JLabel lblNewLabel = new JLabel("Leave feedback");
+		JLabel lblNewLabel = new JLabel("Leave Feedback");
 		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Beroo94\\Desktop\\misc_58.png"));
-		lblNewLabel.setBounds(265, 78, 164, 34);
+                lblNewLabel.setFont(new Font("Century", Font.PLAIN, 14));
+                lblNewLabel.setHorizontalAlignment(lblNewLabel.TRAILING);
+		lblNewLabel.setBounds(390, 78, 164, 34);
 		add(lblNewLabel);
-        }
-        
+
+	}
 
 }

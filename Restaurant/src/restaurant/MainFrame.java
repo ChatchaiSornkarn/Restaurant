@@ -30,7 +30,9 @@ import javax.swing.JLayeredPane;
 import java.awt.Component;
 import java.sql.SQLException;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
+import javax.swing.border.EmptyBorder;
 import static restaurant.SQLRestaurant.*;
 
 public class MainFrame {
@@ -53,47 +55,77 @@ public class MainFrame {
 	private void initialize() throws SQLException {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
-		frame.setSize(800, 433);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(820, 425);
+                frame.setLocationRelativeTo(null);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.X_AXIS));
-		
+                frame.setResizable(false);
+                
 		JPanel panel = new JPanel();
 		frame.getContentPane().add(panel);
+                panel.setBackground(Color.red);
 		panel.setLayout(null);
+
+      //          Background.setIcon(new ImageIcon(getClass().getResource());
 		
+                JLabel toolbar = new JLabel("Hello");
+                toolbar.setIcon(new ImageIcon(getClass().getResource("/resources/Toolbar.png")));
+                
+                
+                JTextField searchbar = new JTextField();
+		searchbar.setBounds(15, 30, 205, 20);
+                searchbar.setText("Search...");
+                searchbar.setFont(new Font("Century", Font.PLAIN, 13));
+		panel.add(searchbar);
+		searchbar.setColumns(10);
+                searchbar.addMouseListener(new MouseAdapter() {
+		@Override
+		public void mouseClicked(MouseEvent e) {
+                searchbar.setText("");
+			}
+		});
+                
+                
 		JTextPane txtpnPleaseSelectThe = new JTextPane();
 		txtpnPleaseSelectThe.setEditable(false);
-		txtpnPleaseSelectThe.setBackground(SystemColor.control);
-		txtpnPleaseSelectThe.setFont(new Font("Lucida Handwriting", Font.PLAIN, 14));
-		txtpnPleaseSelectThe.setText("Please select the cusinie");
-		txtpnPleaseSelectThe.setBounds(0, 0, 318, 20);
+		txtpnPleaseSelectThe.setOpaque(false);
+		txtpnPleaseSelectThe.setFont(new Font("Century", Font.PLAIN, 15));
+		txtpnPleaseSelectThe.setText("Please select the cuisine");
+		txtpnPleaseSelectThe.setBounds(15, 53, 318, 20);
 		panel.add(txtpnPleaseSelectThe);
 		
 		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(0, 31, 197, 20);
+		comboBox.setBounds(15, 78, 203, 20);
+                comboBox.setFont(new Font("Century", Font.PLAIN, 13));
 		comboBox.addItem("Thai");
 		comboBox.addItem("Swedish");
 		comboBox.addItem("Indian");
 		panel.add(comboBox);
                 
 		JTextPane txtpnSelectBudget = new JTextPane();
-		txtpnSelectBudget.setBackground(SystemColor.control);
+		txtpnSelectBudget.setOpaque(false);
 		txtpnSelectBudget.setEditable(false);
-		txtpnSelectBudget.setFont(new Font("Lucida Handwriting", Font.PLAIN, 14));
+		txtpnSelectBudget.setFont(new Font("Century", Font.PLAIN, 15));
 		txtpnSelectBudget.setText("Select budget");
-		txtpnSelectBudget.setBounds(0, 62, 197, 20);
+		txtpnSelectBudget.setBounds(15, 100, 197, 25);
 		panel.add(txtpnSelectBudget);
 		
 		JRadioButton rdbtnSek = new JRadioButton("15-50 SEK");
-		rdbtnSek.setBounds(6, 92, 109, 23);
+		rdbtnSek.setBounds(15, 120, 109, 23);
+                rdbtnSek.setOpaque(false);
+                rdbtnSek.setFont(new Font("Century", Font.PLAIN, 13));
 		panel.add(rdbtnSek);
 		
 		JRadioButton rdbtnSek_1 = new JRadioButton("50-75 SEK");
-		rdbtnSek_1.setBounds(6, 118, 109, 23);
+		rdbtnSek_1.setBounds(15, 140, 109, 23);
+                rdbtnSek_1.setOpaque(false);
+                rdbtnSek_1.setFont(new Font("Century", Font.PLAIN, 13));
 		panel.add(rdbtnSek_1);
 		
 		JRadioButton rdbtnSek_2 = new JRadioButton("75-125 SEK");
-		rdbtnSek_2.setBounds(6, 144, 109, 23);
+		rdbtnSek_2.setBounds(15, 160, 109, 23);
+                rdbtnSek_2.setOpaque(false);
+                rdbtnSek_2.setFont(new Font("Century", Font.PLAIN, 13));
 		panel.add(rdbtnSek_2);
 		
 		ButtonGroup btnG=new ButtonGroup();
@@ -102,39 +134,44 @@ public class MainFrame {
 		btnG.add(rdbtnSek_1);
 		btnG.add(rdbtnSek_2);
 		
-		JLabel lblNewLabel = new JLabel("New label");
+		JLabel lblNewLabel = new JLabel("GO");
+                lblNewLabel.setFont(new Font("Century", Font.PLAIN , 14));
 		lblNewLabel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//CODE ACTION HERE
+                        JOptionPane.showMessageDialog(null, "Hello");//CODE ACTION HERE
 			}
 		});
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Beroo94\\Desktop\\Arrow-right-icon.png"));
-		lblNewLabel.setBounds(10, 186, 46, 51);
+		lblNewLabel.setBounds(20, 186, 46, 30);
 		panel.add(lblNewLabel);
 		
                 
-		JTextPane txtpnGo = new JTextPane();
-		txtpnGo.setBackground(SystemColor.control);
-		txtpnGo.setEditable(false);
-		txtpnGo.setFont(new Font("Stencil", Font.PLAIN, 14));
-		txtpnGo.setText("GO");
-		txtpnGo.setBounds(20, 226, 33, 20);
-		panel.add(txtpnGo);
+	//	JTextPane txtpnGo = new JTextPane();
+	//	txtpnGo.setBackground(SystemColor.control);
+	//	txtpnGo.setEditable(false);
+	//	txtpnGo.setFont(new Font("Stencil", Font.PLAIN, 14));
+	//	txtpnGo.setText("GO");
+	//	txtpnGo.setBounds(20, 226, 33, 20);
+	//	panel.add(txtpnGo);
                 
                 JList jpanel = new JList(selectRestName());
-                jpanel.setBounds(207, 31, 567, 352);
+                jpanel.setBounds(207, 31, 567, 357);
                 JScrollPane jscroll = new JScrollPane(jpanel);
                 panel.add(jscroll);
                 
-                JTabbedPane tabbedPane = getJTabbedPane();
-                panel.add(tabbedPane);
+                JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setBorder(new EmptyBorder(0, 0, 0, 0));
+		tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
+                tabbedPane.setFont(new Font("Century", Font.PLAIN, 12));
+		tabbedPane.setToolTipText(":)\r\n");
+		tabbedPane.setBounds(235, 27, 572, 363);
+		panel.add(tabbedPane);
                 
                 name = selectRestName();
                 tel = selectRestTel();
                 address = selectRestAddress();
                 
-		for(int i = 0; i < 3; i++){  
+		for(int i = 0; i < 50; i++){  
                 getResultPanel(tabbedPane, name[i], tel[i], address[i]);
                 }
                  
@@ -151,6 +188,10 @@ public class MainFrame {
             
             return tabbedPane;
         }
+
+    private Object getclass() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
         
         
 }
