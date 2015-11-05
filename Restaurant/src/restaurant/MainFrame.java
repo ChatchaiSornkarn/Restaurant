@@ -63,13 +63,17 @@ public class MainFrame {
                 
 		JPanel panel = new JPanel();
 		frame.getContentPane().add(panel);
-                panel.setBackground(Color.red);
 		panel.setLayout(null);
+                
 
-      //          Background.setIcon(new ImageIcon(getClass().getResource());
+      
 		
-                JLabel toolbar = new JLabel("Hello");
-                toolbar.setIcon(new ImageIcon(getClass().getResource("/resources/Toolbar.png")));
+    //            JLabel toolbar = new JLabel();
+    //            toolbar.setIcon(new ImageIcon(getClass().getResource("/resources/Background2.png")));
+    //            toolbar.setBounds(100,100,450,300);
+    //            panel.add(toolbar);
+                
+                
                 
                 
                 JTextField searchbar = new JTextField();
@@ -134,15 +138,28 @@ public class MainFrame {
 		btnG.add(rdbtnSek_1);
 		btnG.add(rdbtnSek_2);
 		
-		JLabel lblNewLabel = new JLabel("GO");
-                lblNewLabel.setFont(new Font("Century", Font.PLAIN , 14));
+		JLabel lblNewLabel = new JLabel("");
+                lblNewLabel.setIcon(new ImageIcon(getClass().getResource("/resources/RedGo.png")));
+                lblNewLabel.setBounds(10, 186, 100, 50);
 		lblNewLabel.addMouseListener(new MouseAdapter() {
+                        
+                        @Override
+			public void mouseEntered(MouseEvent e) {
+                        lblNewLabel.setIcon(new ImageIcon(getClass().getResource("/resources/GreenGo.png")));
+			}
+                    
+                         @Override
+			public void mouseExited(MouseEvent e) {
+                        lblNewLabel.setIcon(new ImageIcon(getClass().getResource("/resources/RedGo.png")));
+			}
+                    
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mousePressed(MouseEvent e) {
+                        lblNewLabel.setIcon(new ImageIcon(getClass().getResource("/resources/GreenGo.png")));
                         JOptionPane.showMessageDialog(null, "Hello");//CODE ACTION HERE
 			}
 		});
-		lblNewLabel.setBounds(20, 186, 46, 30);
+		
 		panel.add(lblNewLabel);
 		
                 
