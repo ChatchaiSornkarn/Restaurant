@@ -4,6 +4,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import java.awt.SystemColor;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 
@@ -38,7 +40,23 @@ public class ResultPanel extends JPanel {
 		add(txtpnFfdfd);
 		
                 JLabel star = new JLabel("");
-          //      star.setIcon(new Im)
+                star.setIcon(new ImageIcon(getClass().getResource("/resources/Star.png")));
+                star.setBounds(380, 33, 110,110);
+                add(star);
+                star.addMouseListener(new MouseAdapter() {
+                        
+                        
+			public void mouseEntered(MouseEvent e) {
+                        star.setIcon(new ImageIcon(getClass().getResource("/resources/StarGlow.png")));
+			}
+                    
+                        
+			public void mouseExited(MouseEvent e) {
+                        star.setIcon(new ImageIcon(getClass().getResource("/resources/Star.png")));
+			}
+                    
+		});
+                
                 
                 
 		JLabel lblNewLabel = new JLabel("Leave Feedback");
