@@ -64,16 +64,13 @@ public class MainFrame {
 		JPanel panel = new JPanel();
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
-                panel.setBackground(java.awt.Color.white);
+         //       panel.setBackground(java.awt.Color.white);
       
-		
-    //            JLabel toolbar = new JLabel();
-    //            toolbar.setIcon(new ImageIcon(getClass().getResource("/resources/Background2.png")));
-    //            toolbar.setBounds(100,100,450,300);
-    //            panel.add(toolbar);
                 
-                
-                
+        //        JLabel toolbar = new JLabel();
+        //        toolbar.setIcon(new ImageIcon(getClass().getResource("/resources/Background2.png")));
+        //        toolbar.setBounds(100,100,450,300);
+        //        panel.add(toolbar);
                 
                 JTextField searchbar = new JTextField();
 		searchbar.setBounds(15, 30, 205, 20);

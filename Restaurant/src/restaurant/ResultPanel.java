@@ -37,6 +37,10 @@ public class ResultPanel extends JPanel {
 		txtpnFfdfd.setBounds(72, 0, 378, 66);
 		add(txtpnFfdfd);
 		
+                JLabel star = new JLabel("");
+          //      star.setIcon(new Im)
+                
+                
 		JLabel lblNewLabel = new JLabel("Leave Feedback");
 		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Beroo94\\Desktop\\misc_58.png"));
                 lblNewLabel.setFont(new Font("Century", Font.PLAIN, 14));
