@@ -54,7 +54,7 @@ public class SQLRestaurant extends DBConnection{
         
         try{
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("select * from CUISINE");
+            ResultSet rs = stmt.executeQuery("select * from Cuisine_Types");
             
             int rowcount = 0;
             
@@ -67,7 +67,7 @@ public class SQLRestaurant extends DBConnection{
             int i = 0;
             
 	    while(rs.next()){
-	        cuisine[i] = rs.getString("Name");
+	        cuisine[i] = rs.getString("Cuisine");
 	        i++;
             }
             close(stmt);

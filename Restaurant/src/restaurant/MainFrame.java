@@ -33,12 +33,12 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
-import static restaurant.SQLRestaurant.*;
+import static restaurant.SQLStringReturn.*;
 
 public class MainFrame {
 
 	public JFrame frame;
-        
+        public JTabbedPane tabbedPane;
         private String[] name,tel,address;
 
 	
@@ -94,12 +94,9 @@ public class MainFrame {
 		txtpnPleaseSelectThe.setBounds(15, 53, 318, 20);
 		panel.add(txtpnPleaseSelectThe);
 		
-		JComboBox comboBox = new JComboBox();
+		JComboBox comboBox = new JComboBox(selectCuisine());
 		comboBox.setBounds(15, 78, 203, 20);
                 comboBox.setFont(new Font("Century", Font.PLAIN, 13));
-		comboBox.addItem("Thai");
-		comboBox.addItem("Swedish");
-		comboBox.addItem("Indian");
 		panel.add(comboBox);
                 
 		JTextPane txtpnSelectBudget = new JTextPane();
@@ -151,8 +148,31 @@ public class MainFrame {
                     
 			@Override
 			public void mousePressed(MouseEvent e) {
-                        lblNewLabel.setIcon(new ImageIcon(getClass().getResource("/resources/GreenGo.png")));
-                        JOptionPane.showMessageDialog(null, "Hello");//CODE ACTION HERE
+                        //Selected cuisine in combobox placed in variable cuisine
+                		String cuisine = comboBox.getSelectedItem().toString();
+                		
+                		//Gets Name address and phone of all restaurants that been 
+                		//filterde out with SQL filtering query in the class SQLFilter.  
+                		String[] restName = selectFilterCuisineName(cuisine);
+                		String[] address = selectFilterCuisineAddress(cuisine);
+                		String[] phone = selectFilterCuisinePhone(cuisine);
+                		
+                		//If the tabbedPane is empty puts restaurant names in to tabbs
+                		//and puts restaurant information into ResultPanel.
+                		if (tabbedPane.getSelectedIndex() == -1) {
+                		for(int i = 0; i < restName.length; i++){  
+                            getResultPanel(tabbedPane, restName[i], phone[i], address[i]);
+                            }
+                		}
+                		//If the tabbedPane is not empty. Empties the tabbedPane
+                		// first and than puts restaurant names in to tabbs
+                		//and puts restaurant information into ResultPanel.
+                		else {
+                			tabbedPane.removeAll();
+                			for(int i = 0; i < restName.length; i++){  
+                                getResultPanel(tabbedPane, restName[i], phone[i], address[i]);
+                                }
+                		}
 			}
 		});
 		
@@ -172,7 +192,7 @@ public class MainFrame {
                 JScrollPane jscroll = new JScrollPane(jpanel);
                 panel.add(jscroll);
                 
-                JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+                tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 		tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
                 tabbedPane.setFont(new Font("Century", Font.PLAIN, 12));
