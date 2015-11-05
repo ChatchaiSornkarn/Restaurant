@@ -20,7 +20,6 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;
-import java.awt.Color;
 import java.awt.ScrollPane;
 import java.awt.Label;
 import java.awt.Panel;
@@ -29,6 +28,7 @@ import javax.swing.JLayeredPane;
 
 import java.awt.Component;
 import java.sql.SQLException;
+import javafx.scene.paint.Color;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
@@ -64,8 +64,7 @@ public class MainFrame {
 		JPanel panel = new JPanel();
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
-                
-
+                panel.setBackground(java.awt.Color.white);
       
 		
     //            JLabel toolbar = new JLabel();
@@ -182,6 +181,7 @@ public class MainFrame {
                 tabbedPane.setFont(new Font("Century", Font.PLAIN, 12));
 		tabbedPane.setToolTipText(":)\r\n");
 		tabbedPane.setBounds(235, 27, 572, 363);
+                tabbedPane.setBackground(java.awt.Color.white);
 		panel.add(tabbedPane);
                 
                 name = selectRestName();
