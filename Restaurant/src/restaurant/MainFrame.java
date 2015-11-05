@@ -131,21 +131,10 @@ public class MainFrame {
 		btnG.add(rdbtnSek_1);
 		btnG.add(rdbtnSek_2);
 		
-		JLabel lblNewLabel = new JLabel("");
-                lblNewLabel.setIcon(new ImageIcon(getClass().getResource("/resources/RedGo.png")));
-                lblNewLabel.setBounds(10, 186, 100, 50);
+		JButton lblNewLabel = new JButton("Select");
+                lblNewLabel.setBounds(30, 249, 146, 29);
 		lblNewLabel.addMouseListener(new MouseAdapter() {
                         
-                        @Override
-			public void mouseEntered(MouseEvent e) {
-                        lblNewLabel.setIcon(new ImageIcon(getClass().getResource("/resources/GreenGo.png")));
-			}
-                    
-                         @Override
-			public void mouseExited(MouseEvent e) {
-                        lblNewLabel.setIcon(new ImageIcon(getClass().getResource("/resources/RedGo.png")));
-			}
-                    
 			@Override
 			public void mousePressed(MouseEvent e) {
                         //Selected cuisine in combobox placed in variable cuisine
@@ -196,7 +185,6 @@ public class MainFrame {
 		tabbedPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 		tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
                 tabbedPane.setFont(new Font("Century", Font.PLAIN, 12));
-		tabbedPane.setToolTipText(":)\r\n");
 		tabbedPane.setBounds(235, 27, 572, 363);
                 tabbedPane.setBackground(java.awt.Color.white);
 		panel.add(tabbedPane);
