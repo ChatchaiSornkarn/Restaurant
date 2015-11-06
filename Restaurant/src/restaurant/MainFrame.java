@@ -27,10 +27,14 @@ import javax.swing.JScrollBar;
 import javax.swing.JLayeredPane;
 
 import java.awt.Component;
+import java.awt.Cursor;
 import java.sql.SQLException;
 import javafx.scene.paint.Color;
+import javax.swing.JCheckBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
 import static restaurant.SQLStringReturn.*;
@@ -55,27 +59,71 @@ public class MainFrame {
 	private void initialize() throws SQLException {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
-		frame.setSize(820, 425);
+		frame.setSize(902, 600);
                 frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.X_AXIS));
                 frame.setResizable(false);
+                frame.setUndecorated(true);
                 
 		JPanel panel = new JPanel();
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
+                panel.setBackground(java.awt.Color.DARK_GRAY);
                 
-      
+                JLabel ExitTool = new JLabel("");
+                ExitTool.setBounds(867, 1, 40, 40);
+		ExitTool.addMouseListener(new MouseAdapter() {
+                    
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				frame.dispose();
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
+				ExitTool.setCursor(cur1);
+                                ExitTool.setIcon(new ImageIcon(getClass().getResource("/resources/closeButtonHover.png")));
+			}
+                        @Override
+                        public void mouseExited(MouseEvent e){
+                            ExitTool.setIcon(new ImageIcon(getClass().getResource("/resources/closeButton.png")));
+                        }
+		});
+		ExitTool.setIcon(new ImageIcon(getClass().getResource("/resources/closeButton.png")));
+		panel.add(ExitTool);
                 
-                JLabel toolbar = new JLabel();
-                toolbar.setIcon(new ImageIcon("resources/Background2.png"));
-                toolbar.setBounds(100,100,450,300);
-                panel.add(toolbar);
+                JFormattedTextField UserLogin = new JFormattedTextField();
+		UserLogin.setText(" Username/Email");
+                UserLogin.setBackground(java.awt.Color.DARK_GRAY);
+                UserLogin.setForeground(java.awt.Color.WHITE);
+		UserLogin.setBounds(10, 3, 122, 20);
+		panel.add(UserLogin);
+
+		JPasswordField PassLogin = new JPasswordField();
+		PassLogin.setBounds(142, 3, 128, 20);
+                PassLogin.setBackground(java.awt.Color.DARK_GRAY);
+                PassLogin.setForeground(java.awt.Color.WHITE);
+		PassLogin.setText("jjjjjjjjjjjj");
+		panel.add(PassLogin);
+
+		JButton EnterLogin = new JButton("Enter");
+		EnterLogin.setBounds(280, 3, 89, 20);
+		panel.add(EnterLogin);
+                EnterLogin.addMouseListener(new MouseAdapter() {
+                    
+			@Override
+			public void mouseClicked(MouseEvent e) {
+                            JOptionPane.showMessageDialog(null, "This action is not yet applicable");
+			}
+		});
+                
                 
                 JTextField searchbar = new JTextField();
-		searchbar.setBounds(15, 30, 205, 20);
-                searchbar.setText("Search...");
-                searchbar.setFont(new Font("Century", Font.PLAIN, 13));
+		searchbar.setBounds(33, 60, 174, 20);
+                searchbar.setText("Enter search terms here");
+                searchbar.setFont(new Font("Arial", Font.ITALIC, 13));
+                searchbar.setBorder(null);
 		panel.add(searchbar);
 		searchbar.setColumns(10);
                 searchbar.addMouseListener(new MouseAdapter() {
@@ -89,56 +137,61 @@ public class MainFrame {
 		JTextPane txtpnPleaseSelectThe = new JTextPane();
 		txtpnPleaseSelectThe.setEditable(false);
 		txtpnPleaseSelectThe.setOpaque(false);
-		txtpnPleaseSelectThe.setFont(new Font("Century", Font.PLAIN, 15));
+		txtpnPleaseSelectThe.setFont(new Font("Arial", Font.BOLD, 14));
 		txtpnPleaseSelectThe.setText("Please select the cuisine");
-		txtpnPleaseSelectThe.setBounds(15, 53, 318, 20);
+                txtpnPleaseSelectThe.setForeground(java.awt.Color.white);
+		txtpnPleaseSelectThe.setBounds(50, 107, 318, 20);
 		panel.add(txtpnPleaseSelectThe);
 		
-		JComboBox comboBox = new JComboBox(selectCuisine());
-		comboBox.setBounds(15, 78, 203, 20);
-                comboBox.setFont(new Font("Century", Font.PLAIN, 13));
-		panel.add(comboBox);
+		JComboBox cuisinecomboBox = new JComboBox(selectCuisine());
+		cuisinecomboBox.setBounds(53, 135, 150, 20);
+                cuisinecomboBox.setFont(new Font("Arial", Font.PLAIN, 13));
+		panel.add(cuisinecomboBox);
                 
 		JTextPane txtpnSelectBudget = new JTextPane();
 		txtpnSelectBudget.setOpaque(false);
 		txtpnSelectBudget.setEditable(false);
-		txtpnSelectBudget.setFont(new Font("Century", Font.PLAIN, 15));
+		txtpnSelectBudget.setFont(new Font("Arial", Font.BOLD, 15));
 		txtpnSelectBudget.setText("Select budget");
-		txtpnSelectBudget.setBounds(15, 100, 197, 25);
+                txtpnSelectBudget.setForeground(java.awt.Color.white);
+		txtpnSelectBudget.setBounds(50, 200, 197, 25);
 		panel.add(txtpnSelectBudget);
 		
-		JRadioButton rdbtnSek = new JRadioButton("15-50 SEK");
-		rdbtnSek.setBounds(15, 120, 109, 23);
-                rdbtnSek.setOpaque(false);
-                rdbtnSek.setFont(new Font("Century", Font.PLAIN, 13));
-		panel.add(rdbtnSek);
+		JCheckBox sek15_20 = new JCheckBox("15-50 SEK");
+		sek15_20.setBounds(53, 225, 109, 23);
+                sek15_20.setOpaque(false);
+                sek15_20.setFont(new Font("Arial", Font.PLAIN, 13));
+                sek15_20.setForeground(java.awt.Color.white);
+		panel.add(sek15_20);
 		
-		JRadioButton rdbtnSek_1 = new JRadioButton("50-75 SEK");
-		rdbtnSek_1.setBounds(15, 140, 109, 23);
-                rdbtnSek_1.setOpaque(false);
-                rdbtnSek_1.setFont(new Font("Century", Font.PLAIN, 13));
-		panel.add(rdbtnSek_1);
+		JCheckBox sek50_75 = new JCheckBox("50-75 SEK");
+		sek50_75.setBounds(53, 255, 109, 23);
+                sek50_75.setOpaque(false);
+                sek50_75.setFont(new Font("Arial", Font.PLAIN, 13));
+                sek50_75.setForeground(java.awt.Color.white);
+		panel.add(sek50_75);
 		
-		JRadioButton rdbtnSek_2 = new JRadioButton("75-125 SEK");
-		rdbtnSek_2.setBounds(15, 160, 109, 23);
-                rdbtnSek_2.setOpaque(false);
-                rdbtnSek_2.setFont(new Font("Century", Font.PLAIN, 13));
-		panel.add(rdbtnSek_2);
+		JCheckBox sek75_125 = new JCheckBox("75-125 SEK");
+		sek75_125.setBounds(53, 285, 109, 23);
+                sek75_125.setOpaque(false);
+                sek75_125.setFont(new Font("Arial", Font.PLAIN, 13));
+                sek75_125.setForeground(java.awt.Color.white);
+		panel.add(sek75_125);
 		
 		ButtonGroup btnG=new ButtonGroup();
-		btnG.add(rdbtnSek);
-		rdbtnSek.setSelected(true);
-		btnG.add(rdbtnSek_1);
-		btnG.add(rdbtnSek_2);
+		btnG.add(sek15_20);
+		sek15_20.setSelected(true);
+		btnG.add(sek50_75);
+		btnG.add(sek75_125);
 		
-		JButton lblNewLabel = new JButton("Select");
-                lblNewLabel.setBounds(30, 249, 146, 29);
-		lblNewLabel.addMouseListener(new MouseAdapter() {
+		JButton selectbutton = new JButton("Select");
+                selectbutton.setBounds(50, 340, 253, 29);
+		selectbutton.addMouseListener(new MouseAdapter() {
                         
 			@Override
 			public void mousePressed(MouseEvent e) {
                         //Selected cuisine in combobox placed in variable cuisine
-                		String cuisine = comboBox.getSelectedItem().toString();
+                		String cuisine = cuisinecomboBox.getSelectedItem().toString();
                 		
                 		//Gets Name address and phone of all restaurants that been 
                 		//filterde out with SQL filtering query in the class SQLFilter.  
@@ -165,16 +218,7 @@ public class MainFrame {
 			}
 		});
 		
-		panel.add(lblNewLabel);
-		
-                
-	//	JTextPane txtpnGo = new JTextPane();
-	//	txtpnGo.setBackground(SystemColor.control);
-	//	txtpnGo.setEditable(false);
-	//	txtpnGo.setFont(new Font("Stencil", Font.PLAIN, 14));
-	//	txtpnGo.setText("GO");
-	//	txtpnGo.setBounds(20, 226, 33, 20);
-	//	panel.add(txtpnGo);
+		panel.add(selectbutton);
                 
                 JList jpanel = new JList(selectRestName());
                 jpanel.setBounds(207, 31, 567, 357);
@@ -184,10 +228,16 @@ public class MainFrame {
                 tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 		tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
-                tabbedPane.setFont(new Font("Century", Font.PLAIN, 12));
-		tabbedPane.setBounds(235, 27, 572, 363);
+                tabbedPane.setFont(new Font("Arial", Font.BOLD, 12));
+		tabbedPane.setBounds(310, 67, 560, 510);
                 tabbedPane.setBackground(java.awt.Color.white);
 		panel.add(tabbedPane);
+                
+                
+                JLabel backgroundlayout = new JLabel("");
+                backgroundlayout.setIcon(new ImageIcon(getClass().getResource("/resources/TestBackground.png")));
+                backgroundlayout.setBounds(0, 0, 902, 608);
+                panel.add(backgroundlayout);
                 
                 name = selectRestName();
                 tel = selectRestTel();
@@ -210,10 +260,13 @@ public class MainFrame {
             
             return tabbedPane;
         }
+                
+                
 
     private Object getclass() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
         
+    
         
 }
