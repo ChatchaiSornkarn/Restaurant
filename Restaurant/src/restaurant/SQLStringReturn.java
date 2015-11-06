@@ -13,14 +13,14 @@ import java.util.ArrayList;
 
 /**
  *
- * @author chatchai
+ * @author team 14
  */
-public class SQLStringReturn extends SQLFilter{
+public class SQLStringReturn {
     
-    ArrayList<String> is;
+     
     
     public String[] makeList(String a){
-		is = new ArrayList<String>();
+	ArrayList<String> is = new ArrayList<String>();
 		String[] array = null;
 		
         try {
