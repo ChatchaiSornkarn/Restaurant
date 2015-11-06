@@ -98,14 +98,27 @@ public class MainFrame {
                 UserLogin.setBackground(java.awt.Color.DARK_GRAY);
                 UserLogin.setForeground(java.awt.Color.WHITE);
 		UserLogin.setBounds(10, 3, 122, 20);
+                UserLogin.addMouseListener(new MouseAdapter(){
+                    @Override
+                    public void mouseClicked(MouseEvent e){
+                        UserLogin.setText("");
+                    }
+                });
 		panel.add(UserLogin);
 
 		JPasswordField PassLogin = new JPasswordField();
 		PassLogin.setBounds(142, 3, 128, 20);
                 PassLogin.setBackground(java.awt.Color.DARK_GRAY);
                 PassLogin.setForeground(java.awt.Color.WHITE);
-		PassLogin.setText("jjjjjjjjjjjj");
+		PassLogin.setText("jjjjjjjjjj");
+                PassLogin.addMouseListener(new MouseAdapter(){
+                    @Override
+                    public void mouseClicked(MouseEvent e){
+                        PassLogin.setText("");
+                    }
+                });
 		panel.add(PassLogin);
+                
 
 		JButton EnterLogin = new JButton("Enter");
 		EnterLogin.setBounds(280, 3, 89, 20);
@@ -116,6 +129,12 @@ public class MainFrame {
 			public void mouseClicked(MouseEvent e) {
                             JOptionPane.showMessageDialog(null, "This action is not yet applicable");
 			}
+                                     
+                    @Override
+                    public void mouseEntered(MouseEvent e){
+                          Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
+                            EnterLogin.setCursor(cur1);
+                        }
 		});
                 
                 
@@ -146,6 +165,13 @@ public class MainFrame {
 		JComboBox cuisinecomboBox = new JComboBox(selectCuisine());
 		cuisinecomboBox.setBounds(53, 135, 150, 20);
                 cuisinecomboBox.setFont(new Font("Arial", Font.PLAIN, 13));
+                cuisinecomboBox.addMouseListener(new MouseAdapter(){
+                    @Override
+                    public void mouseEntered(MouseEvent e){
+                          Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
+                            cuisinecomboBox.setCursor(cur1);
+                        }
+                });
 		panel.add(cuisinecomboBox);
                 
 		JTextPane txtpnSelectBudget = new JTextPane();
@@ -162,6 +188,13 @@ public class MainFrame {
                 sek15_20.setOpaque(false);
                 sek15_20.setFont(new Font("Arial", Font.PLAIN, 13));
                 sek15_20.setForeground(java.awt.Color.white);
+                sek15_20.addMouseListener(new MouseAdapter(){
+                    @Override
+                    public void mouseEntered(MouseEvent e){
+                          Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
+                            sek15_20.setCursor(cur1);
+                        }
+                });
 		panel.add(sek15_20);
 		
 		JCheckBox sek50_75 = new JCheckBox("50-75 SEK");
@@ -169,6 +202,13 @@ public class MainFrame {
                 sek50_75.setOpaque(false);
                 sek50_75.setFont(new Font("Arial", Font.PLAIN, 13));
                 sek50_75.setForeground(java.awt.Color.white);
+                sek50_75.addMouseListener(new MouseAdapter(){
+                    @Override
+                    public void mouseEntered(MouseEvent e){
+                          Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
+                            sek50_75.setCursor(cur1);
+                        }
+                });
 		panel.add(sek50_75);
 		
 		JCheckBox sek75_125 = new JCheckBox("75-125 SEK");
@@ -176,6 +216,13 @@ public class MainFrame {
                 sek75_125.setOpaque(false);
                 sek75_125.setFont(new Font("Arial", Font.PLAIN, 13));
                 sek75_125.setForeground(java.awt.Color.white);
+                sek75_125.addMouseListener(new MouseAdapter(){
+                    @Override
+                    public void mouseEntered(MouseEvent e){
+                          Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
+                            sek75_125.setCursor(cur1);
+                        }
+                });
 		panel.add(sek75_125);
 		
 		ButtonGroup btnG=new ButtonGroup();
@@ -187,10 +234,17 @@ public class MainFrame {
 		JButton selectbutton = new JButton("Select");
                 selectbutton.setBounds(50, 340, 253, 29);
 		selectbutton.addMouseListener(new MouseAdapter() {
+                    
+                        @Override
+                        public void mouseEntered(MouseEvent e){
+                            Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
+                            selectbutton.setCursor(cur1);
+                        }
                         
 			@Override
 			public void mousePressed(MouseEvent e) {
                         //Selected cuisine in combobox placed in variable cuisine
+                            
                 		String cuisine = cuisinecomboBox.getSelectedItem().toString();
                 		
                 		//Gets Name address and phone of all restaurants that been 
@@ -250,12 +304,12 @@ public class MainFrame {
         }
         
         private static void getResultPanel(JTabbedPane tabbedPane, String name, String tel, String address){
-            tabbedPane.addTab(name, new ImageIcon("C:\\Users\\Beroo94\\Desktop\\restaurant_12_2x.png"), new ResultPanel(name, tel, address));
+            tabbedPane.addTab(name, new ImageIcon("C:\\Users\\Beroo94\\Desktop\\restaurant_12_2x.png") , new ResultPanel(name, tel, address));
         }
         
         private static JTabbedPane getJTabbedPane(){
             JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-            tabbedPane.setToolTipText("Hello\r\n");
+            tabbedPane.setToolTipText("");
             tabbedPane.setBounds(207, 31, 567, 352);
             
             return tabbedPane;

@@ -67,11 +67,14 @@ public class FirstFrame {
 		panel.setLayout(null);
 
 		JLabel ResButton = new JLabel("");
+                ResButton.setIcon(new ImageIcon(getClass().getResource("/resources/UtensilDefault1.png")));
+		ResButton.setBounds(311, 135, 172, 182);
+		panel.add(ResButton);
 		ResButton.addMouseListener(new MouseAdapter() {// code later
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
-				Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
-				ResButton.setCursor(cur1);
+				Cursor cur7 = new Cursor(Cursor.HAND_CURSOR);
+				ResButton.setCursor(cur7);
                                 ImageIcon II = new ImageIcon(getClass().getResource("/resources/UtensilHover1.png"));
                                 ResButton.setIcon(II); 
 			       // code
@@ -93,18 +96,12 @@ public class FirstFrame {
                         
 		});
                 
-                JLabel searchText = new JLabel("");
-		searchText.setIcon(new ImageIcon(getClass().getResource("/resources/ResSearch.png")));
-		searchText.setBounds(180, 29, 464, 400);
-		panel.add(searchText);
+        //      JLabel searchText = new JLabel("");
+	//	searchText.setIcon(new ImageIcon(getClass().getResource("/resources/ResSearch.png")));
+	//	searchText.setBounds(180, 29, 464, 400);
+	//	panel.add(searchText);
                 
-		ResButton.setIcon(new ImageIcon(getClass().getResource("/resources/UtensilDefault1.png")));
-		ResButton.setBounds(311, 135, 172, 182);
-		panel.add(ResButton);
-                
-		ResButton.setIcon(new ImageIcon(getClass().getResource("/resources/UtensilDefault1.png")));
-		ResButton.setBounds(311, 135, 172, 182);
-		panel.add(ResButton);
+		
 
 		JFormattedTextField UserLogin = new JFormattedTextField();
 		UserLogin.setText(" Username/Email");
@@ -125,12 +122,19 @@ public class FirstFrame {
 		panel.add(EnterLogin);
                 EnterLogin.addMouseListener(new MouseAdapter() {
                     
+                        @Override
+                        public void mouseEntered(MouseEvent e){
+                            Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
+                            EnterLogin.setCursor(cur1);
+                        }
+                    
 			@Override
 			public void mouseClicked(MouseEvent e) {
                             JOptionPane.showMessageDialog(null, "This action is not yet applicable");
 			}
 		});
 		JLabel ExitTool = new JLabel("");
+                ExitTool.setBounds(762, 5, 40, 40);
 		ExitTool.addMouseListener(new MouseAdapter() {
                     
 			@Override
@@ -141,10 +145,14 @@ public class FirstFrame {
 			public void mouseEntered(MouseEvent e) {
 				Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
 				ExitTool.setCursor(cur1);
+                                ExitTool.setIcon(new ImageIcon(getClass().getResource("/resources/closeButtonHover.png")));
 			}
+                        @Override
+                        public void mouseExited(MouseEvent e){
+                                ExitTool.setIcon(new ImageIcon(getClass().getResource("/resources/closeButton.png")));
+                        }
 		});
 		ExitTool.setIcon(new ImageIcon(getClass().getResource("/resources/closeButton.png")));
-		ExitTool.setBounds(762, 11, 32, 23);
 		panel.add(ExitTool);
 
 		JLabel Background = new JLabel("New label");
