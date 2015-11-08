@@ -249,15 +249,15 @@ public class MainFrame {
                 		
                 		//Gets Name address and phone of all restaurants that been 
                 		//filterde out with SQL filtering query in the class SQLFilter.  
-                		String[] restName = selectFilterCuisineName(cuisine);
+                		String[] name = selectFilterCuisineName(cuisine);
                 		String[] address = selectFilterCuisineAddress(cuisine);
-                		String[] phone = selectFilterCuisinePhone(cuisine);
+                		String[] tel = selectFilterCuisinePhone(cuisine);
                 		
                 		//If the tabbedPane is empty puts restaurant names in to tabbs
                 		//and puts restaurant information into ResultPanel.
                 		if (tabbedPane.getSelectedIndex() == -1) {
-                		for(int i = 0; i < restName.length; i++){  
-                            getResultPanel(tabbedPane, restName[i], phone[i], address[i]);
+                		for(int i = 0; i < name.length; i++){  
+                            getResultPanel(tabbedPane, name[i], tel[i], address[i]);
                             }
                 		}
                 		//If the tabbedPane is not empty. Empties the tabbedPane
@@ -265,8 +265,8 @@ public class MainFrame {
                 		//and puts restaurant information into ResultPanel.
                 		else {
                 			tabbedPane.removeAll();
-                			for(int i = 0; i < restName.length; i++){  
-                                getResultPanel(tabbedPane, restName[i], phone[i], address[i]);
+                			for(int i = 0; i < name.length; i++){  
+                                getResultPanel(tabbedPane, name[i], tel[i], address[i]);
                                 }
                 		}
 			}
