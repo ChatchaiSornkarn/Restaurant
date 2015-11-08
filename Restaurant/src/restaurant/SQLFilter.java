@@ -30,19 +30,19 @@ public class SQLFilter extends SQLRestaurant {
                     + "INNER JOIN Restaurant_Cuisine_Types USING (Restaurant_ID) "
                     + "INNER JOIN Cuisine_Types USING (Cuisine_ID)"
                     + "WHERE Cuisine = \"" + cuisine 
-                    + "\"");
+                    + "\" ORDER BY RestName");
         
         address = makeList("Select Address from Restaurant "
                     + "INNER JOIN Restaurant_Cuisine_Types USING (Restaurant_ID) "
                     + "INNER JOIN Cuisine_Types USING (Cuisine_ID)"
                     + "WHERE Cuisine = \"" + cuisine 
-                    + "\"");
+                    + "\" ORDER BY RestName");
         
         phone = makeList("Select Telephone from Restaurant "
                     + "INNER JOIN Restaurant_Cuisine_Types USING (Restaurant_ID) "
                     + "INNER JOIN Cuisine_Types USING (Cuisine_ID)"
                     + "WHERE Cuisine = \"" + cuisine 
-                    + "\"");
+                    + "\" ORDER BY RestName");
         
         String[][] cuisineRest = new String[name.length][3];
         
