@@ -15,11 +15,11 @@ import java.util.ArrayList;
  *
  * @author chatchai
  */
-public class SQLStringReturn extends SQLFilter{
+public class SQLStringReturn extends DBConnection{
     
-    ArrayList<String> is;
+    private static ArrayList<String> is;
     
-    public String[] makeList(String a){
+    public static String[] makeList(String a){
 		is = new ArrayList<String>();
 		String[] array = null;
 		
@@ -29,8 +29,9 @@ public class SQLStringReturn extends SQLFilter{
                 ResultSet r = stmt.executeQuery(a);
             while(r.next() ){
     	        is.add(r.getString(1));
-	        }  conn.close();
+	        }
             array = is.toArray(new String[is.size()]);
+            close(stmt);
 	     }catch (Exception e) {
 		  e.printStackTrace();
 	}     
@@ -56,7 +57,7 @@ public class SQLStringReturn extends SQLFilter{
 	      
 	    p.executeUpdate();
 	    p.close();
-	    conn.close();
+            
 	    }catch (Exception e) {
 			  e.printStackTrace();
 		}     

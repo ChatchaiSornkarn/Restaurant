@@ -30,6 +30,7 @@ import java.awt.Component;
 import java.awt.Cursor;
 import java.sql.SQLException;
 import javafx.scene.paint.Color;
+import javax.swing.ButtonModel;
 import javax.swing.JCheckBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JList;
@@ -37,13 +38,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
-import static restaurant.SQLStringReturn.*;
+import static restaurant.SQLFilter.*;
 
 public class MainFrame {
 
 	public JFrame frame;
-        public JTabbedPane tabbedPane;
-        private String[] name,tel,address;
+        private static String slBudget;
+        private static JTabbedPane tabbedPane;
+        private static String[] name,tel,address;
 
 	
 	/**
@@ -162,7 +164,15 @@ public class MainFrame {
 		txtpnPleaseSelectThe.setBounds(50, 107, 318, 20);
 		panel.add(txtpnPleaseSelectThe);
 		
-		JComboBox cuisinecomboBox = new JComboBox(selectCuisine());
+                //add All to type
+                String[] allcuisine = selectCuisine();
+                String[] allcuisine1 = new String[allcuisine.length+1];
+                allcuisine1[0] = "All";
+                for(int i = 1; i <= allcuisine.length; i++){
+                    allcuisine1[i] = allcuisine[i-1];
+                }
+                
+		JComboBox cuisinecomboBox = new JComboBox(allcuisine1);
 		cuisinecomboBox.setBounds(53, 135, 150, 20);
                 cuisinecomboBox.setFont(new Font("Arial", Font.PLAIN, 13));
                 cuisinecomboBox.addMouseListener(new MouseAdapter(){
@@ -183,7 +193,7 @@ public class MainFrame {
 		txtpnSelectBudget.setBounds(50, 200, 197, 25);
 		panel.add(txtpnSelectBudget);
 		
-		JCheckBox sek15_20 = new JCheckBox("15-50 SEK");
+		JCheckBox sek15_20 = new JCheckBox("15-60 SEK");
 		sek15_20.setBounds(53, 225, 109, 23);
                 sek15_20.setOpaque(false);
                 sek15_20.setFont(new Font("Arial", Font.PLAIN, 13));
@@ -194,10 +204,15 @@ public class MainFrame {
                           Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
                             sek15_20.setCursor(cur1);
                         }
+                    // fix
+                    @Override
+			public void mousePressed(MouseEvent e) {
+                            slBudget = "15-60";
+                        }
                 });
 		panel.add(sek15_20);
 		
-		JCheckBox sek50_75 = new JCheckBox("50-75 SEK");
+		JCheckBox sek50_75 = new JCheckBox("60-90 SEK");
 		sek50_75.setBounds(53, 255, 109, 23);
                 sek50_75.setOpaque(false);
                 sek50_75.setFont(new Font("Arial", Font.PLAIN, 13));
@@ -208,10 +223,16 @@ public class MainFrame {
                           Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
                             sek50_75.setCursor(cur1);
                         }
+                    // fix
+                    @Override
+			public void mousePressed(MouseEvent e) {
+                            slBudget = "60-90";
+                        }
+                    
                 });
 		panel.add(sek50_75);
 		
-		JCheckBox sek75_125 = new JCheckBox("75-125 SEK");
+		JCheckBox sek75_125 = new JCheckBox("90+ SEK");
 		sek75_125.setBounds(53, 285, 109, 23);
                 sek75_125.setOpaque(false);
                 sek75_125.setFont(new Font("Arial", Font.PLAIN, 13));
@@ -221,6 +242,11 @@ public class MainFrame {
                     public void mouseEntered(MouseEvent e){
                           Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
                             sek75_125.setCursor(cur1);
+                        }
+                    // fix
+                    @Override
+			public void mousePressed(MouseEvent e) {
+                            slBudget = "90+";
                         }
                 });
 		panel.add(sek75_125);
@@ -244,31 +270,10 @@ public class MainFrame {
 			@Override
 			public void mousePressed(MouseEvent e) {
                         //Selected cuisine in combobox placed in variable cuisine
-                            
                 		String cuisine = cuisinecomboBox.getSelectedItem().toString();
-                		
-                		//Gets Name address and phone of all restaurants that been 
-                		//filterde out with SQL filtering query in the class SQLFilter.  
-                		String[] restName = selectFilterCuisineName(cuisine);
-                		String[] address = selectFilterCuisineAddress(cuisine);
-                		String[] phone = selectFilterCuisinePhone(cuisine);
-                		
-                		//If the tabbedPane is empty puts restaurant names in to tabbs
-                		//and puts restaurant information into ResultPanel.
-                		if (tabbedPane.getSelectedIndex() == -1) {
-                		for(int i = 0; i < restName.length; i++){  
-                            getResultPanel(tabbedPane, restName[i], phone[i], address[i]);
-                            }
-                		}
-                		//If the tabbedPane is not empty. Empties the tabbedPane
-                		// first and than puts restaurant names in to tabbs
-                		//and puts restaurant information into ResultPanel.
-                		else {
-                			tabbedPane.removeAll();
-                			for(int i = 0; i < restName.length; i++){  
-                                getResultPanel(tabbedPane, restName[i], phone[i], address[i]);
-                                }
-                		}
+                                
+                                getFilter(cuisine);
+                                
 			}
 		});
 		
@@ -297,7 +302,7 @@ public class MainFrame {
                 tel = selectRestTel();
                 address = selectRestAddress();
                 
-		for(int i = 0; i < 50; i++){  
+		for(int i = 0; i < name.length; i++){  
                 getResultPanel(tabbedPane, name[i], tel[i], address[i]);
                 }
                  
@@ -314,7 +319,44 @@ public class MainFrame {
             
             return tabbedPane;
         }
-                
+            
+        /**
+         * 
+         * @param cuisine the cuisine type that you want to filter
+         */
+        
+        private static void getFilter(String cuisine){
+            String[][] cuisineRest = null;
+            tabbedPane.removeAll();
+            // If the 
+            if(cuisine.equalsIgnoreCase("All")){
+                name = selectRestName();
+                tel = selectRestTel();
+                address = selectRestAddress();
+                cuisineRest = new String[name.length][3];
+                for(int i = 0; i < name.length; i++){  
+                    cuisineRest[i][0] = name[i];
+                    cuisineRest[i][1] = address[i];
+                    cuisineRest[i][2] = tel[i];
+                }
+            }
+            else{
+                //Gets Name address and phone of all restaurants that been 
+                //filterde out with SQL filtering query in the class SQLFilter. 
+                cuisineRest = selectFilterCuisine(cuisine);
+            }
+            
+            String[][] budgetsRest = SelectFilterBudget(slBudget);
+            
+            for(int i = 0; i < cuisineRest.length; i++){
+                for(int j = 0; j < budgetsRest.length; j++){
+                    if(cuisineRest[i][0].equalsIgnoreCase(budgetsRest[j][0])){ 
+                        getResultPanel(tabbedPane, cuisineRest[i][0], cuisineRest[i][2], cuisineRest[0][1]);
+                    }
+                }
+            }
+            
+        }
                 
 
     private Object getclass() {
