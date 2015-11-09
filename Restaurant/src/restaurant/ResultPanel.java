@@ -48,4 +48,25 @@ public class ResultPanel extends JPanel {
 
 	}
 
+        public ResultPanel(String message) {
+		this.name = message;
+		this.address= "";
+		this.tel="";
+		setLayout(null);
+		
+		JTextPane txtpnFfdfd = new JTextPane();
+        txtpnFfdfd.setBackground(SystemColor.control);
+		txtpnFfdfd.setEditable(false);
+		txtpnFfdfd.setFont(new Font("Century", Font.PLAIN, 14));
+		txtpnFfdfd.setText("   "+name+"\r\n   "+address+"\r\n   "+tel);
+		txtpnFfdfd.setBounds(72, 0, 378, 66);
+		add(txtpnFfdfd);
+		
+		JLabel lblNewLabel = new JLabel("Leave Feedback");
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Beroo94\\Desktop\\misc_58.png"));
+        lblNewLabel.setFont(new Font("Century", Font.PLAIN, 14));
+        lblNewLabel.setHorizontalAlignment(lblNewLabel.TRAILING);
+		lblNewLabel.setBounds(390, 78, 164, 34);
+		add(lblNewLabel);
+}
 }

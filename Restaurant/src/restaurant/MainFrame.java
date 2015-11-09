@@ -28,6 +28,7 @@ import javax.swing.JLayeredPane;
 
 import java.awt.Component;
 import java.awt.Cursor;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import javafx.scene.paint.Color;
 import javax.swing.JCheckBox;
@@ -38,6 +39,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
 import static restaurant.SQLStringReturn.*;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MainFrame {
 
@@ -145,12 +148,22 @@ public class MainFrame {
                 searchbar.setBorder(null);
 		panel.add(searchbar);
 		searchbar.setColumns(10);
-                searchbar.addMouseListener(new MouseAdapter() {
-		@Override
-		public void mouseClicked(MouseEvent e) {
-                searchbar.setText("");
-			}
-		});
+                searchbar.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		
+        		tabbedPane.removeAll();
+        		String userSearch = searchbar.getText();
+        		String strName = SQLSearch.searchRestName(userSearch);
+        		if (strName == "wrong") {
+        			getResultPanel(tabbedPane, "No restaurant with this name");
+        		}
+        		else{
+        		String strAddress = SQLSearch.searchRestPhone(userSearch);
+        		String strTel = SQLSearch.searchRestAddress(userSearch);
+				getResultPanel(tabbedPane, strName,strAddress, strTel );
+				}
+        	}
+        });
                 
                 
 		JTextPane txtpnPleaseSelectThe = new JTextPane();
@@ -162,7 +175,11 @@ public class MainFrame {
 		txtpnPleaseSelectThe.setBounds(50, 107, 318, 20);
 		panel.add(txtpnPleaseSelectThe);
 		
-		JComboBox cuisinecomboBox = new JComboBox(selectCuisine());
+                String[] allArray = {"All"};
+		String[] newArray = new String[allArray.length + selectCuisine().length ];
+		System.arraycopy(allArray, 0, newArray, 0, allArray.length);
+		System.arraycopy(selectCuisine(), 0, newArray, allArray.length, selectCuisine().length);
+		JComboBox cuisinecomboBox = new JComboBox(newArray);
 		cuisinecomboBox.setBounds(53, 135, 150, 20);
                 cuisinecomboBox.setFont(new Font("Arial", Font.PLAIN, 13));
                 cuisinecomboBox.addMouseListener(new MouseAdapter(){
@@ -249,25 +266,42 @@ public class MainFrame {
                 		
                 		//Gets Name address and phone of all restaurants that been 
                 		//filterde out with SQL filtering query in the class SQLFilter.  
-                		String[] name = selectFilterCuisineName(cuisine);
-                		String[] address = selectFilterCuisineAddress(cuisine);
-                		String[] tel = selectFilterCuisinePhone(cuisine);
+                		name = selectFilterCuisineName(cuisine);
+                		address = selectFilterCuisineAddress(cuisine);
+                		tel = selectFilterCuisinePhone(cuisine);
                 		
                 		//If the tabbedPane is empty puts restaurant names in to tabbs
-                		//and puts restaurant information into ResultPanel.
-                		if (tabbedPane.getSelectedIndex() == -1) {
-                		for(int i = 0; i < name.length; i++){  
+            		//and puts restaurant information into ResultPanel.
+            		 if (tabbedPane.getSelectedIndex() == -1) {
+            			 for(int i = 0; i < name.length; i++){  
+                        getResultPanel(tabbedPane, name[i], tel[i], address[i]);
+                        }
+            		}
+            		 else if (cuisine.equals("All")) {
+            			 
+            		        try {
+                                            tel = selectRestTel();
+                                            address = selectRestAddress();
+                                            name = selectRestName();
+                                    } catch (SQLException e1) {
+                                            // TODO Auto-generated catch block
+                                            e1.printStackTrace();
+                                    }
+            		       
+             			for(int i = 0; i < name.length; i++){  
+                             getResultPanel(tabbedPane, name[i], tel[i], address[i]);
+             			}
+             		}
+            		//If the tabbedPane is not empty. Empties the tabbedPane
+            		// first and than puts restaurant names in to tabbs
+            		//and puts restaurant information into ResultPanel.
+            		else {			
+            			tabbedPane.removeAll();
+            			
+			for(int i = 0; i < name.length; i++){ 				
                             getResultPanel(tabbedPane, name[i], tel[i], address[i]);
-                            }
-                		}
-                		//If the tabbedPane is not empty. Empties the tabbedPane
-                		// first and than puts restaurant names in to tabbs
-                		//and puts restaurant information into ResultPanel.
-                		else {
-                			tabbedPane.removeAll();
-                			for(int i = 0; i < name.length; i++){  
-                                getResultPanel(tabbedPane, name[i], tel[i], address[i]);
-                                }
+							    }
+						
                 		}
 			}
 		});
@@ -305,6 +339,10 @@ public class MainFrame {
         
         private static void getResultPanel(JTabbedPane tabbedPane, String name, String tel, String address){
             tabbedPane.addTab(name, new ImageIcon("C:\\Users\\Beroo94\\Desktop\\restaurant_12_2x.png") , new ResultPanel(name, tel, address));
+        }
+        
+          private static void getResultPanel(JTabbedPane tabbedPane, String str){
+        	tabbedPane.addTab(str, new ResultPanel(str));;
         }
         
         private static JTabbedPane getJTabbedPane(){
