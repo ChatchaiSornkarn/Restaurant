@@ -11,14 +11,17 @@ import java.sql.*;
  *
  * @author chatchai
  */
-public class SQLRestaurant extends DBConnection{
+public class SQLRestaurant extends SQLStringReturn{
+    
+    private static String[] name;
+    private static String[] cuisine;
     
     /**
      * select id and name from Restaurant
      * @return name[] array
+     * @throws java.sql.SQLException
      */
-    public static String[] selectRestName() throws SQLException{
-        String[] name = null;
+    public static String[] selectRestName(){
         try{
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("select RestName from Restaurant ORDER BY RestName");
@@ -50,8 +53,6 @@ public class SQLRestaurant extends DBConnection{
      * @return cuisine[] array
      */
     public static String[] selectCuisine(){
-        String[] cuisine = null;
-        
         try{
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("select * from Cuisine_Types");
@@ -78,8 +79,7 @@ public class SQLRestaurant extends DBConnection{
         return cuisine;
     }
     
-    public static String[] selectRestTel() throws SQLException{
-        String[] name = null;
+    public static String[] selectRestTel(){
         try{
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("select Telephone from Restaurant ORDER BY RestName");
@@ -106,8 +106,7 @@ public class SQLRestaurant extends DBConnection{
         return name;
     }
     
-    public static String[] selectRestAddress() throws SQLException{
-        String[] name = null;
+    public static String[] selectRestAddress(){
         try{
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("select Address from Restaurant ORDER BY RestName");

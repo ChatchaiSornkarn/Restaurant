@@ -6,6 +6,7 @@
 package restaurant;
 
 import java.sql.SQLException;
+import static restaurant.SQLFilter.SelectFilterBudget;
 
 
 /**
