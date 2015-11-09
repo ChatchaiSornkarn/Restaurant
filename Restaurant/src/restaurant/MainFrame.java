@@ -28,6 +28,8 @@ import javax.swing.JLayeredPane;
 
 import java.awt.Component;
 import java.awt.Cursor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import javafx.scene.paint.Color;
 import javax.swing.ButtonModel;
@@ -147,12 +149,22 @@ public class MainFrame {
                 searchbar.setBorder(null);
 		panel.add(searchbar);
 		searchbar.setColumns(10);
-                searchbar.addMouseListener(new MouseAdapter() {
-		@Override
-		public void mouseClicked(MouseEvent e) {
-                searchbar.setText("");
-			}
-		});
+                searchbar.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		
+        		tabbedPane.removeAll();
+        		String userSearch = searchbar.getText();
+        		String strName = SQLSearch.searchRestName(userSearch);
+        		if (strName == "wrong") {
+        			getResultPanel(tabbedPane, "No restaurant with this name");
+        		}
+        		else{
+        		String strAddress = SQLSearch.searchRestPhone(userSearch);
+        		String strTel = SQLSearch.searchRestAddress(userSearch);
+				getResultPanel(tabbedPane, strName,strAddress, strTel );
+				}
+        	}
+        });
                 
                 
 		JTextPane txtpnPleaseSelectThe = new JTextPane();
@@ -363,6 +375,9 @@ public class MainFrame {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
         
+    private static void getResultPanel(JTabbedPane tabbedPane, String str){
+        	tabbedPane.addTab(str, new ResultPanel(str));;
+        }
     
         
 }
