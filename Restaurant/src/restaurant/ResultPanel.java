@@ -4,69 +4,70 @@ import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import java.awt.SystemColor;
 import java.awt.Font;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
+import java.awt.BorderLayout;
+import javax.swing.JSeparator;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class ResultPanel extends JPanel {
      
-	String name;
-	String address;
-	String tel;
+	protected String name;
+	protected String address;
+	protected String tel;
+        
 	/**
 	 * Create the panel.
+         * @param name
+         * @param address
+         * @param tel
 	 */
-	public ResultPanel(String name, String address,String tel) {
+	public ResultPanel(String name, String address, String tel) {
 		this.name=name;
 		this.address=address;
 		this.tel=tel;
-		setLayout(null);
+		setSize(430,130);
+		setLayout(new BorderLayout(0, 0));
 		
-		JTextPane txtpnName = new JTextPane();
-		txtpnName.setFont(new Font("Arial", Font.PLAIN, 14));
-		txtpnName.setBackground(SystemColor.control);
-		txtpnName.setEditable(false);
-		txtpnName.setText("Name:\r\nTelephone:\r\nAddress:");
-		txtpnName.setBounds(0, 0, 72, 66);
-		add(txtpnName);
+		JTextPane textPane = new JTextPane();
+		textPane.setText("Name:\r\nAddress:\r\nTel:");
+		textPane.setFont(new Font("Lucida Handwriting", Font.PLAIN, 14));
+		textPane.setEditable(false);
+		textPane.setBackground(SystemColor.menu);
+		add(textPane, BorderLayout.WEST);
 		
-		JTextPane txtpnFfdfd = new JTextPane();
-                txtpnFfdfd.setBackground(SystemColor.control);
-		txtpnFfdfd.setEditable(false);
-		txtpnFfdfd.setFont(new Font("Arial", Font.PLAIN, 14));
-		txtpnFfdfd.setText("   "+name+"\r\n   "+address+"\r\n   "+tel);
-		txtpnFfdfd.setBounds(72, 0, 378, 66);
-		add(txtpnFfdfd);
+		JTextPane textPane_1 = new JTextPane();
+		textPane_1.setText("   "+name+"\r\n   "+address+"\r\n   "+tel);
+		textPane_1.setFont(new Font("Lucida Handwriting", Font.PLAIN, 14));
+		textPane_1.setEditable(false);
+		textPane_1.setBackground(SystemColor.menu);
+		add(textPane_1, BorderLayout.CENTER);
 		
-		JLabel lblNewLabel = new JLabel("Leave Feedback");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Beroo94\\Desktop\\misc_58.png"));
-                lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 14));
-                lblNewLabel.setHorizontalAlignment(lblNewLabel.TRAILING);
-		lblNewLabel.setBounds(385, 78, 164, 34);
-		add(lblNewLabel);
-
+		final JLabel lblFeedback = new JLabel("Feedback");
+		
+		lblFeedback.setIcon(new ImageIcon(ResultPanel.class.getResource("/resources/yellow-star-icon.png")));
+		add(lblFeedback, BorderLayout.EAST);
+		lblFeedback.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				lblFeedback.setIcon(new ImageIcon(ResultPanel.class.getResource("/resources/red-star-icon.png")));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblFeedback.setIcon(new ImageIcon(ResultPanel.class.getResource("/resources/yellow-star-icon.png")));
+			}
+		});
+		
+		JSeparator separator = new JSeparator();
+		add(separator, BorderLayout.SOUTH);
+                
 	}
 
-        public ResultPanel(String message) {
-		this.name = message;
-		this.address= "";
-		this.tel="";
-		setLayout(null);
-		
-		JTextPane txtpnFfdfd = new JTextPane();
-        txtpnFfdfd.setBackground(SystemColor.control);
-		txtpnFfdfd.setEditable(false);
-		txtpnFfdfd.setFont(new Font("Century", Font.PLAIN, 14));
-		txtpnFfdfd.setText("   "+name+"\r\n   "+address+"\r\n   "+tel);
-		txtpnFfdfd.setBounds(72, 0, 378, 66);
-		add(txtpnFfdfd);
-		
-		JLabel lblNewLabel = new JLabel("Leave Feedback");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Beroo94\\Desktop\\misc_58.png"));
-        lblNewLabel.setFont(new Font("Century", Font.PLAIN, 14));
-        lblNewLabel.setHorizontalAlignment(lblNewLabel.TRAILING);
-		lblNewLabel.setBounds(390, 78, 164, 34);
-		add(lblNewLabel);
-}
+        public ResultPanel(ResultPanel resultpanel) {
+		this.name= resultpanel.name;
+		this.address= resultpanel.address;
+		this.tel= resultpanel.tel;
+	}
+        
 }

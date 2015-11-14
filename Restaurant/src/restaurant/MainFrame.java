@@ -35,19 +35,24 @@ import javafx.scene.paint.Color;
 import javax.swing.ButtonModel;
 import javax.swing.JCheckBox;
 import javax.swing.JFormattedTextField;
+import javax.swing.JInternalFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTabbedPane;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import static restaurant.SQLFilter.*;
 
 public class MainFrame {
 
 	public JFrame frame;
+        private static JInternalFrame internalFrame;
         private static String slBudget;
         private static JTabbedPane tabbedPane;
         private static String[] name,tel,address;
+        private static JPanel panel;
+        private static JScrollPane scrollPane;
 
 	
 	/**
@@ -155,14 +160,11 @@ public class MainFrame {
         		tabbedPane.removeAll();
         		String userSearch = searchbar.getText();
         		String strName = SQLSearch.searchRestName(userSearch);
-        		if (strName == "wrong") {
-        			getResultPanel(tabbedPane, "No restaurant with this name");
-        		}
-        		else{
+        		
         		String strAddress = SQLSearch.searchRestPhone(userSearch);
         		String strTel = SQLSearch.searchRestAddress(userSearch);
-				getResultPanel(tabbedPane, strName,strAddress, strTel );
-				}
+				getResultPanel(strName, strTel, strAddress);
+				
         	}
         });
                 
@@ -283,7 +285,8 @@ public class MainFrame {
 			public void mousePressed(MouseEvent e) {
                         //Selected cuisine in combobox placed in variable cuisine
                 		String cuisine = cuisinecomboBox.getSelectedItem().toString();
-                                
+                                internalFrame.removeAll();
+                                getInternalFrame();
                                 getFilter(cuisine);
                                 
 			}
@@ -291,19 +294,13 @@ public class MainFrame {
 		
 		panel.add(selectbutton);
                 
-                JList jpanel = new JList(selectRestName());
-                jpanel.setBounds(207, 31, 567, 357);
-                JScrollPane jscroll = new JScrollPane(jpanel);
-                panel.add(jscroll);
+                scrollPane = new JScrollPane();
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.setBounds(310, 67, 560, 510);
+		panel.add(scrollPane);
                 
-                tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBorder(new EmptyBorder(0, 0, 0, 0));
-		tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
-                tabbedPane.setFont(new Font("Arial", Font.BOLD, 12));
-		tabbedPane.setBounds(310, 67, 560, 510);
-                tabbedPane.setBackground(java.awt.Color.white);
-		panel.add(tabbedPane);
-                
+                getInternalFrame();
                 
                 JLabel backgroundlayout = new JLabel("");
                 backgroundlayout.setIcon(new ImageIcon(getClass().getResource("/resources/TestBackground.png")));
@@ -314,32 +311,50 @@ public class MainFrame {
                 tel = selectRestTel();
                 address = selectRestAddress();
                 
-		for(int i = 0; i < name.length; i++){  
-                getResultPanel(tabbedPane, name[i], tel[i], address[i]);
-                }
+		for(int i=0; i<name.length; i++){
+			getResultPanel(name[i], tel[i], address[i]);
+		}
                  
         }
         
-        private static void getResultPanel(JTabbedPane tabbedPane, String name, String tel, String address){
-            tabbedPane.addTab(name, new ImageIcon("C:\\Users\\Beroo94\\Desktop\\restaurant_12_2x.png") , new ResultPanel(name, tel, address));
+                private static void getInternalFrame(){
+            internalFrame = new JInternalFrame("Please login to leave a feedback");
+		internalFrame.getContentPane().setLayout(new BoxLayout(internalFrame.getContentPane(), BoxLayout.Y_AXIS));
+		internalFrame.setEnabled(false);
+		internalFrame.setSize(200, 10000);
+		scrollPane.setViewportView(internalFrame);
+		internalFrame.setVisible(true);
+                internalFrame.setBorder(UIManager.getBorder("ScrollPane.border"));
         }
         
-        private static JTabbedPane getJTabbedPane(){
-            JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-            tabbedPane.setToolTipText("");
-            tabbedPane.setBounds(207, 31, 567, 352);
+        private static void getResultPanel(String name, String tel, String address){
+            ResultPanel resultPanel = new ResultPanel(name, address, tel);
+            resultPanel.addMouseListener(new MouseAdapter() {
+                    
+                        @Override
+                        public void mouseEntered(MouseEvent e){
+                            Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
+                            resultPanel.setCursor(cur1);
+                        }
+                        
+			@Override
+			public void mousePressed(MouseEvent e) {
+                                internalFrame.removeAll();
+                                getInternalFrame();
+                                InsideResultPanel insideResultPanel = new InsideResultPanel(resultPanel);
+                                internalFrame.getContentPane().add(insideResultPanel);
+			}
+                });
             
-            return tabbedPane;
+            internalFrame.getContentPane().add(resultPanel);
         }
             
         /**
          * 
          * @param cuisine the cuisine type that you want to filter
          */
-        
         private static void getFilter(String cuisine){
             String[][] cuisineRest = null;
-            tabbedPane.removeAll();
             // If the 
             if(cuisine.equalsIgnoreCase("All")){
                 name = selectRestName();
@@ -363,21 +378,13 @@ public class MainFrame {
             for(int i = 0; i < cuisineRest.length; i++){
                 for(int j = 0; j < budgetsRest.length; j++){
                     if(cuisineRest[i][0].equalsIgnoreCase(budgetsRest[j][0])){ 
-                        getResultPanel(tabbedPane, cuisineRest[i][0], cuisineRest[i][2], cuisineRest[0][1]);
+                        getResultPanel(cuisineRest[i][0], cuisineRest[i][2], cuisineRest[i][1]);
                     }
                 }
             }
             
         }
-                
-
-    private Object getclass() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
         
-    private static void getResultPanel(JTabbedPane tabbedPane, String str){
-        	tabbedPane.addTab(str, new ResultPanel(str));;
-        }
     
         
 }
