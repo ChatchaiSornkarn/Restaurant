@@ -3,6 +3,7 @@ package restaurant;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.Graphics;
 
 import javax.swing.JFrame;
@@ -12,7 +13,9 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.font.TextAttribute;
 import java.sql.SQLException;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFormattedTextField;
@@ -133,6 +136,42 @@ public class FirstFrame {
                             JOptionPane.showMessageDialog(null, "This action is not yet applicable");
 			}
 		});
+                
+                /*REGISTER FUNCTIONALITY, JUST COPY AND PASTE TO FIRSTFRAME OF UPDATED PROGRAM*/
+                JLabel register = new JLabel();
+                register.setText("Click here to register for free");
+                register.setBounds(378, 5, 200, 20);
+                register.setFont(new Font("Arial", Font.PLAIN, 13));
+                register.setForeground(java.awt.Color.blue);
+                Font font = register.getFont();
+                Map attributes = font.getAttributes();
+                attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+                register.setFont(font.deriveFont(attributes));
+                register.addMouseListener(new MouseAdapter (){
+                    @Override
+                    public void mouseEntered(MouseEvent e){
+                        Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
+                        register.setCursor(cur1);
+                        register.setForeground(java.awt.Color.cyan);
+                    }
+                    @Override
+                    public void mouseExited(MouseEvent e){
+                        register.setForeground(java.awt.Color.blue);
+                    }
+                   @Override
+			public void mouseClicked(MouseEvent e) {
+				Register registerFrame = null;
+                            try {
+                                registerFrame = new Register();
+                            } catch (SQLException ex) {
+                                Logger.getLogger(FirstFrame.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                                registerFrame.frame.setVisible(true);
+			}
+                    
+                });
+                panel.add(register);
+                
 		JLabel ExitTool = new JLabel("");
                 ExitTool.setBounds(762, 5, 40, 40);
 		ExitTool.addMouseListener(new MouseAdapter() {

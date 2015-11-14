@@ -30,7 +30,11 @@ import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.font.TextAttribute;
 import java.sql.SQLException;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.paint.Color;
 import javax.swing.ButtonModel;
 import javax.swing.JCheckBox;
@@ -146,7 +150,42 @@ public class MainFrame {
                         }
 		});
                 
+                /*REGISTER FUNCTIONALITY, JUST COPY AND PASTE TO MAINFRAME OF UPDATED PROGRAM*/
+                JLabel register = new JLabel();
+                register.setText("Click here to register for free");
+                register.setBounds(378, 5, 200, 20);
+                register.setFont(new Font("Arial", Font.PLAIN, 13));
+                register.setForeground(java.awt.Color.blue);
+                Font font = register.getFont();
+                Map attributes = font.getAttributes();
+                attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+                register.setFont(font.deriveFont(attributes));
+                register.addMouseListener(new MouseAdapter (){
+                    @Override
+                    public void mouseEntered(MouseEvent e){
+                        Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
+                        register.setCursor(cur1);
+                        register.setForeground(java.awt.Color.cyan);
+                    }
+                    @Override
+                    public void mouseExited(MouseEvent e){
+                        register.setForeground(java.awt.Color.blue);
+                    }
+                   @Override
+			public void mouseClicked(MouseEvent e) {
+				Register registerFrame = null;
+                            try {
+                                registerFrame = new Register();
+                            } catch (SQLException ex) {
+                                Logger.getLogger(FirstFrame.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                                registerFrame.frame.setVisible(true);
+			}
+                    
+                });
+                panel.add(register);
                 
+                // Johan Search
                 JTextField searchbar = new JTextField();
 		searchbar.setBounds(33, 60, 174, 20);
                 searchbar.setText("Enter search terms here");
@@ -156,15 +195,18 @@ public class MainFrame {
 		searchbar.setColumns(10);
                 searchbar.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		
-        		tabbedPane.removeAll();
+        		internalFrame.removeAll();
+                        getInternalFrame();
         		String userSearch = searchbar.getText();
         		String strName = SQLSearch.searchRestName(userSearch);
-        		
-        		String strAddress = SQLSearch.searchRestPhone(userSearch);
+                        String strAddress = SQLSearch.searchRestPhone(userSearch);
         		String strTel = SQLSearch.searchRestAddress(userSearch);
+        		if (strName == "wrong") {
+        			getResultPanel("No restaurant with this name", strTel, strAddress);
+        		}
+        		else{
 				getResultPanel(strName, strTel, strAddress);
-				
+                        }
         	}
         });
                 
