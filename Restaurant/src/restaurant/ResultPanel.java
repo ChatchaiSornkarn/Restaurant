@@ -32,14 +32,14 @@ public class ResultPanel extends JPanel {
 		
 		JTextPane textPane = new JTextPane();
 		textPane.setText("Name:\r\nAddress:\r\nTel:");
-		textPane.setFont(new Font("Lucida Handwriting", Font.PLAIN, 14));
+		textPane.setFont(new Font("Arial", Font.PLAIN, 14));
 		textPane.setEditable(false);
 		textPane.setBackground(SystemColor.menu);
 		add(textPane, BorderLayout.WEST);
 		
 		JTextPane textPane_1 = new JTextPane();
 		textPane_1.setText("   "+name+"\r\n   "+address+"\r\n   "+tel);
-		textPane_1.setFont(new Font("Lucida Handwriting", Font.PLAIN, 14));
+		textPane_1.setFont(new Font("Arial", Font.PLAIN, 14));
 		textPane_1.setEditable(false);
 		textPane_1.setBackground(SystemColor.menu);
 		add(textPane_1, BorderLayout.CENTER);
