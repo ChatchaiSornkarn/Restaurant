@@ -88,10 +88,10 @@ public class Register {
                 frame.add(password);
                 
                    
-                JButton login = new JButton("Login");
-                login.setSize(30,5);
-                login.setBounds(143,340,164, 25);
-                login.addMouseListener(new MouseAdapter(){
+                JButton register = new JButton("Register");
+                register.setSize(30,5);
+                register.setBounds(143,340,164, 25);
+                register.addMouseListener(new MouseAdapter(){
                 @Override
                 public void mouseClicked(MouseEvent e ){
                     boolean taken = false;
@@ -135,11 +135,13 @@ public class Register {
                         else if(taken == false){
                     System.out.println(usernameInput + passwordInput);
                    InsertUserRegister(usernameInput,passwordInput);
+                   frame.dispose();
+                   JOptionPane.showMessageDialog(null, "Register Successful");
                     }
                         
                 } 
                 });
-                frame.add(login);
+                frame.add(register);
                 
                 
 
