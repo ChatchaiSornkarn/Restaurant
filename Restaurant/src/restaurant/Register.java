@@ -8,17 +8,25 @@ package restaurant;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.font.TextAttribute;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import static restaurant.SQLRegisterStore.*;
 /**
@@ -54,14 +62,14 @@ public class Register {
                 @Override
                 public void mouseClicked(MouseEvent e){
                     username.setText("");
-                      
+               
                 }
-                String usernameInput = username.getText();
-                });
               
+                });
+                
                 frame.add(username);
                 
-                JTextField password = new JTextField("Password");
+                JPasswordField password = new JPasswordField("Password");
                 password.setBounds(165, 243, 200, 20);
                 password.setOpaque(false);
                 password.setBorder(null);
@@ -71,10 +79,11 @@ public class Register {
                 @Override
                 public void mouseClicked(MouseEvent e){
                     password.setText("");
+
                     
                 }
-               String passwordInput = password.getText();
                 });
+
               
                 frame.add(password);
                 
@@ -85,27 +94,55 @@ public class Register {
                 login.addMouseListener(new MouseAdapter(){
                 @Override
                 public void mouseClicked(MouseEvent e ){
-                   InsertUserRegister("hi","bye");
-                }
-                    
+                    boolean taken = false;
+                    usernameInput = username.getText().trim();
+                    passwordInput = password.getText().trim();
+                    String[] name = null;
+                    String sqlLoginVerify = "Select User from Login";
+                        try {
+                        Statement stmt = conn.createStatement();
+                        ResultSet rs = stmt.executeQuery(sqlLoginVerify);
+                        
+                        int rowcount = 0;
+            
+            if (rs.last()) {
+            rowcount = rs.getRow();
+            rs.beforeFirst();
+            }
+            
+            name = new String[rowcount];
+            int i = 0;
+                        
+                                while (rs.next()) {
+                                    name[i] = rs.getString("User");
+                                    i++;
+                                }
+                                
+                }   catch (SQLException ex) {
+                        Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                        for(int i = 0; i< name.length; i++){
+                            if(usernameInput.equals(name[i])){
+                                      JOptionPane.showMessageDialog(null, "Username already taken, please choose another username.");
+                                      taken=true;
+                                 }
+                        }
+                        if(usernameInput.equals(null) || passwordInput.equals(null) || usernameInput.equals("Desired Username") || passwordInput.equals("Password")){
+                                    JOptionPane.showMessageDialog(null, "Please input something.");
+                                    taken=true;
+                                }
+                                
+                        else if(taken == false){
+                    System.out.println(usernameInput + passwordInput);
+                   InsertUserRegister(usernameInput,passwordInput);
+                    }
+                        
+                } 
                 });
                 frame.add(login);
                 
-//                JTextField retypepassword = new JTextField("Re-type Password");
-//                retypepassword.setBounds(165, 293, 200, 20);
-//                retypepassword.setOpaque(false);
-//                retypepassword.setBorder(null);
-//                retypepassword.setFont(new Font("Arial", Font.PLAIN, 16));
-//                retypepassword.setForeground(Color.lightGray);
-//                retypepassword.addMouseListener(new MouseAdapter (){
-//                @Override
-//                public void mouseClicked(MouseEvent e){
-//                    retypepassword.setText("");
-//                }
-//  
-//                });
-//               
-//                frame.add(retypepassword);
+                
+
                 
                 JLabel ExitTool = new JLabel("");
                 ExitTool.setBounds(386, 228, 5, 2);

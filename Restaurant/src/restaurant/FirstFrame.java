@@ -14,7 +14,9 @@ import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.font.TextAttribute;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,6 +24,7 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import static restaurant.DBConnection.conn;
 import restaurant.MainFrame;
 
 public class FirstFrame {
@@ -133,8 +136,40 @@ public class FirstFrame {
                     
 			@Override
 			public void mouseClicked(MouseEvent e) {
-                            JOptionPane.showMessageDialog(null, "This action is not yet applicable");
-			}
+                              String username = UserLogin.getText().trim();
+                        String password = PassLogin.getText().trim();
+                        String sqlLoginVerify = "Select User, Password from Login where User = '"+username+"' and Password = '"+password+"'";
+                        try {
+                        Statement stmt = conn.createStatement();
+                        ResultSet rs = stmt.executeQuery(sqlLoginVerify);
+                        
+                        
+                                if (rs.next()) {
+                                 JOptionPane.showMessageDialog(null, "Login Successful!"); 
+                                 MainFrame mainframe = null;
+                                 mainframe = new MainFrame();
+                                 mainframe.frame.setVisible(true);
+                                 frame.setVisible(false);
+                                 Boolean loggedIn = true;
+                                 
+                                 
+                                } else if (UserLogin.getText().equals("") && (PassLogin.getText().equals(""))) {
+                                  JOptionPane.showMessageDialog(null, "Please enter your username and password.");
+                                  
+                                  
+                                } else if (UserLogin.getText().equals("")) {
+                                  JOptionPane.showMessageDialog(null, "Username field is empty. Please enter your username.");
+                                  
+                                } else if (PassLogin.getText().equals("")) {
+                                  JOptionPane.showMessageDialog(null, "Password field is empty. Please enter your password.");
+                                
+                                  
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Login Failed. Please try again.");
+                                }
+                            
+                                } catch(SQLException err) {;}}
+			
 		});
                 
                 /*REGISTER FUNCTIONALITY, JUST COPY AND PASTE TO FIRSTFRAME OF UPDATED PROGRAM*/
