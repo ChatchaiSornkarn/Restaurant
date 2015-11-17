@@ -22,12 +22,12 @@ public class SQLRegisterStore extends SQLStringReturn {
                 Statement stmt = conn.createStatement();
                 stmt.setQueryTimeout(30);
 		int index = 0;
-                ResultSet r = stmt.executeQuery("select * from UserRegister ");
+                ResultSet r = stmt.executeQuery("select * from Login ");
 		      
 //	       while(r.next())
 //		      {index++;}
 	    	  
-	    p = conn.prepareStatement("INSERT INTO UserRegister (Username,Password) VALUES (?, ?)");
+	    p = conn.prepareStatement("INSERT INTO Login (User,Password) VALUES (?, ?)");
 //	    p.setInt(1, index);
 	    p.setString(1, a);
 	    p.setString(2, b);
