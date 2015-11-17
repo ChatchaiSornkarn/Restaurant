@@ -52,7 +52,7 @@ public class MainFrame {
 
 	public JFrame frame;
         private static JInternalFrame internalFrame;
-        private static String slBudget;
+        private static String[] slBudget = new String[3];
         private static JTabbedPane tabbedPane;
         private static String[] name,tel,address;
         private static JPanel panel;
@@ -263,8 +263,13 @@ public class MainFrame {
                         }
                     // fix
                     @Override
-			public void mousePressed(MouseEvent e) {
-                            slBudget = "15-60";
+			public void mouseClicked(MouseEvent e) {
+                            if(sek15_20.isSelected()){
+                                slBudget[0] = "15-60";
+                            }
+                            else{
+                                slBudget[0] = null;
+                            }
                         }
                 });
 		panel.add(sek15_20);
@@ -282,8 +287,13 @@ public class MainFrame {
                         }
                     // fix
                     @Override
-			public void mousePressed(MouseEvent e) {
-                            slBudget = "60-90";
+			public void mouseClicked(MouseEvent e) {
+                            if(sek50_75.isSelected()){
+                                slBudget[1] = "60-90";
+                            }
+                            else{
+                            slBudget[1] = null;
+                            }
                         }
                     
                 });
@@ -302,17 +312,22 @@ public class MainFrame {
                         }
                     // fix
                     @Override
-			public void mousePressed(MouseEvent e) {
-                            slBudget = "90+";
+			public void mouseClicked(MouseEvent e) {
+                            if(sek75_125.isSelected()){
+                                slBudget[2] = "90+";
+                            }
+                            else{
+                            slBudget[2] = null;
+                            }
                         }
                 });
 		panel.add(sek75_125);
 		
-		ButtonGroup btnG=new ButtonGroup();
-		btnG.add(sek15_20);
-		sek15_20.setSelected(true);
-		btnG.add(sek50_75);
-		btnG.add(sek75_125);
+//		ButtonGroup btnG=new ButtonGroup();
+//		btnG.add(sek15_20);
+//		sek15_20.setSelected(true);
+//		btnG.add(sek50_75);
+//		btnG.add(sek75_125);
 		
 		JButton selectbutton = new JButton("Select");
                 selectbutton.setBounds(50, 340, 253, 29);
@@ -415,9 +430,21 @@ public class MainFrame {
                 //filterde out with SQL filtering query in the class SQLFilter. 
                 cuisineRest = selectFilterCuisine(cuisine);
             }
+            String[][] budgetsRest = null;
+            String[][] budgetsRest1 = null;
+            String[][] budgetsRest2 = null;
             
-            String[][] budgetsRest = SelectFilterBudget(slBudget);
+            if(slBudget[0] == "15-60"){
+            budgetsRest = SelectFilterBudget(slBudget[0]);
+            }
+            if(slBudget[1] == "60-90"){
+            budgetsRest1 = SelectFilterBudget(slBudget[1]);
+            }
+            if(slBudget[2] == "90+"){
+            budgetsRest2 = SelectFilterBudget(slBudget[2]);
+            }
             
+            if(slBudget[0] == "15-60"){
             for(int i = 0; i < cuisineRest.length; i++){
                 for(int j = 0; j < budgetsRest.length; j++){
                     if(cuisineRest[i][0].equalsIgnoreCase(budgetsRest[j][0])){ 
@@ -425,7 +452,33 @@ public class MainFrame {
                     }
                 }
             }
+            }
             
+            if(slBudget[1] == "60-90"){
+            for(int i = 0; i < cuisineRest.length; i++){
+                for(int j = 0; j < budgetsRest1.length; j++){
+                    if(cuisineRest[i][0].equalsIgnoreCase(budgetsRest1[j][0])){ 
+                        getResultPanel(cuisineRest[i][0], cuisineRest[i][2], cuisineRest[i][1]);
+                    }
+                }
+            }
+            }
+            
+            if(slBudget[2] == "90+"){
+            for(int i = 0; i < cuisineRest.length; i++){
+                for(int j = 0; j < budgetsRest2.length; j++){
+                    if(cuisineRest[i][0].equalsIgnoreCase(budgetsRest2[j][0])){ 
+                        getResultPanel(cuisineRest[i][0], cuisineRest[i][2], cuisineRest[i][1]);
+                    }
+                }
+            }
+            }
+            
+            if(slBudget[0] == null && slBudget[1] == null && slBudget[2] == null){
+            for(int i = 0; i < cuisineRest.length; i++){
+                getResultPanel(cuisineRest[i][0], cuisineRest[i][2], cuisineRest[i][1]);
+            }
+            }
         }
         
     
