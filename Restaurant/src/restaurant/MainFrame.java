@@ -185,6 +185,7 @@ public class MainFrame {
                 });
                 panel.add(register);
                 
+               
                 // Johan Search
                 JTextField searchbar = new JTextField();
 		searchbar.setBounds(33, 60, 174, 20);
@@ -209,7 +210,7 @@ public class MainFrame {
                         }
         	}
         });
-                
+
                 
 		JTextPane txtpnPleaseSelectThe = new JTextPane();
 		txtpnPleaseSelectThe.setEditable(false);
