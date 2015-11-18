@@ -51,6 +51,7 @@ import static restaurant.SQLFilter.*;
 public class MainFrame {
 
 	public JFrame frame;
+        private Login login = new Login();
         public static JInternalFrame internalFrame;
         private static String[] slBudget = new String[3];
         private static JTabbedPane tabbedPane;
@@ -128,6 +129,7 @@ public class MainFrame {
                     @Override
                     public void mouseClicked(MouseEvent e){
                         PassLogin.setText("");
+                        
                     }
                 });
 		panel.add(PassLogin);
@@ -140,7 +142,19 @@ public class MainFrame {
                     
 			@Override
 			public void mouseClicked(MouseEvent e) {
-                            JOptionPane.showMessageDialog(null, "This action is not yet applicable");
+                            String username = UserLogin.getText().trim();
+                        String password = PassLogin.getText().trim();
+                        login.AdminLogin(username, password, frame);
+                        if(login.adminLogin == true){
+                            AdminFrame adminFrame = null;
+                            try {
+                                adminFrame = new AdminFrame();
+                            } catch (SQLException ex) {
+                                Logger.getLogger(FirstFrame.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                                 adminFrame.frame.setVisible(true);
+                                 frame.setVisible(false);
+                        }
 			}
                                      
                     @Override

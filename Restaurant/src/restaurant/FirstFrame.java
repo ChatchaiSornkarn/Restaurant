@@ -31,8 +31,7 @@ public class FirstFrame {
 
 	public JFrame frame;
 	public JPasswordField PassLogin;
-        // is login or not
-        boolean AdminLogged;
+        public Login login = new Login();
 
 	/**
 	 * Launch the application.
@@ -93,8 +92,7 @@ public class FirstFrame {
                         }
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				AdminLogged=true;
-				if(AdminLogged==false){
+				if(login.adminLogin==false){
 				MainFrame mainframe = null;
                             try {
                                 mainframe = new MainFrame();
@@ -129,6 +127,12 @@ public class FirstFrame {
                 UserLogin.setBackground(Color.BLACK);
                 UserLogin.setForeground(Color.WHITE);
 		UserLogin.setBounds(10, 6, 122, 20);
+                UserLogin.addMouseListener(new MouseAdapter(){
+                    @Override
+                    public void mouseClicked(MouseEvent e){
+                        UserLogin.setText("");
+                    }
+                });
 		panel.add(UserLogin);
 
 		PassLogin = new JPasswordField();
@@ -136,6 +140,12 @@ public class FirstFrame {
                 PassLogin.setBackground(Color.BLACK);
                 PassLogin.setForeground(Color.WHITE);
 		PassLogin.setText("jjjjjjjjjjjj");
+                PassLogin.addMouseListener(new MouseAdapter(){
+                    @Override
+                    public void mouseClicked(MouseEvent e){
+                        PassLogin.setText(""); 
+                    }
+                });
 		panel.add(PassLogin);
 
 		JButton EnterLogin = new JButton("Enter");
@@ -151,39 +161,20 @@ public class FirstFrame {
                     
 			@Override
 			public void mouseClicked(MouseEvent e) {
-                              String username = UserLogin.getText().trim();
+                        String username = UserLogin.getText().trim();
                         String password = PassLogin.getText().trim();
-                        String sqlLoginVerify = "Select User, Password from Login where User = '"+username+"' and Password = '"+password+"'";
-                        try {
-                        Statement stmt = conn.createStatement();
-                        ResultSet rs = stmt.executeQuery(sqlLoginVerify);
-                        
-                        
-                                if (rs.next()) {
-                                 JOptionPane.showMessageDialog(null, "Login Successful!"); 
-                                 MainFrame mainframe = null;
-                                 mainframe = new MainFrame();
-                                 mainframe.frame.setVisible(true);
+                        login.AdminLogin(username, password, frame);
+                        if(login.adminLogin == true){
+                            AdminFrame adminFrame = null;
+                            try {
+                                adminFrame = new AdminFrame();
+                            } catch (SQLException ex) {
+                                Logger.getLogger(FirstFrame.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                                 adminFrame.frame.setVisible(true);
                                  frame.setVisible(false);
-                                 Boolean loggedIn = true;
-                                 
-                                 
-                                } else if (UserLogin.getText().equals("") && (PassLogin.getText().equals(""))) {
-                                  JOptionPane.showMessageDialog(null, "Please enter your username and password.");
-                                  
-                                  
-                                } else if (UserLogin.getText().equals("")) {
-                                  JOptionPane.showMessageDialog(null, "Username field is empty. Please enter your username.");
-                                  
-                                } else if (PassLogin.getText().equals("")) {
-                                  JOptionPane.showMessageDialog(null, "Password field is empty. Please enter your password.");
-                                
-                                  
-                                } else {
-                                    JOptionPane.showMessageDialog(null, "Login Failed. Please try again.");
-                                }
-                            
-                                } catch(SQLException err) {;}}
+                        }
+                        }
 			
 		});
                 
