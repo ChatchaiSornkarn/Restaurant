@@ -31,6 +31,8 @@ public class FirstFrame {
 
 	public JFrame frame;
 	public JPasswordField PassLogin;
+        // is login or not
+        boolean AdminLogged;
 
 	/**
 	 * Launch the application.
@@ -91,6 +93,8 @@ public class FirstFrame {
                         }
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				AdminLogged=true;
+				if(AdminLogged==false){
 				MainFrame mainframe = null;
                             try {
                                 mainframe = new MainFrame();
@@ -98,6 +102,17 @@ public class FirstFrame {
                                 Logger.getLogger(FirstFrame.class.getName()).log(Level.SEVERE, null, ex);
                             }
                                 mainframe.frame.setVisible(true);
+			}
+                                //is login
+                                else {
+				AdminFrame mainframe = null;
+                try {
+                    mainframe = new AdminFrame();
+                } catch (SQLException ex) {
+                    Logger.getLogger(FirstFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                    mainframe.frame.setVisible(true);
+			}
 			}
                         
 		});

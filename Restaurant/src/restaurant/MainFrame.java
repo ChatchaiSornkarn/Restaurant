@@ -51,12 +51,12 @@ import static restaurant.SQLFilter.*;
 public class MainFrame {
 
 	public JFrame frame;
-        private static JInternalFrame internalFrame;
+        public static JInternalFrame internalFrame;
         private static String[] slBudget = new String[3];
         private static JTabbedPane tabbedPane;
-        private static String[] name,tel,address;
+        public static String[] name,tel,address;
         private static JPanel panel;
-        private static JScrollPane scrollPane;
+        public static JScrollPane scrollPane;
 
 	
 	/**
@@ -340,7 +340,7 @@ public class MainFrame {
                         }
                         
 			@Override
-			public void mousePressed(MouseEvent e) {
+			public void mouseClicked(MouseEvent e) {
                         //Selected cuisine in combobox placed in variable cuisine
                 		String cuisine = cuisinecomboBox.getSelectedItem().toString();
                                 internalFrame.removeAll();

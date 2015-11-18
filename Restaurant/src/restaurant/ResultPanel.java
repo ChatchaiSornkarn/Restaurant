@@ -7,12 +7,14 @@ import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.BorderLayout;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import javax.swing.JSeparator;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class ResultPanel extends JPanel {
-     
+        public ResultPanel res = this;
 	protected String name;
 	protected String address;
 	protected String tel;
@@ -23,7 +25,27 @@ public class ResultPanel extends JPanel {
          * @param address
          * @param tel
 	 */
-	public ResultPanel(String name, String address, String tel) {
+public ResultPanel(String name, String address, String tel) {
+		addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent arg0) {
+				AdminFrame.res=res;
+			}
+		});
+		addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {//the light up stuff
+				
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				AdminFrame.res=res;
+			}
+		});
 		this.name=name;
 		this.address=address;
 		this.tel=tel;
@@ -31,15 +53,42 @@ public class ResultPanel extends JPanel {
 		setLayout(new BorderLayout(0, 0));
 		
 		JTextPane textPane = new JTextPane();
+		textPane.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent arg0) {
+				AdminFrame.res=res;
+			}
+		});
+		addMouseListener(new MouseAdapter() {
+			
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				AdminFrame.res=res;
+			}
+		});
 		textPane.setText("Name:\r\nAddress:\r\nTel:");
-		textPane.setFont(new Font("Arial", Font.PLAIN, 14));
+		textPane.setFont(new Font("Lucida Handwriting", Font.PLAIN, 14));
 		textPane.setEditable(false);
 		textPane.setBackground(SystemColor.menu);
 		add(textPane, BorderLayout.WEST);
+		addMouseListener(new MouseAdapter() {
+			@Override
+			
+			public void mouseClicked(MouseEvent e) {
+				AdminFrame.res=res;
+			}
+		});
 		
 		JTextPane textPane_1 = new JTextPane();
+		textPane_1.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent arg0) {
+				AdminFrame.res=res;
+			}
+		});
 		textPane_1.setText("   "+name+"\r\n   "+address+"\r\n   "+tel);
-		textPane_1.setFont(new Font("Arial", Font.PLAIN, 14));
+		textPane_1.setFont(new Font("Lucida Handwriting", Font.PLAIN, 14));
 		textPane_1.setEditable(false);
 		textPane_1.setBackground(SystemColor.menu);
 		add(textPane_1, BorderLayout.CENTER);
@@ -57,6 +106,16 @@ public class ResultPanel extends JPanel {
 			public void mouseExited(MouseEvent e) {
 				lblFeedback.setIcon(new ImageIcon(ResultPanel.class.getResource("/resources/yellow-star-icon.png")));
 			}
+			public void mouseClicked(MouseEvent e){
+				if(AdminFrame.inUse==true){
+				AdminFrame.res=res;
+				AdminFrame.internalFrame.getContentPane().removeAll();
+				AdminFrame.internalFrame.getContentPane().add(new SResultPanel (res));
+				}else {
+					MainFrame.internalFrame.getContentPane().removeAll();
+					MainFrame.internalFrame.getContentPane().add(new SResultPanel (res));
+				}
+			}
 		});
 		
 		JSeparator separator = new JSeparator();
@@ -65,9 +124,9 @@ public class ResultPanel extends JPanel {
 	}
 
         public ResultPanel(ResultPanel resultpanel) {
-		this.name= resultpanel.name;
-		this.address= resultpanel.address;
-		this.tel= resultpanel.tel;
+		this.name = resultpanel.name;
+		this.address = resultpanel.address;
+		this.tel = resultpanel.tel;
 	}
         
 }
