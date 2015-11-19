@@ -86,4 +86,25 @@ public class SQLFilter extends SQLRestaurant {
         return bugetRest;
         
     }
+    
+    public static String[][] SelectFilterDiscount(){
+        name = makeList("Select RestName from Restaurant "
+                + "WHERE StudentDiscount = \"1\" ORDER BY RestName");
+        
+        address = makeList("Select Address from Restaurant "
+                + "WHERE StudentDiscount = \"1\" ORDER BY RestName");
+        
+        phone = makeList("Select Telephone from Restaurant "
+                + "WHERE StudentDiscount = \"1\" ORDER BY RestName");
+        
+        String[][] discountRest = new String[name.length][3];
+        
+        for(int i = 0; i < name.length; i ++){
+            discountRest[i][0] = name[i];
+            discountRest[i][1] = address[i];
+            discountRest[i][2] = phone[i];
+                }
+        
+        return discountRest;
+    }
 }

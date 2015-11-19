@@ -376,7 +376,7 @@ public class AdminFrame {
                     @Override
 			public void mouseClicked(MouseEvent e) {
                             if(sek15_20.isSelected()){
-                                slBudget[0] = "15-60";
+                                slBudget[0] = "30";
                             }
                             else{
                                 slBudget[0] = null;
@@ -400,7 +400,7 @@ public class AdminFrame {
                     @Override
 			public void mouseClicked(MouseEvent e) {
                             if(sek50_75.isSelected()){
-                                slBudget[1] = "60-90";
+                                slBudget[1] = "60";
                             }
                             else{
                             slBudget[1] = null;
@@ -425,7 +425,7 @@ public class AdminFrame {
                     @Override
 			public void mouseClicked(MouseEvent e) {
                             if(sek75_125.isSelected()){
-                                slBudget[2] = "90+";
+                                slBudget[2] = "90";
                             }
                             else{
                             slBudget[2] = null;
@@ -550,17 +550,17 @@ public class AdminFrame {
             String[][] budgetsRest1 = null;
             String[][] budgetsRest2 = null;
             
-            if(slBudget[0] == "15-60"){
+            if(slBudget[0] == "30"){
             budgetsRest = SelectFilterBudget(slBudget[0]);
             }
-            if(slBudget[1] == "60-90"){
+            if(slBudget[1] == "60"){
             budgetsRest1 = SelectFilterBudget(slBudget[1]);
             }
-            if(slBudget[2] == "90+"){
+            if(slBudget[2] == "90"){
             budgetsRest2 = SelectFilterBudget(slBudget[2]);
             }
             
-            if(slBudget[0] == "15-60"){
+            if(slBudget[0] == "30"){
             for(int i = 0; i < cuisineRest.length; i++){
                 for(int j = 0; j < budgetsRest.length; j++){
                     if(cuisineRest[i][0].equalsIgnoreCase(budgetsRest[j][0])){ 
@@ -570,7 +570,7 @@ public class AdminFrame {
             }
             }
             
-            if(slBudget[1] == "60-90"){
+            if(slBudget[1] == "60"){
             for(int i = 0; i < cuisineRest.length; i++){
                 for(int j = 0; j < budgetsRest1.length; j++){
                     if(cuisineRest[i][0].equalsIgnoreCase(budgetsRest1[j][0])){ 
@@ -580,7 +580,7 @@ public class AdminFrame {
             }
             }
             
-            if(slBudget[2] == "90+"){
+            if(slBudget[2] == "90"){
             for(int i = 0; i < cuisineRest.length; i++){
                 for(int j = 0; j < budgetsRest2.length; j++){
                     if(cuisineRest[i][0].equalsIgnoreCase(budgetsRest2[j][0])){ 
