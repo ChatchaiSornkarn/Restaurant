@@ -49,6 +49,9 @@ import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import static restaurant.SQLFilter.*;
 import java.awt.Color;
+import static restaurant.MainFrame.address;
+import static restaurant.MainFrame.name;
+import static restaurant.MainFrame.tel;
 
 public class AdminFrame {
 
@@ -61,6 +64,7 @@ public class AdminFrame {
         private static String cuisine;
         public static ResultPanel res;
         public static boolean inUse=false;
+        private static int slStudentDis;
 	
 	/**
 	 * Create the application.
@@ -434,6 +438,31 @@ public class AdminFrame {
                 });
 		panel.add(sek75_125);
 		
+                //STUDENT DISCOUNT CHECKBOX
+                JCheckBox sudentDis = new JCheckBox("Student discount");
+		sudentDis.setBounds(53, 315, 109, 23);
+                sudentDis.setOpaque(false);
+                sudentDis.setFont(new Font("Arial", Font.PLAIN, 13));
+                sudentDis.setForeground(java.awt.Color.white);
+                sudentDis.addMouseListener(new MouseAdapter(){
+                    @Override
+                    public void mouseEntered(MouseEvent e){
+                          Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
+                            sudentDis.setCursor(cur1);
+                        }
+                    // fix
+                    @Override
+			public void mouseClicked(MouseEvent e) {
+                           if(sudentDis.isSelected()) {
+                            slStudentDis = 1;
+                        }
+                            else {
+                            slStudentDis = 0;
+                            }
+                        }
+                });
+		panel.add(sudentDis);
+                
 		final JButton selectbutton = new JButton("Select");
                 selectbutton.setBounds(50, 340, 253, 29);
                 
@@ -526,29 +555,29 @@ public class AdminFrame {
                  * 
                  * @param cuisine the cuisine type that you want to filter
                  */
-                public static void getFilter(String cuisine){
-                    String[][] cuisineRest = null;
-                    // If the 
-                    if(cuisine.equalsIgnoreCase("All")){
-                        name = selectRestName();
-                        tel = selectRestTel();
-                        address = selectRestAddress();
-                        cuisineRest = new String[name.length][3];
-                        for(int i = 0; i < name.length; i++){  
-                            cuisineRest[i][0] = name[i];
-                            cuisineRest[i][1] = address[i];
-                            cuisineRest[i][2] = tel[i];
-                        }
-                    }
-                    else{
-                        //Gets Name address and phone of all restaurants that been 
-                        //filterde out with SQL filtering query in the class SQLFilter. 
-                        cuisineRest = selectFilterCuisine(cuisine);
-                    }
-                    
-                    String[][] budgetsRest = null;
+    private static void getFilter(String cuisine){
+            String[][] cuisineRest = null;
+            // If the 
+            if(cuisine.equalsIgnoreCase("All")){
+                name = selectRestName();
+                tel = selectRestTel();
+                address = selectRestAddress();
+                cuisineRest = new String[name.length][3];
+                for(int i = 0; i < name.length; i++){  
+                    cuisineRest[i][0] = name[i];
+                    cuisineRest[i][1] = address[i];
+                    cuisineRest[i][2] = tel[i];
+                }
+            }
+            else{
+                //Gets Name address and phone of all restaurants that been 
+                //filterde out with SQL filtering query in the class SQLFilter. 
+                cuisineRest = selectFilterCuisine(cuisine);
+            }
+            String[][] budgetsRest = null;
             String[][] budgetsRest1 = null;
             String[][] budgetsRest2 = null;
+            String[][] isdiscouted = null;
             
             if(slBudget[0] == "30"){
             budgetsRest = SelectFilterBudget(slBudget[0]);
@@ -559,8 +588,26 @@ public class AdminFrame {
             if(slBudget[2] == "90"){
             budgetsRest2 = SelectFilterBudget(slBudget[2]);
             }
+            if(slStudentDis == 1){
+                isdiscouted = SelectFilterDiscount();
+            }
+            
             
             if(slBudget[0] == "30"){
+                if(slStudentDis == 1){
+                    for(int i = 0; i < cuisineRest.length; i++){
+                for(int j = 0; j < budgetsRest.length; j++){
+                    if(cuisineRest[i][0].equalsIgnoreCase(budgetsRest[j][0])){ 
+                        for(int k = 0; k < isdiscouted.length; k++){
+                        if(cuisineRest[i][0].equalsIgnoreCase(isdiscouted[k][0])){
+                            getResultPanel(cuisineRest[i][0], cuisineRest[i][2], cuisineRest[i][1]);
+                        }
+                        }
+                    }
+                }
+            }
+                }
+                else{
             for(int i = 0; i < cuisineRest.length; i++){
                 for(int j = 0; j < budgetsRest.length; j++){
                     if(cuisineRest[i][0].equalsIgnoreCase(budgetsRest[j][0])){ 
@@ -568,9 +615,24 @@ public class AdminFrame {
                     }
                 }
             }
+                }
             }
             
             if(slBudget[1] == "60"){
+                if(slStudentDis == 1){
+                    for(int i = 0; i < cuisineRest.length; i++){
+                for(int j = 0; j < budgetsRest1.length; j++){
+                    if(cuisineRest[i][0].equalsIgnoreCase(budgetsRest1[j][0])){ 
+                        for(int k = 0; k < isdiscouted.length; k++){
+                        if(cuisineRest[i][0].equalsIgnoreCase(isdiscouted[k][0])){
+                            getResultPanel(cuisineRest[i][0], cuisineRest[i][2], cuisineRest[i][1]);
+                        }
+                        }
+                    }
+                }
+            }
+                }
+                else{
             for(int i = 0; i < cuisineRest.length; i++){
                 for(int j = 0; j < budgetsRest1.length; j++){
                     if(cuisineRest[i][0].equalsIgnoreCase(budgetsRest1[j][0])){ 
@@ -578,23 +640,49 @@ public class AdminFrame {
                     }
                 }
             }
+                }
             }
             
             if(slBudget[2] == "90"){
+                if(slStudentDis == 1){
+                    for(int i = 0; i < cuisineRest.length; i++){
+                for(int j = 0; j < budgetsRest2.length; j++){
+                    if(cuisineRest[i][0].equalsIgnoreCase(budgetsRest2[j][0])){
+                        for(int k = 0; k < isdiscouted.length; k++){
+                        if(cuisineRest[i][0].equalsIgnoreCase(isdiscouted[k][0])){
+                            getResultPanel(cuisineRest[i][0], cuisineRest[i][2], cuisineRest[i][1]);
+                        }
+                        }
+                    }
+                }
+            }
+                }
+                else{
             for(int i = 0; i < cuisineRest.length; i++){
                 for(int j = 0; j < budgetsRest2.length; j++){
-                    if(cuisineRest[i][0].equalsIgnoreCase(budgetsRest2[j][0])){ 
+                    if(cuisineRest[i][0].equalsIgnoreCase(budgetsRest2[j][0])){
                         getResultPanel(cuisineRest[i][0], cuisineRest[i][2], cuisineRest[i][1]);
                     }
                 }
             }
+                }
             }
             
             if(slBudget[0] == null && slBudget[1] == null && slBudget[2] == null){
+                if(slStudentDis == 1){
+                    for(int i = 0; i < cuisineRest.length; i++){
+                for(int j = 0; j < isdiscouted.length; j++){
+                        if(cuisineRest[i][0].equalsIgnoreCase(isdiscouted[j][0])){
+                            getResultPanel(cuisineRest[i][0], cuisineRest[i][2], cuisineRest[i][1]);
+                        }
+                }
+            }
+                }
+                else{
             for(int i = 0; i < cuisineRest.length; i++){
                 getResultPanel(cuisineRest[i][0], cuisineRest[i][2], cuisineRest[i][1]);
             }
             }
-                    
-                }
+            }
+        }
         }

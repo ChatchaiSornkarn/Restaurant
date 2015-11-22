@@ -201,6 +201,5 @@ public class SResultPanel extends ResultPanel {
 		lblNewLabel_1.setFont(new Font("Arial Black", Font.PLAIN, 12));
 		lblNewLabel_1.setBounds(500, 41, 42, 28);
 		add(lblNewLabel_1);
-
 	}
 }

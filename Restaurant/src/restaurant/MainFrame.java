@@ -339,7 +339,6 @@ public class MainFrame {
 		panel.add(sek75_125);
                 
                 //STUDENT DISCOUNT CHECKBOX
-		
                 JCheckBox sudentDis = new JCheckBox("Student discount");
 		sudentDis.setBounds(53, 315, 109, 23);
                 sudentDis.setOpaque(false);
