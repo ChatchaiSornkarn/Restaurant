@@ -15,6 +15,7 @@ public class SQLRestaurant extends SQLStringReturn{
     
     private static String[] name;
     private static String[] cuisine;
+    private static String image;
     
     /**
      * select id and name from Restaurant
@@ -59,6 +60,7 @@ public class SQLRestaurant extends SQLStringReturn{
             
             int rowcount = 0;
             
+            // to look for array size
             if (rs.last()) {
             rowcount = rs.getRow();
             rs.beforeFirst();
@@ -131,6 +133,22 @@ public class SQLRestaurant extends SQLStringReturn{
         System.err.println(e.getMessage());
         }
         return name;
+    }
+    
+    public static String getImage(String restName){
+        try{
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("select image from Restaurant WHERE RestName =\""+restName+"\"");
+            
+	    while(rs.next()){
+                image = rs.getString("image");
+            }
+            close(stmt);
+        }
+        catch(Exception e){
+        System.err.println(e.getMessage());
+        }
+        return image;
     }
     
 }
