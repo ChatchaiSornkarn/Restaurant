@@ -12,7 +12,6 @@ import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import static restaurant.SQLRestaurant.getImage;
 
 public class SResultPanel extends ResultPanel {
      
@@ -20,8 +19,6 @@ public class SResultPanel extends ResultPanel {
 	int selected;
 	String comment;
 	private JTextField textField;
-        String image = getImage(name);;
-        
 	/**
 	 * Create the panel.
 	 */
@@ -204,10 +201,6 @@ public class SResultPanel extends ResultPanel {
 		lblNewLabel_1.setFont(new Font("Arial Black", Font.PLAIN, 12));
 		lblNewLabel_1.setBounds(500, 41, 42, 28);
 		add(lblNewLabel_1);
-                
-                JLabel label = new JLabel("");
-		label.setBounds(0, 0, 542, 509);
-		label.setIcon(new ImageIcon(SResultPanel.class.getResource("/resources/"+image)));
-		add(label);
+
 	}
 }

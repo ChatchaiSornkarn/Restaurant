@@ -30,6 +30,8 @@ import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.font.TextAttribute;
 import java.sql.SQLException;
 import java.util.Map;
@@ -201,7 +203,7 @@ public class MainFrame {
                 panel.add(register);
                 
                
-                // Johan Search
+                 // Search
                 JTextField searchbar = new JTextField();
 		searchbar.setBounds(33, 60, 174, 20);
                 searchbar.setText("Enter search terms here");
@@ -209,24 +211,69 @@ public class MainFrame {
                 searchbar.setBorder(null);
 		panel.add(searchbar);
 		searchbar.setColumns(10);
+
+ 
                 searchbar.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		internalFrame.removeAll();
-                        getInternalFrame();
+		public void actionPerformed(ActionEvent e) {
+                    
+		internalFrame.removeAll();
+                        getInternalFrame(); 
         		String userSearch = searchbar.getText();
-        		String strName = SQLSearch.searchRestName(userSearch);
-                        String strAddress = SQLSearch.searchRestPhone(userSearch);
-        		String strTel = SQLSearch.searchRestAddress(userSearch);
-        		if (strName == "wrong") {
-        			getResultPanel("No restaurant with this name", strTel, strAddress);
+                        
+        		String[] strName = SQLSearch.searchRestName(userSearch);
+                        String[] strAddress = SQLSearch.searchRestPhone(userSearch);
+        		String[] strTel = SQLSearch.searchRestAddress(userSearch);
+        		if (strName[0].equals("wrong")) {
+        		JOptionPane.showMessageDialog(frame, "No rerstaurant with this name.");
         		}
         		else{
-				getResultPanel(strName, strTel, strAddress);
+			for(int i=0; i<strName.length; i++){
+                            getResultPanel(strName[i], strAddress[i], strTel[i]);
+            		}
                         }
         	}
-        });
+	});
+                searchbar.addMouseListener(new MouseAdapter(){
+                    
+			@Override
+			public void mouseClicked(MouseEvent e) {
+                        searchbar.setText("");
+			}
+		});
+                //HÄR ÄR SEARCHBUTTON SOM SKA LÄGGAS TILL.
+                JButton searchButton = new JButton("Search");
+                searchButton.setBounds(207, 55, 86, 34);
+		searchButton.addMouseListener(new MouseAdapter() {
+                    
+                        @Override
+                        public void mouseEntered(MouseEvent e){
+                            Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
+                            searchButton.setCursor(cur1);
+                        }
+                        
+			@Override
+			public void mouseClicked(MouseEvent e) {
+                        internalFrame.removeAll();
+                        getInternalFrame();
+        		String userSearch = searchbar.getText();
+        		String[] strName = SQLSearch.searchRestName(userSearch);
+                        String[] strAddress = SQLSearch.searchRestPhone(userSearch);
+        		String[] strTel = SQLSearch.searchRestAddress(userSearch);
+        		if (strName[0].equals("wrong")) {
+        			JOptionPane.showMessageDialog(frame, "No rerstaurant with this name.");
+        		}
+        		else{
+			for(int i=0; i<strName.length; i++){
+                            getResultPanel(strName[i], strAddress[i], strTel[i]);
+                        }
+                        }
+                		
+                                
+			}
+		});
+		panel.add(searchButton);
 
-                
+            
 		JTextPane txtpnPleaseSelectThe = new JTextPane();
 		txtpnPleaseSelectThe.setEditable(false);
 		txtpnPleaseSelectThe.setOpaque(false);
@@ -339,6 +386,7 @@ public class MainFrame {
 		panel.add(sek75_125);
                 
                 //STUDENT DISCOUNT CHECKBOX
+		
                 JCheckBox sudentDis = new JCheckBox("Student discount");
 		sudentDis.setBounds(53, 315, 109, 23);
                 sudentDis.setOpaque(false);
