@@ -218,52 +218,7 @@ public class AdminFrame {
 		lblNewLabel_1.setIcon(new ImageIcon(AdminFrame.class.getResource("/resources/Manager-32.png")));
 		lblNewLabel_1.setForeground(Color.WHITE);
 		lblNewLabel_1.setBounds(907, 3, 80, 78);
-		panel.add(lblNewLabel_1);
-                
-                final JFormattedTextField UserLogin = new JFormattedTextField();
-		UserLogin.setText(" Username/Email");
-                UserLogin.setBackground(java.awt.Color.DARK_GRAY);
-                UserLogin.setForeground(java.awt.Color.WHITE);
-		UserLogin.setBounds(10, 3, 122, 20);
-                UserLogin.addMouseListener(new MouseAdapter(){
-                    @Override
-                    public void mouseClicked(MouseEvent e){
-                        UserLogin.setText("");
-                    }
-                });
-		panel.add(UserLogin);
-
-		final JPasswordField PassLogin = new JPasswordField();
-		PassLogin.setBounds(142, 3, 128, 20);
-                PassLogin.setBackground(java.awt.Color.DARK_GRAY);
-                PassLogin.setForeground(java.awt.Color.WHITE);
-		PassLogin.setText("jjjjjjjjjj");
-                PassLogin.addMouseListener(new MouseAdapter(){
-                    @Override
-                    public void mouseClicked(MouseEvent e){
-                        PassLogin.setText("");
-                    }
-                });
-		panel.add(PassLogin);
-                
-
-		final JButton EnterLogin = new JButton("Enter");
-		EnterLogin.setSelectedIcon(new ImageIcon(AdminFrame.class.getResource("/resources/Checked-32.png")));
-		EnterLogin.setBounds(280, 3, 89, 20);
-		panel.add(EnterLogin);
-                EnterLogin.addMouseListener(new MouseAdapter() {
-                    
-			@Override
-			public void mouseClicked(MouseEvent e) {
-                            JOptionPane.showMessageDialog(null, "This action is not yet applicable");
-			}
-                                     
-                    @Override
-                    public void mouseEntered(MouseEvent e){
-                          Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
-                            EnterLogin.setCursor(cur1);
-                        }
-		});
+		panel.add(lblNewLabel_1);          
                 
                 /*REGISTER FUNCTIONALITY, JUST COPY AND PASTE TO MAINFRAME OF UPDATED PROGRAM*/
                 final JLabel register = new JLabel();

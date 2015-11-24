@@ -1,5 +1,6 @@
 package restaurant;
 
+import java.awt.Cursor;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -13,6 +14,8 @@ import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JOptionPane;
+import static restaurant.SQLDelete.*;
 
 public class DeleteWindow extends JFrame {
 
@@ -54,6 +57,21 @@ public class DeleteWindow extends JFrame {
 		lblNewLabel_3.setFont(new Font("Impact", Font.PLAIN, 14));
 		lblNewLabel_3.setIcon(new ImageIcon(DeleteWindow.class.getResource("/resources/Cancel-32.png")));
 		lblNewLabel_3.setBounds(217, 137, 111, 46);
+                lblNewLabel_3.addMouseListener(new MouseAdapter() {
+                    
+                        @Override
+                        public void mouseEntered(MouseEvent e){
+                            Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
+                            lblNewLabel_3.setCursor(cur1);
+                        }
+                        
+			@Override
+			public void mouseClicked(MouseEvent e) {
+                        //add Restaurant
+                                deleteRestaurant(textField.getText(), textField_1.getText(), textField_2.getText());
+                                JOptionPane.showMessageDialog(null, "Delete Success!");
+			}
+		});
 		contentPane.add(lblNewLabel_3);
 		
 		lblNewLabel_2 = new JLabel("");

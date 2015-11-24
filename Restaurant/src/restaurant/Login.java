@@ -30,8 +30,7 @@ public class Login {
                         
                                 if (rs.next()) {
                                  JOptionPane.showMessageDialog(null, "Login Successful!"); 
-                                 adminLogin = true;
-                                 
+                                 this.adminLogin = true;
                                  
                                 } else if (username.equals("") && (password.equals(""))) {
                                   JOptionPane.showMessageDialog(null, "Please enter your username and password.");

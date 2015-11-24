@@ -31,7 +31,7 @@ public class FirstFrame {
 
 	public JFrame frame;
 	public JPasswordField PassLogin;
-        public Login login = new Login();
+        protected Login login = new Login();
 
 	/**
 	 * Launch the application.

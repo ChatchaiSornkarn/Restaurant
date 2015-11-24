@@ -50,7 +50,7 @@ import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import static restaurant.SQLFilter.*;
 
-public class MainFrame {
+public class MainFrame{
 
 	public JFrame frame;
         private Login login = new Login();
