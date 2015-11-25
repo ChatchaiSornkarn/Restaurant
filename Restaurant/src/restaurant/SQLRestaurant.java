@@ -5,7 +5,11 @@
  */
 package restaurant;
 
+import java.awt.Image;
 import java.sql.*;
+import java.util.ArrayList;
+import javax.swing.ImageIcon;
+import static restaurant.DBConnection.conn;
 
 /**
  *
@@ -132,5 +136,41 @@ public class SQLRestaurant extends SQLStringReturn{
         }
         return name;
     }
+    
+    public static ImageIcon getIcon(String a){
+		ImageIcon icon = null;
+		try {
+			
+	       // Connection connection = null;
+	      //  connection  = DriverManager.getConnection(url,user,pass);
+	        Statement statement = conn.createStatement();
+            statement.setQueryTimeout(60);
+            
+            ResultSet r = statement.executeQuery(a);
+            while(r.next() ){
+            
+            	if(r.getBytes(1) != null ){
+                  byte[] imageBytes = r.getBytes(1);
+    	         
+    	          icon = new ImageIcon(imageBytes);
+         		  Image image = icon.getImage();
+         		  Image bild= image.getScaledInstance(535, 503,  java.awt.Image.SCALE_SMOOTH);
+         		  icon = new ImageIcon(bild);
+         		  
+            	} else if (r.getBytes(1)== null) {
+            		icon = new ImageIcon(SQLRestaurant.class.getResource("/resources/restaurant.jpg"));
+            		Image image = icon.getImage();
+             		Image bild= image.getScaledInstance(535, 503,  java.awt.Image.SCALE_SMOOTH);
+             		icon = new ImageIcon(bild);
+            	  
+            	 }
+           
+	        }  statement.close();
+            
+	     }catch (SQLException e) {
+	}     
+	      
+		return icon; 
+	}
     
 }
