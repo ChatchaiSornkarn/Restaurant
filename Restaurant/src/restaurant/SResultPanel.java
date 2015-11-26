@@ -12,13 +12,20 @@ import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import javax.swing.JButton;
+import java.lang.String;
+import javax.swing.text.StyledDocument;
 
 public class SResultPanel extends ResultPanel {
      
 	
 	int selected;
 	String comment;
-	private JTextField textField;
+	JTextField userComment;
+        FirstFrame FF = new FirstFrame();
+        Login login = new Login();
+        
+        
 	/**
 	 * Create the panel.
 	 */
@@ -128,6 +135,20 @@ public class SResultPanel extends ResultPanel {
 		
 		fourstars.setBounds(93, 66, 31, 26);
 		add(fourstars);
+                
+                
+                JButton commentButton = new JButton ("Enter");
+                commentButton.setBounds(400,350,120,50);
+                add(commentButton);
+                commentButton.addMouseListener(new MouseAdapter() {
+                public void mouseEntered(MouseEvent e){
+                   Review.insertReview(name ,FirstFrame.username,userComment.getText());
+                    
+                    
+                    
+                }
+                });
+                
 		
 		JTextPane textPane = new JTextPane();
 		textPane.setBounds(10, 0, 62, 128);
@@ -156,19 +177,30 @@ public class SResultPanel extends ResultPanel {
 		txtpnLeaveAComment.setBounds(0, 139, 62, 34);
 		add(txtpnLeaveAComment);
 		
-		textField = new JTextField();//the comment will be here
-		textField.setBounds(62, 147, 240, 26);
-		add(textField);
-		textField.setColumns(10);
+		userComment = new JTextField();  //the comment will be here
+		userComment.setBounds(62, 147, 240, 26);
+		add(userComment);
+		userComment.setColumns(10);
+                String userCommentInput = userComment.getText();
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 182, 498, 170);
 		add(scrollPane);
 		
-		JTextPane txtpnPutTheComment = new JTextPane();
-		txtpnPutTheComment.setEditable(false);
-		txtpnPutTheComment.setText("Put the comment next to it's username and print each one in a new line and the  scroll is automatically provided\r\nUser : Comment\r\nUser : Comment\r\nUser : Comment\r\nUser : Comment\r\nUser : Comment\r\nUser : Comment\r\nUser : Comment\r\nUser : Comment\r\nUser : Comment\r\nUser : Comment\r\nUser : Comment\r\nUser : Comment\r\nUser : Comment\r\nUser : Comment\r\nUser : Comment\r\nUser : Comment\r\nUser : Comment");
-		scrollPane.setViewportView(txtpnPutTheComment);
+		JTextPane commentSection = new JTextPane();
+                String displayComments = "";
+                StyledDocument commentD = commentSection.getStyledDocument();
+		commentSection.setEditable(false);
+                String[] comment = SQLReview.displayReview(name);
+                for (int i = 0 ; i < comment.length  ; i++) {
+                    displayComments += comment[i] + "\n";
+                    commentSection.setText(displayComments);
+                }
+		 scrollPane.setViewportView(commentSection);
+                 
+                
+                
+            
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.addMouseListener(new MouseAdapter() {

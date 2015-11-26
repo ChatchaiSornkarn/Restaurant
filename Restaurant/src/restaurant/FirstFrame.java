@@ -31,7 +31,13 @@ public class FirstFrame {
 
 	public JFrame frame;
 	public JPasswordField PassLogin;
+        public JFormattedTextField UserLogin;
         protected Login login = new Login();
+        public static String username;
+        
+        
+        
+        
 
 	/**
 	 * Launch the application.
@@ -54,8 +60,11 @@ public class FirstFrame {
 	 */
 	public FirstFrame() {
 		initialize();
+                
 	}
-
+        
+        
+       
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -122,7 +131,7 @@ public class FirstFrame {
                 
 		
 
-		JFormattedTextField UserLogin = new JFormattedTextField();
+		UserLogin = new JFormattedTextField();
 		UserLogin.setText(" Username/Email");
                 UserLogin.setBackground(Color.BLACK);
                 UserLogin.setForeground(Color.WHITE);
@@ -160,8 +169,8 @@ public class FirstFrame {
                         }
                     
 			@Override
-			public void mouseClicked(MouseEvent e) {
-                        String username = UserLogin.getText().trim();
+			public  void mouseClicked(MouseEvent e) {
+                        username = UserLogin.getText().trim();
                         String password = PassLogin.getText().trim();
                         login.AdminLogin(username, password, frame);
                         if(login.adminLogin == true){
@@ -172,7 +181,7 @@ public class FirstFrame {
                                 Logger.getLogger(FirstFrame.class.getName()).log(Level.SEVERE, null, ex);
                             }
                                  adminFrame.frame.setVisible(true);
-                                 frame.setVisible(false);
+                                 
                         }
                         }
 			
@@ -240,5 +249,11 @@ public class FirstFrame {
 		// lblNewLabel.setBounds(31, 48, 653, 358);
 		Background.setSize(800, 433);
 		panel.add(Background);
-	}
+        }
 }
+
+	
+   
+        
+        
+

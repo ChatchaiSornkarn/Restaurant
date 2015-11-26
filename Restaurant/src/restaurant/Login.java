@@ -17,15 +17,19 @@ import static restaurant.DBConnection.conn;
  * @author chatchai
  */
 public class Login {
-    
+   
     boolean adminLogin = false; 
+   
+
     
     public void AdminLogin(String username, String password, JFrame frame){ 
+        
         
                         String sqlLoginVerify = "Select User, Password from Login where User = '"+username+"' and Password = '"+password+"'";
                         try {
                         Statement stmt = conn.createStatement();
                         ResultSet rs = stmt.executeQuery(sqlLoginVerify);
+                        
                         
                         
                                 if (rs.next()) {
