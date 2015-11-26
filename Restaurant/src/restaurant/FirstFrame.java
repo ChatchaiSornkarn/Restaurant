@@ -34,7 +34,7 @@ public class FirstFrame {
         public JFormattedTextField UserLogin;
         protected Login login = new Login();
         public static String username;
-        
+        public static String password;
         
         
         
@@ -171,9 +171,15 @@ public class FirstFrame {
 			@Override
 			public  void mouseClicked(MouseEvent e) {
                         username = UserLogin.getText().trim();
-                        String password = PassLogin.getText().trim();
+                        password = PassLogin.getText().trim();
                         login.AdminLogin(username, password, frame);
                         if(login.adminLogin == true){
+                            Admin adminFrame = null;
+                            adminFrame = new Admin();
+                                 adminFrame.rame.setVisible(true);
+                                 
+                        }
+                        else if(login.ownAdmin == true){
                             AdminFrame adminFrame = null;
                             try {
                                 adminFrame = new AdminFrame();
@@ -181,7 +187,6 @@ public class FirstFrame {
                                 Logger.getLogger(FirstFrame.class.getName()).log(Level.SEVERE, null, ex);
                             }
                                  adminFrame.frame.setVisible(true);
-                                 
                         }
                         }
 			

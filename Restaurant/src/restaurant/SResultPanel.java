@@ -1,4 +1,5 @@
 package restaurant;
+import java.awt.Cursor;
 import javax.swing.JTextPane;
 import java.awt.SystemColor;
 import java.awt.Font;
@@ -184,6 +185,12 @@ public class SResultPanel extends ResultPanel {
 		add(userComment);
 		userComment.setColumns(10);
                 String userCommentInput = userComment.getText();
+                
+                // small rest pic
+                JLabel lblewLabel = new JLabel("");
+		lblewLabel.setIcon(getIcon("Select image from Restaurant where RestName = \""+name+"\""));	
+                 lblewLabel.setBounds(300, 0, 180, 100);
+		add(lblewLabel);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 182, 498, 170);
@@ -236,9 +243,5 @@ public class SResultPanel extends ResultPanel {
 		lblNewLabel_1.setBounds(500, 41, 42, 28);
 		add(lblNewLabel_1);
                 
-                JLabel label = new JLabel("");
-		label.setBounds(0, 0, 542, 509);
-		label.setIcon(getIcon("Select image from Restaurant where RestName = \""+name+"\""));
-		add(label);
 	}
 }

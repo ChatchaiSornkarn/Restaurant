@@ -489,11 +489,11 @@ public class AdminFrame {
                 txtpnRefresh.setOpaque(false);
                 panel.add(txtpnRefresh);
                 
-                name = selectRestName();
-                tel = selectRestTel();
-                address = selectRestAddress();
+                name = selectRestName(FirstFrame.username, FirstFrame.password);
+                tel = selectRestTel(FirstFrame.username, FirstFrame.password);
+                address = selectRestAddress(FirstFrame.username, FirstFrame.password);
                 
-		for(int i=0; i<name.length; i++){
+		for(int i=0; i < name.length; i++){
 			getResultPanel(name[i], tel[i], address[i]);
 		}
                  

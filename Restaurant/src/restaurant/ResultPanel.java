@@ -12,6 +12,7 @@ import java.awt.event.FocusEvent;
 import javax.swing.JSeparator;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import static restaurant.SQLRestaurant.getIcon;
 
 public class ResultPanel extends JPanel {
         public ResultPanel res = this;
@@ -94,9 +95,13 @@ public ResultPanel(String name, String address, String tel) {
 		add(textPane_1, BorderLayout.CENTER);
 		
 		final JLabel lblFeedback = new JLabel("Feedback");
-		
+
 		lblFeedback.setIcon(new ImageIcon(ResultPanel.class.getResource("/resources/yellow-star-icon.png")));
 		add(lblFeedback, BorderLayout.EAST);
+                
+                JLabel lbl = new JLabel("");
+		add(lbl, BorderLayout.WEST);
+                lbl.setIcon(getIcon("Select image from Restaurant where RestName = \""+name+"\""));
 		lblFeedback.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {

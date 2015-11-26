@@ -52,6 +52,34 @@ public class SQLRestaurant extends SQLStringReturn{
         return name;
     }
     
+    public static String[] selectRestName(String username, String password){
+        try{
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("select RestName from Restaurant "
+                    + "INNER JOIN Login USING (Login_ID) WHERE User = '" + username + "' and Password = '" + password + "' ORDER BY RestName");
+            
+            int rowcount = 0;
+            
+            if (rs.last()) {
+            rowcount = rs.getRow();
+            rs.beforeFirst();
+            }
+            
+            name = new String[rowcount];
+            int i = 0;
+            
+	    while(rs.next()){
+                name[i] = rs.getString("RestName");
+                i++;
+            }
+            close(stmt);
+        }
+        catch(Exception e){
+        System.err.println(e.getMessage());
+        }
+        return name;
+    }
+    
     /**
      * select cuisine from Restaurant
      * @return cuisine[] array
@@ -83,10 +111,39 @@ public class SQLRestaurant extends SQLStringReturn{
         return cuisine;
     }
     
+    
     public static String[] selectRestTel(){
         try{
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("select Telephone from Restaurant ORDER BY RestName");
+            
+            int rowcount = 0;
+            
+            if (rs.last()) {
+            rowcount = rs.getRow();
+            rs.beforeFirst();
+            }
+            
+            name = new String[rowcount];
+            int i = 0;
+            
+	    while(rs.next()){
+                name[i] = rs.getString("Telephone");
+                i++;
+            }
+            close(stmt);
+        }
+        catch(Exception e){
+        System.err.println(e.getMessage());
+        }
+        return name;
+    }
+    
+    public static String[] selectRestTel(String username, String password){
+        try{
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("select Telephone from Restaurant "
+                    + "INNER JOIN Login USING (Login_ID) WHERE User = '" + username + "' and Password = '" + password + "' ORDER BY RestName");
             
             int rowcount = 0;
             
@@ -137,6 +194,34 @@ public class SQLRestaurant extends SQLStringReturn{
         return name;
     }
     
+    public static String[] selectRestAddress(String username, String password){
+        try{
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("select Address from Restaurant "
+                    + "INNER JOIN Login USING (Login_ID) WHERE User = '" + username + "' and Password = '" + password + "' ORDER BY RestName");
+            
+            int rowcount = 0;
+            
+            if (rs.last()) {
+            rowcount = rs.getRow();
+            rs.beforeFirst();
+            }
+            
+            name = new String[rowcount];
+            int i = 0;
+            
+	    while(rs.next()){
+                name[i] = rs.getString("Address");
+                i++;
+            }
+            close(stmt);
+        }
+        catch(Exception e){
+        System.err.println(e.getMessage());
+        }
+        return name;
+    }
+    
     public static ImageIcon getIcon(String a){
 		ImageIcon icon = null;
 		try {
@@ -154,13 +239,13 @@ public class SQLRestaurant extends SQLStringReturn{
     	         
     	          icon = new ImageIcon(imageBytes);
          		  Image image = icon.getImage();
-         		  Image bild= image.getScaledInstance(535, 503,  java.awt.Image.SCALE_SMOOTH);
+         		  Image bild= image.getScaledInstance(180, 100,  java.awt.Image.SCALE_SMOOTH);
          		  icon = new ImageIcon(bild);
          		  
             	} else if (r.getBytes(1)== null) {
             		icon = new ImageIcon(SQLRestaurant.class.getResource("/resources/restaurant.jpg"));
             		Image image = icon.getImage();
-             		Image bild= image.getScaledInstance(535, 503,  java.awt.Image.SCALE_SMOOTH);
+             		Image bild= image.getScaledInstance(180, 100,  java.awt.Image.SCALE_SMOOTH);
              		icon = new ImageIcon(bild);
             	  
             	 }

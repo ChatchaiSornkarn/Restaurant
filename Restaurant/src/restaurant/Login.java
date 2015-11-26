@@ -17,40 +17,42 @@ import static restaurant.DBConnection.conn;
  * @author chatchai
  */
 public class Login {
-   
-    boolean adminLogin = false; 
-   
 
-    
-    public void AdminLogin(String username, String password, JFrame frame){ 
-        
-        
-                        String sqlLoginVerify = "Select User, Password from Login where User = '"+username+"' and Password = '"+password+"'";
-                        try {
-                        Statement stmt = conn.createStatement();
-                        ResultSet rs = stmt.executeQuery(sqlLoginVerify);
+    boolean adminLogin = false;
+    boolean ownAdmin = false;
+
+    public void AdminLogin(String username, String password, JFrame frame) {
+
+        String sqlLoginVerify = "Select User, Password from Login where User = '" + username + "' and Password = '" + password + "' and User = 'bob' and Password = 'me'";
+        try {
+            Statement stmt = conn.createStatement();
+            Statement stmt2 = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sqlLoginVerify);
+            ResultSet r = stmt2.executeQuery("Select User, Password from Login where User = '"+username+"' and Password = '"+password+"'");
                         
-                        
-                        
-                                if (rs.next()) {
-                                 JOptionPane.showMessageDialog(null, "Login Successful!"); 
-                                 this.adminLogin = true;
-                                 
-                                } else if (username.equals("") && (password.equals(""))) {
-                                  JOptionPane.showMessageDialog(null, "Please enter your username and password.");
-                                  
-                                  
-                                } else if (username.equals("")) {
-                                  JOptionPane.showMessageDialog(null, "Username field is empty. Please enter your username.");
-                                  
-                                } else if (password.equals("")) {
-                                  JOptionPane.showMessageDialog(null, "Password field is empty. Please enter your password.");
-                                
-                                  
-                                } else {
-                                    JOptionPane.showMessageDialog(null, "Login Failed. Please try again.");
-                                }
-                            
-                                } catch(SQLException err) {;}
+
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(null, "Super Login Successful!");
+                this.adminLogin = true;
+            } 
+            else if (r.next()){
+                JOptionPane.showMessageDialog(null, "Own Login Successful!");
+                this.ownAdmin = true;
+            }
+            else if (username.equals("") && (password.equals(""))) {
+                JOptionPane.showMessageDialog(null, "Please enter your username and password.");
+
+            } else if (username.equals("")) {
+                JOptionPane.showMessageDialog(null, "Username field is empty. Please enter your username.");
+
+            } else if (password.equals("")) {
+                JOptionPane.showMessageDialog(null, "Password field is empty. Please enter your password.");
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Login Failed. Please try again.");
+            }
+
+        } catch (SQLException err) {;
+        }
     }
 }
