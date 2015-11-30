@@ -1,6 +1,8 @@
 package restaurant;
 import java.awt.Cursor;
 import javax.swing.JTextPane;
+import javax.swing.SwingUtilities;
+
 import java.awt.SystemColor;
 import java.awt.Font;
 import javax.swing.JLabel;
@@ -216,22 +218,28 @@ public class SResultPanel extends ResultPanel {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(AdminFrame.inUse==true){
-				AdminFrame.internalFrame.getContentPane().removeAll();
-				AdminFrame.scrollPane.setViewportView(AdminFrame.internalFrame);
-				for(int i=0; i<AdminFrame.name.length; i++){
-					ResultPanel res=new ResultPanel(AdminFrame.name[i],AdminFrame.address[i],AdminFrame.tel[i]);
-					AdminFrame.internalFrame.getContentPane().add(res);
-				}
-				}else {
-					MainFrame.internalFrame.getContentPane().removeAll();
-					MainFrame.scrollPane.setViewportView(MainFrame.internalFrame);
-					for(int i=0; i<MainFrame.name.length; i++){
-						ResultPanel res=new ResultPanel(MainFrame.name[i],MainFrame.address[i],MainFrame.tel[i]);
-						MainFrame.internalFrame.getContentPane().add(res);
-					}
-				}
-				
+		    Runnable run = new Runnable(){
+		    	public void run(){
+		    		if(AdminFrame.inUse==true){
+						AdminFrame.internalFrame.getContentPane().removeAll();
+						AdminFrame.scrollPane.setViewportView(AdminFrame.internalFrame);
+						for(int i=0; i<AdminFrame.name.length; i++){
+							ResultPanel res=new ResultPanel(AdminFrame.name[i],AdminFrame.address[i],AdminFrame.tel[i]);
+							AdminFrame.internalFrame.getContentPane().add(res);
+						}
+						}else {
+							MainFrame.internalFrame.getContentPane().removeAll();
+							MainFrame.scrollPane.setViewportView(MainFrame.internalFrame);
+							for(int i=0; i<MainFrame.name.length; i++){
+								ResultPanel res=new ResultPanel(MainFrame.name[i],MainFrame.address[i],MainFrame.tel[i]);
+								MainFrame.internalFrame.getContentPane().add(res);
+							}
+						}
+		    	}
+		    	
+		    };
+			Thread thread = new Thread(run);
+			thread.start();
 			}
 		});
 		lblNewLabel.setIcon(new ImageIcon(SResultPanel.class.getResource("/resources/Home-32.png")));

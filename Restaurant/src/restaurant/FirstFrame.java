@@ -22,6 +22,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFormattedTextField;
 import javax.swing.JPasswordField;
+import javax.swing.SwingUtilities;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import static restaurant.DBConnection.conn;
@@ -82,7 +83,7 @@ public class FirstFrame {
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 
-		JLabel ResButton = new JLabel("");
+		final JLabel ResButton = new JLabel("");
                 ResButton.setIcon(new ImageIcon(getClass().getResource("/resources/UtensilDefault1.png")));
 		ResButton.setBounds(311, 135, 172, 182);
 		panel.add(ResButton);
@@ -101,25 +102,33 @@ public class FirstFrame {
                         }
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(login.adminLogin==false){
-				MainFrame mainframe = null;
-                            try {
-                                mainframe = new MainFrame();
-                            } catch (SQLException ex) {
-                                Logger.getLogger(FirstFrame.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                                mainframe.frame.setVisible(true);
-			}
-                                //is login
-                                else {
-				AdminFrame mainframe = null;
-                try {
-                    mainframe = new AdminFrame();
-                } catch (SQLException ex) {
-                    Logger.getLogger(FirstFrame.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                    mainframe.frame.setVisible(true);
-			}
+			Runnable run = new Runnable (){
+				public void run(){
+					if(login.adminLogin==false){
+						MainFrame mainframe = null;
+		                            try {
+		                                mainframe = new MainFrame();
+		                            } catch (SQLException ex) {
+		                                Logger.getLogger(FirstFrame.class.getName()).log(Level.SEVERE, null, ex);
+		                            }
+		                                mainframe.frame.setVisible(true);
+					}
+		                                //is login
+		                                else {
+						AdminFrame mainframe = null;
+		                try {
+		                    mainframe = new AdminFrame();
+		                } catch (SQLException ex) {
+		                    Logger.getLogger(FirstFrame.class.getName()).log(Level.SEVERE, null, ex);
+		                }
+		                    mainframe.frame.setVisible(true);
+					}
+				}
+				
+				
+			};
+			Thread thread = new Thread(run);
+			thread.start();
 			}
                         
 		});
@@ -157,7 +166,7 @@ public class FirstFrame {
                 });
 		panel.add(PassLogin);
 
-		JButton EnterLogin = new JButton("Enter");
+		final JButton EnterLogin = new JButton("Enter");
 		EnterLogin.setBounds(280, 4, 89, 23);
 		panel.add(EnterLogin);
                 EnterLogin.addMouseListener(new MouseAdapter() {
@@ -193,7 +202,7 @@ public class FirstFrame {
 		});
                 
                 /*REGISTER FUNCTIONALITY, JUST COPY AND PASTE TO FIRSTFRAME OF UPDATED PROGRAM*/
-                JLabel register = new JLabel();
+                final JLabel register = new JLabel();
                 register.setText("Click here to register for free");
                 register.setBounds(378, 5, 200, 20);
                 register.setFont(new Font("Arial", Font.PLAIN, 13));
@@ -227,7 +236,7 @@ public class FirstFrame {
                 });
                 panel.add(register);
                 
-		JLabel ExitTool = new JLabel("");
+		final JLabel ExitTool = new JLabel("");
                 ExitTool.setBounds(762, 5, 40, 40);
 		ExitTool.addMouseListener(new MouseAdapter() {
                     

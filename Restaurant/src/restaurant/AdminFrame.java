@@ -294,7 +294,7 @@ public class AdminFrame {
 		});
                 
                 //HÄR ÄR SEARCHBUTTON SOM SKA LÄGGAS TILL.
-                JButton searchButton = new JButton("Search");
+                final JButton searchButton = new JButton("Search");
                 searchButton.setBounds(207, 55, 86, 34);
 		searchButton.addMouseListener(new MouseAdapter() {
                     

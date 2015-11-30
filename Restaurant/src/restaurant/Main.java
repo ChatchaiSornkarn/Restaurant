@@ -6,6 +6,9 @@
 package restaurant;
 
 import java.sql.SQLException;
+
+import javax.swing.JFrame;
+
 import static restaurant.SQLFilter.SelectFilterBudget;
 
 
@@ -22,6 +25,7 @@ public class Main {
         DBConnection.dbconnecting();
         FirstFrame form = new FirstFrame();
         form.frame.setVisible(true);
+        
     }
     
 }

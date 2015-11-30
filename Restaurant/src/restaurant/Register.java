@@ -52,7 +52,7 @@ public class Register {
                 frame.setUndecorated(true);
                 frame.setBackground(new Color(0,0,0,0));
                 
-                JTextField username = new JTextField("Desired Username");
+                final JTextField username = new JTextField("Desired Username");
                 username.setBounds(165, 192, 200, 20);
                 username.setFont(new Font("Arial", Font.PLAIN, 16));
                 username.setForeground(Color.lightGray);
@@ -69,7 +69,7 @@ public class Register {
                 
                 frame.add(username);
                 
-                JPasswordField password = new JPasswordField("Password");
+                final JPasswordField password = new JPasswordField("Password");
                 password.setBounds(165, 243, 200, 20);
                 password.setOpaque(false);
                 password.setBorder(null);
@@ -146,7 +146,7 @@ public class Register {
                 
 
                 
-                JLabel ExitTool = new JLabel("");
+                final JLabel ExitTool = new JLabel("");
                 ExitTool.setBounds(386, 228, 5, 2);
                 ExitTool.setSize(40,40);
 		ExitTool.addMouseListener(new MouseAdapter() {

@@ -97,13 +97,13 @@ public class Admin {
 		rame.getContentPane().add(lblNewLabel);
 		
 		
-		JPanel madmin = new JPanel();
+		final JPanel madmin = new JPanel();
 		madmin.setBorder(new LineBorder(new Color(0, 0, 0), 4, true));
 		madmin.setBounds(201, 90, 900, 244);
 		rame.getContentPane().add(madmin);
 		madmin.setLayout(new CardLayout(0, 0));
 		
-		JPanel add = new JPanel();
+		final JPanel add = new JPanel();
 		add.setBackground(SystemColor.info);
 		madmin.add(add, "name_430299286202735");
 		add.setLayout(null);
@@ -226,7 +226,7 @@ public class Admin {
 		list_1 = new JList(connect.makeList("select Cuisine from Cuisine_Types"));
 		scrollPane.setViewportView(list_1);
 		
-		JPanel user = new JPanel();
+		final JPanel user = new JPanel();
 		user.setBackground(Color.GREEN);
 		madmin.add(user, "name_430254776220175");
 		
@@ -236,11 +236,11 @@ public class Admin {
 		JButton btnNewButton_5 = new JButton("New button");
 		user.add(btnNewButton_5);
 		
-		JPanel review = new JPanel();
+		final JPanel review = new JPanel();
 		review.setBackground(Color.ORANGE);
 		madmin.add(review, "name_428658833133265");
 		
-		JPanel remo = new JPanel();
+		final JPanel remo = new JPanel();
 		madmin.add(remo, "name_430310930577694");
 		remo.setLayout(null);
 		
@@ -248,7 +248,7 @@ public class Admin {
 		comboBox_1.setBounds(148, 43, 85, 22);
 		remo.add(comboBox_1);
 		
-		JPanel admin = new JPanel();
+		final JPanel admin = new JPanel();
 		admin.setForeground(SystemColor.desktop);
 		admin.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, SystemColor.desktop, null, new Color(0, 0, 0), null));
 		madmin.add(admin, "name_641553752768966");
@@ -260,7 +260,7 @@ public class Admin {
 		txtpnEnterNewAdmin.setText("enter new admin name:  ");
 		admin.add(txtpnEnterNewAdmin);
 		
-		JTextField textField_1 = new JTextField();
+		final JTextField textField_1 = new JTextField();
 		textField_1.setBounds(170, 5, 136, 22);
 		
 		JTextPane txtpnEnterNewPassword = new JTextPane();
@@ -279,7 +279,7 @@ public class Admin {
 		admin.add(textField_1);
 		
 		
-		JTextField textField_2 = new JTextField();
+		final JTextField textField_2 = new JTextField();
 		textField_2.setBounds(170, 42, 136, 22);
 		
 		textField_2.addActionListener(new ActionListener() {

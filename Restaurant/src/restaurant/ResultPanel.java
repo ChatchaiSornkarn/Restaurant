@@ -2,6 +2,8 @@ package restaurant;
 
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
+import javax.swing.SwingUtilities;
+
 import java.awt.SystemColor;
 import java.awt.Font;
 import javax.swing.JLabel;
@@ -26,6 +28,10 @@ public class ResultPanel extends JPanel {
          * @param address
          * @param tel
 	 */
+	/**
+	 * @wbp.parser.constructor
+	 */
+
 public ResultPanel(String name, String address, String tel) {
 		addFocusListener(new FocusAdapter() {
 			@Override
@@ -112,7 +118,9 @@ public ResultPanel(String name, String address, String tel) {
 				lblFeedback.setIcon(new ImageIcon(ResultPanel.class.getResource("/resources/yellow-star-icon.png")));
 			}
 			public void mouseClicked(MouseEvent e){
-				if(AdminFrame.inUse==true){
+	Runnable run = new Runnable(){
+		public void run(){
+			if(AdminFrame.inUse==true){
 				AdminFrame.res=res;
 				AdminFrame.internalFrame.getContentPane().removeAll();
 				AdminFrame.internalFrame.getContentPane().add(new SResultPanel (res));
@@ -120,6 +128,11 @@ public ResultPanel(String name, String address, String tel) {
 					MainFrame.internalFrame.getContentPane().removeAll();
 					MainFrame.internalFrame.getContentPane().add(new SResultPanel (res));
 				}
+		}
+		
+	};
+	Thread thread = new Thread(run);
+	thread.start();
 			}
 		});
 		
