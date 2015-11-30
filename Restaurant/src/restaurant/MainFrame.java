@@ -65,6 +65,7 @@ public class MainFrame{
         private static JPanel panel;
         public static JScrollPane scrollPane;
         private static int slStudentDis;
+        Connector connect = new Connector();
 
 	
 	/**
@@ -322,8 +323,8 @@ public class MainFrame{
                     allcuisine1[i] = allcuisine[i-1];
                 }
                 
-		final JComboBox cuisinecomboBox = new JComboBox(allcuisine1);
-		cuisinecomboBox.setBounds(53, 135, 150, 20);
+		JComboBox cuisinecomboBox = new JComboBox(allcuisine1);
+		cuisinecomboBox.setBounds(53, 135, 100, 20);
                 cuisinecomboBox.setFont(new Font("Arial", Font.PLAIN, 13));
                 cuisinecomboBox.addMouseListener(new MouseAdapter(){
                     @Override
@@ -333,6 +334,25 @@ public class MainFrame{
                         }
                 });
 		panel.add(cuisinecomboBox);
+                
+		      String[] allfood = connect.makeList("select Food from Food_Type");
+                String[] allfood1 = new String[allfood.length+1];
+                allfood1[0] = "All";
+                for(int i = 1; i <= allfood.length; i++){
+                    allfood1[i] = allfood[i-1];
+                }
+                
+		JComboBox foodcomboBox = new JComboBox(allfood1);
+		foodcomboBox.setBounds(180, 135, 100, 20);
+                foodcomboBox.setFont(new Font("Arial", Font.PLAIN, 13));
+                foodcomboBox.addMouseListener(new MouseAdapter(){
+                    @Override
+                    public void mouseEntered(MouseEvent e){
+                          Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
+                            foodcomboBox.setCursor(cur1);
+                        }
+                });
+		panel.add(foodcomboBox);
                 
 		JTextPane txtpnSelectBudget = new JTextPane();
 		txtpnSelectBudget.setOpaque(false);
