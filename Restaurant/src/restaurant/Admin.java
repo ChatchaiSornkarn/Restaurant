@@ -341,7 +341,7 @@ public class Admin {
             public void mouseClicked(MouseEvent e) {
             }
         });
-        backgroundlayout.setIcon(new ImageIcon(getClass().getResource("/resources/TestBackground.png")));
+        backgroundlayout.setIcon(new ImageIcon(getClass().getResource("/resources/BackgroundFinal.png")));
         backgroundlayout.setBounds(0, 1, 1032, 600);
         panel.add(backgroundlayout);
 

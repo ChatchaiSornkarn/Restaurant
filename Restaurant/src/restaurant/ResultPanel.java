@@ -134,9 +134,7 @@ public class ResultPanel extends JPanel {
             }
 
             public void mouseClicked(MouseEvent e) {
-                Runnable run = new Runnable() {
-                    public void run() {
-                        if (AdminFrame.inUse == true) {
+      if (AdminFrame.inUse == true) {
                             AdminFrame.res = res;
                             AdminFrame.internalFrame.getContentPane().removeAll();
                             AdminFrame.internalFrame.getContentPane().add(new SResultPanel(res));
@@ -148,11 +146,6 @@ public class ResultPanel extends JPanel {
                             MainFrame.internalFrame.getContentPane().removeAll();
                             MainFrame.internalFrame.getContentPane().add(new SResultPanel(res));
                         }
-                    }
-
-                };
-                Thread thread = new Thread(run);
-                thread.start();
             }
         });
 

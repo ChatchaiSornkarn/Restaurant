@@ -174,7 +174,7 @@ public class MainFrame {
         register.setText("Click here to register for free");
         register.setBounds(378, 5, 200, 20);
         register.setFont(new Font("Arial", Font.PLAIN, 13));
-        register.setForeground(java.awt.Color.blue);
+        register.setForeground(java.awt.Color.WHITE);
         Font font = register.getFont();
         Map attributes = font.getAttributes();
 
@@ -185,12 +185,12 @@ public class MainFrame {
             public void mouseEntered(MouseEvent e) {
                 Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
                 register.setCursor(cur1);
-                register.setForeground(java.awt.Color.cyan);
+                register.setForeground(java.awt.Color.CYAN);
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                register.setForeground(java.awt.Color.blue);
+                register.setForeground(java.awt.Color.WHITE);
             }
 
             @Override
@@ -207,7 +207,7 @@ public class MainFrame {
         panel.add(register);
         // Search
         final JTextField searchbar = new JTextField();
-        searchbar.setBounds(33, 60, 174, 20);
+        searchbar.setBounds(53, 70, 178, 20);
         searchbar.setText("Enter search terms here");
         searchbar.setFont(new Font("Arial", Font.ITALIC, 13));
         searchbar.setBorder(null);
@@ -248,11 +248,8 @@ public class MainFrame {
             }
         });
         //HÄR ÄR SEARCHBUTTON SOM SKA LÄGGAS TILL.
-        final JButton searchButton = new JButton("");
-        searchButton.setBounds(235, 55, 86, 34);
-        searchButton.setOpaque(false);
-        searchButton.setContentAreaFilled(false);
-        searchButton.setBorderPainted(false);
+        final JButton searchButton = new JButton("Search");
+        searchButton.setBounds(240,70, 86, 20);
         searchButton.addMouseListener(new MouseAdapter() {
 
             @Override
@@ -289,7 +286,7 @@ public class MainFrame {
         txtpnPleaseSelectThe.setEditable(false);
         txtpnPleaseSelectThe.setOpaque(false);
         txtpnPleaseSelectThe.setFont(new Font("Arial", Font.BOLD, 13));
-        txtpnPleaseSelectThe.setText("SELECT THE CUISINE, FOOD & Environment!!!");
+        txtpnPleaseSelectThe.setText("Select the Cuisine:");
         txtpnPleaseSelectThe.setForeground(java.awt.Color.white);
         txtpnPleaseSelectThe.setBounds(50, 107, 318, 20);
         panel.add(txtpnPleaseSelectThe);
@@ -303,7 +300,7 @@ public class MainFrame {
         }
 
         final JComboBox cuisinecomboBox = new JComboBox(allcuisine1);
-        cuisinecomboBox.setBounds(53, 135, 80, 20);
+        cuisinecomboBox.setBounds(53, 135, 178, 20);
         cuisinecomboBox.setFont(new Font("Arial", Font.PLAIN, 13));
         cuisinecomboBox.addMouseListener(new MouseAdapter() {
             @Override
@@ -314,6 +311,15 @@ public class MainFrame {
         });
         panel.add(cuisinecomboBox);
         
+        JTextPane selectenvironment = new JTextPane();
+        selectenvironment.setEditable(false);
+        selectenvironment.setOpaque(false);
+        selectenvironment.setFont(new Font("Arial", Font.BOLD, 13));
+        selectenvironment.setText("Select the Environment:");
+        selectenvironment.setForeground(java.awt.Color.white);
+        selectenvironment.setBounds(50, 220, 318, 20);
+        panel.add(selectenvironment);
+        
         String[] allsetting = connect.makeList("select Setting from Setting");
         String[] allsetting1 = new String[allsetting.length + 1];
         allsetting1[0] = "All";
@@ -322,7 +328,7 @@ public class MainFrame {
         }
 
         final JComboBox settingcomboBox = new JComboBox(allsetting1);
-        settingcomboBox.setBounds(233, 135, 80, 20);
+        settingcomboBox.setBounds(53,250, 178, 20);
         settingcomboBox.setFont(new Font("Arial", Font.PLAIN, 13));
         settingcomboBox.addMouseListener(new MouseAdapter() {
             @Override
@@ -339,9 +345,18 @@ public class MainFrame {
         for (int i = 1; i <= allfood.length; i++) {
             allfood1[i] = allfood[i - 1];
         }
+        
+        JTextPane selectdiettype = new JTextPane();
+        selectdiettype.setEditable(false);
+        selectdiettype.setOpaque(false);
+        selectdiettype.setFont(new Font("Arial", Font.BOLD, 13));
+        selectdiettype.setText("Select the Diet Type:");
+        selectdiettype.setForeground(java.awt.Color.white);
+        selectdiettype.setBounds(50, 165, 318, 20);
+        panel.add(selectdiettype);
 
         final JComboBox foodcomboBox = new JComboBox(allfood1);
-        foodcomboBox.setBounds(143, 135, 80, 20);
+        foodcomboBox.setBounds(53, 190, 178, 20);
         foodcomboBox.setFont(new Font("Arial", Font.PLAIN, 13));
         foodcomboBox.addMouseListener(new MouseAdapter() {
             @Override
@@ -355,16 +370,20 @@ public class MainFrame {
         JTextPane txtpnSelectBudget = new JTextPane();
         txtpnSelectBudget.setOpaque(false);
         txtpnSelectBudget.setEditable(false);
-        txtpnSelectBudget.setFont(new Font("Arial", Font.BOLD, 15));
+        txtpnSelectBudget.setFont(new Font("Arial", Font.BOLD, 13));
         txtpnSelectBudget.setText("Select budget");
         txtpnSelectBudget.setForeground(java.awt.Color.white);
-        txtpnSelectBudget.setBounds(50, 200, 197, 25);
+        txtpnSelectBudget.setBounds(50, 290, 197, 25);
         panel.add(txtpnSelectBudget);
         final JSlider slider = new JSlider(30, 100);
         slider.setOpaque(false);
         slider.setBackground(Color.DARK_GRAY);
         budget2 = new JFormattedTextField(NumberFormat.getNumberInstance());
         budget2.setText("65");
+        budget2.setFont(new Font("Arial", Font.BOLD,13));
+        budget2.setBorder(null);
+        budget2.setForeground(Color.WHITE);
+        budget2.setOpaque(false);
         budget2.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
@@ -377,7 +396,7 @@ public class MainFrame {
                 slider.setValue(v);
             }
         });
-        budget2.setBounds(200, 240, 41, 22);
+        budget2.setBounds(208, 312, 30, 22);
         panel.add(budget2);
         budget2.setColumns(10);
 
@@ -386,17 +405,17 @@ public class MainFrame {
                 budget2.setText(String.valueOf(slider.getValue()));
             }
         });
-        slider.setBounds(53, 240, 130, 26);
+        slider.setBounds(47, 315, 155, 26);
         slider.setPaintTicks(true);
 
         panel.add(slider);
 
         //STUDENT DISCOUNT CHECKBOX
         final JCheckBox sudentDis = new JCheckBox("Student discount");
-        sudentDis.setBounds(53, 275, 159, 23);
+        sudentDis.setBounds(50, 340, 159, 23);
         sudentDis.setOpaque(false);
         sudentDis.setFont(new Font("Arial", Font.PLAIN, 13));
-        sudentDis.setForeground(java.awt.Color.white);
+        sudentDis.setForeground(java.awt.Color.WHITE);
         sudentDis.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -416,7 +435,7 @@ public class MainFrame {
         });
         panel.add(sudentDis);
         final JButton selectbutton = new JButton("Select");
-        selectbutton.setBounds(50, 400, 253, 29);
+        selectbutton.setBounds(53, 390, 272, 29);
         selectbutton.addMouseListener(new MouseAdapter() {
 
             @Override
@@ -457,7 +476,7 @@ public class MainFrame {
         getInternalFrame();
 
         JLabel backgroundlayout = new JLabel("");
-        ImageIcon icona = new ImageIcon(getClass().getResource("/resources/TestBackground.png"));
+        ImageIcon icona = new ImageIcon(getClass().getResource("/resources/BackgroundFinal.png"));
         Image image = icona.getImage();
         Image bild = image.getScaledInstance(1002, 608, java.awt.Image.SCALE_SMOOTH);
         icona = new ImageIcon(bild);
