@@ -90,11 +90,14 @@ public class AdminFrame {
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.X_AXIS));
         frame.setUndecorated(true);
+        
+        
 
         JPanel panel = new JPanel();
         frame.getContentPane().add(panel);
         panel.setLayout(null);
         panel.setBackground(java.awt.Color.DARK_GRAY);
+       
 
         final JLabel lblE = new JLabel("Edit");
         lblE.setForeground(SystemColor.inactiveCaptionBorder);
@@ -227,78 +230,6 @@ public class AdminFrame {
         lblNewLabel_1.setBounds(907, 3, 80, 78);
         panel.add(lblNewLabel_1);
 
-        // Johan Search
-        final JTextField searchbar = new JTextField();
-        searchbar.setBounds(33, 60, 174, 20);
-        searchbar.setText("Enter search terms here");
-        searchbar.setFont(new Font("Arial", Font.ITALIC, 13));
-        searchbar.setBorder(null);
-        panel.add(searchbar);
-        searchbar.setColumns(10);
-
-        searchbar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-
-                internalFrame.removeAll();
-                getInternalFrame();
-                String userSearch = searchbar.getText();
-
-                String[] strName = SQLSearch.searchRestName(userSearch);
-                String[] strAddress = SQLSearch.searchRestPhone(userSearch);
-                String[] strTel = SQLSearch.searchRestAddress(userSearch);
-                String[] strWebsite = SQLSearch.searchRestWebsite(userSearch);
-                if (strName[0].equals("wrong")) {
-                    JOptionPane.showMessageDialog(frame, "No rerstaurant with this name.");
-                } else {
-                    for (int i = 0; i < strName.length; i++) {
-                        getResultPanel(strName[i], strAddress[i], strTel[i], strWebsite[i]);
-                    }
-                }
-                if (strName.length < 10) {
-                    addBlocks();
-                }
-            }
-        });
-        searchbar.addMouseListener(new MouseAdapter() {
-
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                searchbar.setText("");
-            }
-        });
-
-        //HÄR ÄR SEARCHBUTTON SOM SKA LÄGGAS TILL.
-        final JButton searchButton = new JButton("Search");
-        searchButton.setBounds(207, 55, 86, 34);
-        searchButton.addMouseListener(new MouseAdapter() {
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
-                searchButton.setCursor(cur1);
-            }
-
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                internalFrame.removeAll();
-                getInternalFrame();
-                String userSearch = searchbar.getText();
-                String[] strName = SQLSearch.searchRestName(userSearch);
-                String[] strAddress = SQLSearch.searchRestPhone(userSearch);
-                String[] strTel = SQLSearch.searchRestAddress(userSearch);
-                String[] strWebsite = SQLSearch.searchRestWebsite(userSearch);
-                if (strName[0].equals("wrong")) {
-                    JOptionPane.showMessageDialog(frame, "No rerstaurant with this name.");
-                } else {
-                    for (int i = 0; i < strName.length; i++) {
-                        getResultPanel(strName[i], strAddress[i], strTel[i], strWebsite[i]);
-                    }
-                }
-
-            }
-        });
-        panel.add(searchButton);
-
         scrollPane = new JScrollPane();
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -313,7 +244,7 @@ public class AdminFrame {
             public void mouseClicked(MouseEvent e) {
             }
         });
-        backgroundlayout.setIcon(new ImageIcon(getClass().getResource("/resources/TestBackground.png")));
+        backgroundlayout.setIcon(new ImageIcon(getClass().getResource("/resources/BackgroundFinal.png")));
         backgroundlayout.setBounds(0, 1, 1032, 600);
         panel.add(backgroundlayout);
 
