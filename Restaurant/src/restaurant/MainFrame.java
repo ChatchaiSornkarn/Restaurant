@@ -1,689 +1,509 @@
 package restaurant;
 
-
-import java.awt.EventQueue;
-
-
-
+import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.BoxLayout;
-import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import java.awt.Font;
-import java.awt.SystemColor;
 import javax.swing.JComboBox;
-import javax.swing.JRadioButton;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.SwingUtilities;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-import javax.swing.border.LineBorder;
-import java.awt.ScrollPane;
-import java.awt.Label;
-import java.awt.Panel;
-import javax.swing.JScrollBar;
-import javax.swing.JLayeredPane;
-
-import java.awt.Component;
 import java.awt.Cursor;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.font.TextAttribute;
 import java.sql.SQLException;
+import java.text.NumberFormat;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ButtonModel;
 import javax.swing.JCheckBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JInternalFrame;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
-import javax.swing.JTabbedPane;
+import javax.swing.JSlider;
 import javax.swing.UIManager;
-import javax.swing.border.EmptyBorder;
-import static restaurant.SQLFilter.*;
-import java.awt.Color;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import static restaurant.FirstFrame.password;
+import static restaurant.FirstFrame.username;
 
-public class MainFrame{
+public class MainFrame {
 
-	public JFrame frame;
-        private Login login = new Login();
-        public static JInternalFrame internalFrame;
-        private static String[] slBudget = new String[3];
-        private static JTabbedPane tabbedPane;
-        public static String[] name,tel,address;
-        private static JPanel panel;
-        public static JScrollPane scrollPane;
-        private static int slStudentDis;
-        Connector connect = new Connector();
+    public JFrame frame;
+    public static JInternalFrame internalFrame;
 
-	
-	/**
-	 * Create the application.
-	 */
-	public MainFrame() throws SQLException {
-		initialize();
-	}
+    public static String[] name, tel, address, weblink;
+    //private static JPanel panel;
+    public static JScrollPane scrollPane;
+    private static int slStudentDis;
+    Connector connect = new Connector();
+    public JPasswordField PassLogin;
+    public JFormattedTextField UserLogin;
+    protected Login login = new Login();
+    private JFormattedTextField budget2;
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() throws SQLException {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setSize(902, 600);
-                frame.setLocationRelativeTo(null);
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.X_AXIS));
-                frame.setResizable(false);
-                frame.setUndecorated(true);
-                
-		JPanel panel = new JPanel();
-		frame.getContentPane().add(panel);
-		panel.setLayout(null);
-                panel.setBackground(java.awt.Color.DARK_GRAY);
-                
-                final JLabel ExitTool = new JLabel("");
-                ExitTool.setBounds(867, 1, 40, 40);
-		ExitTool.addMouseListener(new MouseAdapter() {
-                    
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				frame.dispose();
-			}
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
-				ExitTool.setCursor(cur1);
-                                ExitTool.setIcon(new ImageIcon(getClass().getResource("/resources/closeButtonHover.png")));
-			}
-                        @Override
-                        public void mouseExited(MouseEvent e){
-                            ExitTool.setIcon(new ImageIcon(getClass().getResource("/resources/closeButton.png")));
-                        }
-		});
-		ExitTool.setIcon(new ImageIcon(getClass().getResource("/resources/closeButton.png")));
-		panel.add(ExitTool);
-                
-                final JFormattedTextField UserLogin = new JFormattedTextField();
-		UserLogin.setText(" Username/Email");
-                UserLogin.setBackground(java.awt.Color.DARK_GRAY);
-                UserLogin.setForeground(java.awt.Color.WHITE);
-		UserLogin.setBounds(10, 3, 122, 20);
-                UserLogin.addMouseListener(new MouseAdapter(){
-                    @Override
-                    public void mouseClicked(MouseEvent e){
-                        UserLogin.setText("");
+    /**
+     * Create the application.
+     *
+     * @throws java.sql.SQLException
+     */
+    public MainFrame() throws SQLException {
+        initialize();
+    }
+
+    /**
+     * Initialize the contents of the frame.
+     */
+    private void initialize() throws SQLException {
+        frame = new JFrame();
+        frame.setBounds(100, 100, 450, 300);
+        frame.setSize(1002, 600);
+        frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.X_AXIS));
+        frame.setResizable(false);
+        frame.setUndecorated(true);
+
+        JPanel panel = new JPanel();
+        frame.getContentPane().add(panel);
+        panel.setLayout(null);
+        panel.setBackground(java.awt.Color.DARK_GRAY);
+
+        final JLabel ExitTool = new JLabel("");
+        ExitTool.setBounds(967, 1, 40, 40);
+        ExitTool.addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                frame.dispose();
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
+                ExitTool.setCursor(cur1);
+                ExitTool.setIcon(new ImageIcon(getClass().getResource("/resources/closeButtonHover.png")));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                ExitTool.setIcon(new ImageIcon(getClass().getResource("/resources/closeButton.png")));
+            }
+        });
+        ExitTool.setIcon(new ImageIcon(getClass().getResource("/resources/closeButton.png")));
+        panel.add(ExitTool);
+
+        UserLogin = new JFormattedTextField();
+        UserLogin.setText(" Username/Email");
+        UserLogin.setBackground(Color.BLACK);
+        UserLogin.setForeground(Color.WHITE);
+        UserLogin.setBounds(10, 6, 122, 20);
+        UserLogin.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                UserLogin.setText("");
+            }
+        });
+        panel.add(UserLogin);
+
+        PassLogin = new JPasswordField();
+        PassLogin.setBounds(142, 6, 128, 20);
+        PassLogin.setBackground(Color.BLACK);
+        PassLogin.setForeground(Color.WHITE);
+        PassLogin.setText("jjjjjjjjjjjj");
+        PassLogin.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                PassLogin.setText("");
+            }
+        });
+        panel.add(PassLogin);
+
+        final JButton EnterLogin = new JButton("Enter");
+        EnterLogin.setBounds(280, 4, 89, 23);
+        panel.add(EnterLogin);
+        EnterLogin.addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
+                EnterLogin.setCursor(cur1);
+            }
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                username = UserLogin.getText().trim();
+                password = PassLogin.getText().trim();
+                login.AdminLogin(username, password, frame);
+                if (login.adminLogin == true) {
+                    Admin adminFrame = null;
+                    try {
+                        adminFrame = new Admin();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(FirstFrame.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                });
-		
-		JLabel lblChatWithUs = new JLabel("Chat with us!");
-		lblChatWithUs.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				Runnable run = new Runnable(){
-		        	public void run(){
-		        		Client charlie;
-						charlie = new Client ("83.253.236.204");
-						charlie.startRunning();
-						charlie.setVisible(false);
-		        	}
-		        };
-		        Thread thread = new Thread(run);
-		        thread.start();
-			}
-		});
-		lblChatWithUs.setFont(new Font("Arial Black", Font.PLAIN, 12));
-		lblChatWithUs.setForeground(Color.WHITE);
-		lblChatWithUs.setIcon(new ImageIcon(MainFrame.class.getResource("/resources/1448825257_sms_chat_text_bubble.png")));
-		lblChatWithUs.setBounds(50, 506, 122, 59);
-		panel.add(lblChatWithUs);
-		panel.add(UserLogin);
+                    adminFrame.frame.setVisible(true);
 
-		final JPasswordField PassLogin = new JPasswordField();
-		PassLogin.setBounds(142, 3, 128, 20);
-                PassLogin.setBackground(java.awt.Color.DARK_GRAY);
-                PassLogin.setForeground(java.awt.Color.WHITE);
-		PassLogin.setText("jjjjjjjjjj");
-                PassLogin.addMouseListener(new MouseAdapter(){
-                    @Override
-                    public void mouseClicked(MouseEvent e){
-                        PassLogin.setText("");
-                        
+                } else if (login.ownAdmin == true) {
+                    AdminFrame adminFrame = null;
+                    try {
+                        adminFrame = new AdminFrame();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(FirstFrame.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                });
-		panel.add(PassLogin);
-                
+                    adminFrame.frame.setVisible(true);
+                }
+            }
 
-		final JButton EnterLogin = new JButton("Enter");
-		EnterLogin.setBounds(280, 3, 89, 20);
-		panel.add(EnterLogin);
-                EnterLogin.addMouseListener(new MouseAdapter() {
-                    
-			@Override
-			public void mouseClicked(MouseEvent e) {
-                            String username = UserLogin.getText().trim();
-                        String password = PassLogin.getText().trim();
-                        login.AdminLogin(username, password, frame);
-                        if(login.adminLogin == true){
-                            AdminFrame adminFrame = null;
-                            try {
-                                adminFrame = new AdminFrame();
-                            } catch (SQLException ex) {
-                                Logger.getLogger(FirstFrame.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                                 adminFrame.frame.setVisible(true);
-                                 frame.setVisible(false);
-                        }
-			}
-                                     
-                    @Override
-                    public void mouseEntered(MouseEvent e){
-                          Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
-                            EnterLogin.setCursor(cur1);
-                        }
-		});
-                
-                /*REGISTER FUNCTIONALITY, JUST COPY AND PASTE TO MAINFRAME OF UPDATED PROGRAM*/
-                final JLabel register = new JLabel();
-                register.setText("Click here to register for free");
-                register.setBounds(378, 5, 200, 20);
-                register.setFont(new Font("Arial", Font.PLAIN, 13));
+        });
+
+        /*REGISTER FUNCTIONALITY, JUST COPY AND PASTE TO MAINFRAME OF UPDATED PROGRAM*/
+        final JLabel register = new JLabel();
+        register.setText("Click here to register for free");
+        register.setBounds(378, 5, 200, 20);
+        register.setFont(new Font("Arial", Font.PLAIN, 13));
+        register.setForeground(java.awt.Color.blue);
+        Font font = register.getFont();
+        Map attributes = font.getAttributes();
+
+        attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+        register.setFont(font.deriveFont(attributes));
+        register.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
+                register.setCursor(cur1);
+                register.setForeground(java.awt.Color.cyan);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
                 register.setForeground(java.awt.Color.blue);
-                Font font = register.getFont();
-                Map attributes = font.getAttributes();
-                attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
-                register.setFont(font.deriveFont(attributes));
-                register.addMouseListener(new MouseAdapter (){
-                    @Override
-                    public void mouseEntered(MouseEvent e){
-                        Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
-                        register.setCursor(cur1);
-                        register.setForeground(java.awt.Color.cyan);
-                    }
-                    @Override
-                    public void mouseExited(MouseEvent e){
-                        register.setForeground(java.awt.Color.blue);
-                    }
-                   @Override
-			public void mouseClicked(MouseEvent e) {
-				Register registerFrame = null;
-                            try {
-                                registerFrame = new Register();
-                            } catch (SQLException ex) {
-                                Logger.getLogger(FirstFrame.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                                registerFrame.frame.setVisible(true);
-			}
-                    
-                });
-                panel.add(register);
-                
-               
-                 // Search
-                final JTextField searchbar = new JTextField();
-		searchbar.setBounds(18, 55, 174, 29);
-                searchbar.setText("Enter search terms here");
-                searchbar.setFont(new Font("Arial", Font.ITALIC, 13));
-                searchbar.setBorder(null);
-		panel.add(searchbar);
-		searchbar.setColumns(10);
+            }
 
- 
-                searchbar.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-                    
-		internalFrame.removeAll();
-                        getInternalFrame(); 
-        		String userSearch = searchbar.getText();
-                        
-        		String[] strName = SQLSearch.searchRestName(userSearch);
-                        String[] strAddress = SQLSearch.searchRestPhone(userSearch);
-        		String[] strTel = SQLSearch.searchRestAddress(userSearch);
-        		if (strName[0].equals("wrong")) {
-        		JOptionPane.showMessageDialog(frame, "No rerstaurant with this name.");
-        		}
-        		else{
-			for(int i=0; i<strName.length; i++){
-                            getResultPanel(strName[i], strAddress[i], strTel[i]);
-            		}
-                        }
-        	}
-	});
-                searchbar.addMouseListener(new MouseAdapter(){
-                    
-			@Override
-			public void mouseClicked(MouseEvent e) {
-                        searchbar.setText("");
-			}
-		});
-                //HÄR ÄR SEARCHBUTTON SOM SKA LÄGGAS TILL.
-                final JButton searchButton = new JButton("Search");
-                searchButton.setIcon(new ImageIcon(MainFrame.class.getResource("/resources/1448843386_icon-111-search.png")));
-                searchButton.addActionListener(new ActionListener() {
-                	public void actionPerformed(ActionEvent arg0) {
-                	}
-                });
-                searchButton.setBounds(189, 56, 102, 29);
-		searchButton.addMouseListener(new MouseAdapter() {
-                    
-                        @Override
-                        public void mouseEntered(MouseEvent e){
-                            Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
-                            searchButton.setCursor(cur1);
-                        }
-                        
-			@Override
-			public void mouseClicked(MouseEvent e) {
-                        internalFrame.removeAll();
-                        getInternalFrame();
-        		String userSearch = searchbar.getText();
-        		String[] strName = SQLSearch.searchRestName(userSearch);
-                        String[] strAddress = SQLSearch.searchRestPhone(userSearch);
-        		String[] strTel = SQLSearch.searchRestAddress(userSearch);
-        		if (strName[0].equals("wrong")) {
-        			JOptionPane.showMessageDialog(frame, "No rerstaurant with this name.");
-        		}
-        		else{
-			for(int i=0; i<strName.length; i++){
-                            getResultPanel(strName[i], strAddress[i], strTel[i]);
-                        }
-                        }
-                		
-                                
-			}
-		});
-		panel.add(searchButton);
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                Register registerFrame = null;
+                try {
+                    registerFrame = new Register();
+                } catch (SQLException ex) {
+                    Logger.getLogger(FirstFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                registerFrame.frame.setVisible(true);
+            }
+        });
+        panel.add(register);
+        // Search
+        final JTextField searchbar = new JTextField();
+        searchbar.setBounds(33, 60, 174, 20);
+        searchbar.setText("Enter search terms here");
+        searchbar.setFont(new Font("Arial", Font.ITALIC, 13));
+        searchbar.setBorder(null);
+        panel.add(searchbar);
+        searchbar.setColumns(10);
 
-            
-		JTextPane txtpnPleaseSelectThe = new JTextPane();
-		txtpnPleaseSelectThe.setEditable(false);
-		txtpnPleaseSelectThe.setOpaque(false);
-		txtpnPleaseSelectThe.setFont(new Font("Arial", Font.BOLD, 14));
-		txtpnPleaseSelectThe.setText("Please select the cuisine");
-                txtpnPleaseSelectThe.setForeground(java.awt.Color.white);
-		txtpnPleaseSelectThe.setBounds(50, 107, 318, 20);
-		panel.add(txtpnPleaseSelectThe);
-		
-                //add All to type
-                String[] allcuisine = selectCuisine();
-                String[] allcuisine1 = new String[allcuisine.length+1];
-                allcuisine1[0] = "All";
-                for(int i = 1; i <= allcuisine.length; i++){
-                    allcuisine1[i] = allcuisine[i-1];
-                }
-                
-		JComboBox cuisinecomboBox = new JComboBox(allcuisine1);
-		cuisinecomboBox.setBounds(53, 135, 100, 20);
-                cuisinecomboBox.setFont(new Font("Arial", Font.PLAIN, 13));
-                cuisinecomboBox.addMouseListener(new MouseAdapter(){
-                    @Override
-                    public void mouseEntered(MouseEvent e){
-                          Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
-                            cuisinecomboBox.setCursor(cur1);
-                        }
-                });
-		panel.add(cuisinecomboBox);
-                
-		      String[] allfood = connect.makeList("select Food from Food_Type");
-                String[] allfood1 = new String[allfood.length+1];
-                allfood1[0] = "All";
-                for(int i = 1; i <= allfood.length; i++){
-                    allfood1[i] = allfood[i-1];
-                }
-                
-		JComboBox foodcomboBox = new JComboBox(allfood1);
-		foodcomboBox.setBounds(180, 135, 100, 20);
-                foodcomboBox.setFont(new Font("Arial", Font.PLAIN, 13));
-                foodcomboBox.addMouseListener(new MouseAdapter(){
-                    @Override
-                    public void mouseEntered(MouseEvent e){
-                          Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
-                            foodcomboBox.setCursor(cur1);
-                        }
-                });
-		panel.add(foodcomboBox);
-                
-		JTextPane txtpnSelectBudget = new JTextPane();
-		txtpnSelectBudget.setOpaque(false);
-		txtpnSelectBudget.setEditable(false);
-		txtpnSelectBudget.setFont(new Font("Arial", Font.BOLD, 15));
-		txtpnSelectBudget.setText("Select budget");
-                txtpnSelectBudget.setForeground(java.awt.Color.white);
-		txtpnSelectBudget.setBounds(50, 172, 197, 25);
-		panel.add(txtpnSelectBudget);
-		
-		final JCheckBox sek15_20 = new JCheckBox("15-60 SEK");
-		sek15_20.setBounds(50, 204, 109, 23);
-                sek15_20.setOpaque(false);
-                sek15_20.setFont(new Font("Arial", Font.PLAIN, 13));
-                sek15_20.setForeground(java.awt.Color.white);
-                sek15_20.addMouseListener(new MouseAdapter(){
-                    @Override
-                    public void mouseEntered(MouseEvent e){
-                          Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
-                            sek15_20.setCursor(cur1);
-                        }
-                    // fix
-                    @Override
-			public void mouseClicked(MouseEvent e) {
-                            if(sek15_20.isSelected()){
-                                slBudget[0] = "30";
-                            }
-                            else{
-                                slBudget[0] = null;
-                            }
-                        }
-                });
-		panel.add(sek15_20);
-		
-		final JCheckBox sek50_75 = new JCheckBox("60-90 SEK");
-		sek50_75.setBounds(50, 230, 109, 23);
-                sek50_75.setOpaque(false);
-                sek50_75.setFont(new Font("Arial", Font.PLAIN, 13));
-                sek50_75.setForeground(java.awt.Color.white);
-                sek50_75.addMouseListener(new MouseAdapter(){
-                    @Override
-                    public void mouseEntered(MouseEvent e){
-                          Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
-                            sek50_75.setCursor(cur1);
-                        }
-                    // fix
-                    @Override
-			public void mouseClicked(MouseEvent e) {
-                            if(sek50_75.isSelected()){
-                                slBudget[1] = "60";
-                            }
-                            else{
-                            slBudget[1] = null;
-                            }
-                        }
-                    
-                });
-		panel.add(sek50_75);
-		
-		final JCheckBox sek75_125 = new JCheckBox("90+ SEK");
-		sek75_125.setBounds(50, 256, 109, 23);
-                sek75_125.setOpaque(false);
-                sek75_125.setFont(new Font("Arial", Font.PLAIN, 13));
-                sek75_125.setForeground(java.awt.Color.white);
-                sek75_125.addMouseListener(new MouseAdapter(){
-                    @Override
-                    public void mouseEntered(MouseEvent e){
-                          Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
-                            sek75_125.setCursor(cur1);
-                        }
-                    // fix
-                    @Override
-			public void mouseClicked(MouseEvent e) {
-                            if(sek75_125.isSelected()){
-                                slBudget[2] = "90";
-                            }
-                            else{
-                            slBudget[2] = null;
-                            }
-                        }
-                });
-		panel.add(sek75_125);
-                
-                //STUDENT DISCOUNT CHECKBOX
-		
-                final JCheckBox sudentDis = new JCheckBox("Student discount");
-		sudentDis.setBounds(50, 282, 109, 23);
-                sudentDis.setOpaque(false);
-                sudentDis.setFont(new Font("Arial", Font.PLAIN, 13));
-                sudentDis.setForeground(java.awt.Color.white);
-                sudentDis.addMouseListener(new MouseAdapter(){
-                    @Override
-                    public void mouseEntered(MouseEvent e){
-                          Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
-                            sudentDis.setCursor(cur1);
-                        }
-                    // fix
-                    @Override
-			public void mouseClicked(MouseEvent e) {
-                           if(sudentDis.isSelected()) {
-                            slStudentDis = 1;
-                        }
-                            else {
-                            slStudentDis = 0;
-                            }
-                        }
-                });
-		panel.add(sudentDis);
-		
-//		ButtonGroup btnG=new ButtonGroup();
-//		btnG.add(sek15_20);
-//		sek15_20.setSelected(true);
-//		btnG.add(sek50_75);
-//		btnG.add(sek75_125);
-		
-		final JButton selectbutton = new JButton("Select");
-		selectbutton.setIcon(new ImageIcon(MainFrame.class.getResource("/resources/1448843284_dialog-apply.png")));
-                selectbutton.setBounds(50, 340, 253, 29);
-		selectbutton.addMouseListener(new MouseAdapter() {
-                    
-                        @Override
-                        public void mouseEntered(MouseEvent e){
-                            Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
-                            selectbutton.setCursor(cur1);
-                        }
-                        
-			@Override
-			public void mouseClicked(MouseEvent e) {
-                  Runnable run = new Runnable(){
-                	public void run(){  
-                		//Selected cuisine in combobox placed in variable cuisine
-                		String cuisine = cuisinecomboBox.getSelectedItem().toString();
-                                internalFrame.removeAll();
-                                getInternalFrame();
-                                getFilter(cuisine);
-                	}
-                  };
-                  Thread thread = new Thread(run);
-                  thread.start();
-			}
-		});
-		
-		panel.add(selectbutton);
-                
-                scrollPane = new JScrollPane();
-		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setBounds(310, 67, 560, 510);
-		panel.add(scrollPane);
-                
+        searchbar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+                internalFrame.removeAll();
                 getInternalFrame();
-                
-                JLabel backgroundlayout = new JLabel("");
-                backgroundlayout.setIcon(new ImageIcon(getClass().getResource("/resources/TestBackground.png")));
-                backgroundlayout.setBounds(0, 0, 902, 608);
-                panel.add(backgroundlayout);
-                
-                name = selectRestName();
-                tel = selectRestTel();
-                address = selectRestAddress();
-                
-		for(int i=0; i<name.length; i++){
-			getResultPanel(name[i], tel[i], address[i]);
-		}
-                 
+                String userSearch = searchbar.getText();
+
+                String[] strName = SQLSearch.searchRestName(userSearch);
+                String[] strAddress = SQLSearch.searchRestPhone(userSearch);
+                String[] strTel = SQLSearch.searchRestAddress(userSearch);
+                String[] strWebsite = SQLSearch.searchRestWebsite(userSearch);
+                ImageIcon[] strIma = SQLSearch.searchRestImage(userSearch);
+
+                if (strName[0].equals("wrong")) {
+                    JOptionPane.showMessageDialog(frame, "No restaurant with this name.");
+                } else {
+
+                    for (int i = 0; i < strName.length; i++) {
+                        getResultPanel(strName[i], strAddress[i], strTel[i], strWebsite[i]);
+                    }
+                }
+                if (strName.length < 10) {
+                    addBlocks();
+                }
+            }
+        });
+        searchbar.addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                searchbar.setText("");
+            }
+        });
+        //HÄR ÄR SEARCHBUTTON SOM SKA LÄGGAS TILL.
+        final JButton searchButton = new JButton("");
+        searchButton.setBounds(235, 55, 86, 34);
+        searchButton.setOpaque(false);
+        searchButton.setContentAreaFilled(false);
+        searchButton.setBorderPainted(false);
+        searchButton.addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
+                searchButton.setCursor(cur1);
+            }
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                internalFrame.removeAll();
+                getInternalFrame();
+                String userSearch = searchbar.getText();
+                String[] strName = SQLSearch.searchRestName(userSearch);
+                String[] strAddress = SQLSearch.searchRestPhone(userSearch);
+                String[] strTel = SQLSearch.searchRestAddress(userSearch);
+                String[] strWebsite = SQLSearch.searchRestWebsite(userSearch);
+                ImageIcon[] strIma = SQLSearch.searchRestImage(userSearch);
+
+                if (strName[0] == "wrong") {
+                    //getResultPanel("No restaurant with this name", strTel, strAddress);
+                } else {
+
+                    for (int i = 0; i < strName.length - 1; i++) {
+                        getResultPanel(strName[i], strAddress[i], strTel[i], strWebsite[i]);
+                    }
+
+                }
+            }
+        });
+        panel.add(searchButton);
+
+        JTextPane txtpnPleaseSelectThe = new JTextPane();
+        txtpnPleaseSelectThe.setEditable(false);
+        txtpnPleaseSelectThe.setOpaque(false);
+        txtpnPleaseSelectThe.setFont(new Font("Arial", Font.BOLD, 13));
+        txtpnPleaseSelectThe.setText("SELECT THE CUISINE, FOOD & Environment!!!");
+        txtpnPleaseSelectThe.setForeground(java.awt.Color.white);
+        txtpnPleaseSelectThe.setBounds(50, 107, 318, 20);
+        panel.add(txtpnPleaseSelectThe);
+
+        //add All to type
+        String[] allcuisine = connect.makeList("select Cuisine from Cuisine_Types");
+        String[] allcuisine1 = new String[allcuisine.length + 1];
+        allcuisine1[0] = "All";
+        for (int i = 1; i <= allcuisine.length; i++) {
+            allcuisine1[i] = allcuisine[i - 1];
         }
+
+        final JComboBox cuisinecomboBox = new JComboBox(allcuisine1);
+        cuisinecomboBox.setBounds(53, 135, 80, 20);
+        cuisinecomboBox.setFont(new Font("Arial", Font.PLAIN, 13));
+        cuisinecomboBox.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
+                cuisinecomboBox.setCursor(cur1);
+            }
+        });
+        panel.add(cuisinecomboBox);
         
-                private static void getInternalFrame(){
-            internalFrame = new JInternalFrame("Please login to leave a feedback");
-		internalFrame.getContentPane().setLayout(new BoxLayout(internalFrame.getContentPane(), BoxLayout.Y_AXIS));
-		internalFrame.setEnabled(false);
-		internalFrame.setSize(200, 10000);
-		scrollPane.setViewportView(internalFrame);
-		internalFrame.setVisible(true);
-                internalFrame.setBorder(UIManager.getBorder("ScrollPane.border"));
+        String[] allsetting = connect.makeList("select Setting from Setting");
+        String[] allsetting1 = new String[allsetting.length + 1];
+        allsetting1[0] = "All";
+        for (int i = 1; i <= allsetting.length; i++) {
+            allsetting1[i] = allsetting[i - 1];
         }
-        
-        private static void getResultPanel(String name, String tel, String address){
-            final ResultPanel resultPanel = new ResultPanel(name, address, tel);
-            resultPanel.addMouseListener(new MouseAdapter() {
-                    
-                        @Override
-                        public void mouseEntered(MouseEvent e){
-                            Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
-                            resultPanel.setCursor(cur1);
-                        }
-                        
-			@Override
-			public void mousePressed(MouseEvent e) {
-                                internalFrame.removeAll();
-                                getInternalFrame();
-                                InsideResultPanel insideResultPanel = new InsideResultPanel(resultPanel);
-                                internalFrame.getContentPane().add(insideResultPanel);
-			}
-                });
-            
-            internalFrame.getContentPane().add(resultPanel);
+
+        final JComboBox settingcomboBox = new JComboBox(allsetting1);
+        settingcomboBox.setBounds(233, 135, 80, 20);
+        settingcomboBox.setFont(new Font("Arial", Font.PLAIN, 13));
+        settingcomboBox.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
+                settingcomboBox.setCursor(cur1);
+            }
+        });
+        panel.add(settingcomboBox);
+
+        String[] allfood = connect.makeList("select Food from Food_Type");
+        String[] allfood1 = new String[allfood.length + 1];
+        allfood1[0] = "All";
+        for (int i = 1; i <= allfood.length; i++) {
+            allfood1[i] = allfood[i - 1];
         }
-            
-        /**
-         * 
-         * @param cuisine the cuisine type that you want to filter
-         */
-        private static void getFilter(String cuisine){
-            String[][] cuisineRest = null;
-            // If the 
-            if(cuisine.equalsIgnoreCase("All")){
-                name = selectRestName();
-                tel = selectRestTel();
-                address = selectRestAddress();
-                cuisineRest = new String[name.length][3];
-                for(int i = 0; i < name.length; i++){  
-                    cuisineRest[i][0] = name[i];
-                    cuisineRest[i][1] = address[i];
-                    cuisineRest[i][2] = tel[i];
+
+        final JComboBox foodcomboBox = new JComboBox(allfood1);
+        foodcomboBox.setBounds(143, 135, 80, 20);
+        foodcomboBox.setFont(new Font("Arial", Font.PLAIN, 13));
+        foodcomboBox.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
+                foodcomboBox.setCursor(cur1);
+            }
+        });
+        panel.add(foodcomboBox);
+
+        JTextPane txtpnSelectBudget = new JTextPane();
+        txtpnSelectBudget.setOpaque(false);
+        txtpnSelectBudget.setEditable(false);
+        txtpnSelectBudget.setFont(new Font("Arial", Font.BOLD, 15));
+        txtpnSelectBudget.setText("Select budget");
+        txtpnSelectBudget.setForeground(java.awt.Color.white);
+        txtpnSelectBudget.setBounds(50, 200, 197, 25);
+        panel.add(txtpnSelectBudget);
+        final JSlider slider = new JSlider(30, 100);
+        slider.setOpaque(false);
+        slider.setBackground(Color.DARK_GRAY);
+        budget2 = new JFormattedTextField(NumberFormat.getNumberInstance());
+        budget2.setText("65");
+        budget2.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                String asd = budget2.getText();
+                slider.setValue(30);
+                if (!asd.matches("\\d+")) {
+                    return;
+                }
+                int v = Integer.parseInt(asd);
+                slider.setValue(v);
+            }
+        });
+        budget2.setBounds(200, 240, 41, 22);
+        panel.add(budget2);
+        budget2.setColumns(10);
+
+        slider.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+                budget2.setText(String.valueOf(slider.getValue()));
+            }
+        });
+        slider.setBounds(53, 240, 130, 26);
+        slider.setPaintTicks(true);
+
+        panel.add(slider);
+
+        //STUDENT DISCOUNT CHECKBOX
+        final JCheckBox sudentDis = new JCheckBox("Student discount");
+        sudentDis.setBounds(53, 275, 159, 23);
+        sudentDis.setOpaque(false);
+        sudentDis.setFont(new Font("Arial", Font.PLAIN, 13));
+        sudentDis.setForeground(java.awt.Color.white);
+        sudentDis.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
+                sudentDis.setCursor(cur1);
+            }
+
+            // fix
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (sudentDis.isSelected()) {
+                    slStudentDis = 1;
+                } else {
+                    slStudentDis = 0;
                 }
             }
-            else{
-                //Gets Name address and phone of all restaurants that been 
-                //filterde out with SQL filtering query in the class SQLFilter. 
-                cuisineRest = selectFilterCuisine(cuisine);
+        });
+        panel.add(sudentDis);
+        final JButton selectbutton = new JButton("Select");
+        selectbutton.setBounds(50, 400, 253, 29);
+        selectbutton.addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
+                selectbutton.setCursor(cur1);
             }
-            String[][] budgetsRest = null;
-            String[][] budgetsRest1 = null;
-            String[][] budgetsRest2 = null;
-            String[][] isdiscouted = null;
-            
-            if(slBudget[0] == "30"){
-            budgetsRest = SelectFilterBudget(slBudget[0]);
-            }
-            if(slBudget[1] == "60"){
-            budgetsRest1 = SelectFilterBudget(slBudget[1]);
-            }
-            if(slBudget[2] == "90"){
-            budgetsRest2 = SelectFilterBudget(slBudget[2]);
-            }
-            if(slStudentDis == 1){
-                isdiscouted = SelectFilterDiscount();
-            }
-            
-            
-            if(slBudget[0] == "30"){
-                if(slStudentDis == 1){
-                    for(int i = 0; i < cuisineRest.length; i++){
-                for(int j = 0; j < budgetsRest.length; j++){
-                    if(cuisineRest[i][0].equalsIgnoreCase(budgetsRest[j][0])){ 
-                        for(int k = 0; k < isdiscouted.length; k++){
-                        if(cuisineRest[i][0].equalsIgnoreCase(isdiscouted[k][0])){
-                            getResultPanel(cuisineRest[i][0], cuisineRest[i][2], cuisineRest[i][1]);
-                        }
-                        }
-                    }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                //Selected cuisine in combobox placed in variable cuisine
+                String[] setting = connect.setting(settingcomboBox.getSelectedItem().toString());
+                String[] cuisine = connect.cuisine(cuisinecomboBox.getSelectedItem().toString());
+                String discount = connect.sd(slStudentDis);
+                String[] food = connect.food(foodcomboBox.getSelectedItem().toString());
+                int bu = Integer.parseInt(String.valueOf(slider.getValue()));
+                internalFrame.removeAll();
+                getInternalFrame();
+
+                for (int i = 0; connect.restFilter(cuisine, bu, discount, food,setting).length > i; i++) {
+                    getResultPanel(connect.restFilter(cuisine, bu, discount, food,setting)[i], connect.telFilter(cuisine, bu, discount, food,setting)[i],
+                            connect.addFilter(cuisine, bu, discount, food,setting)[i], connect.webFilter(cuisine, bu, discount, food,setting)[i]);
+                }
+                if (connect.restFilter(cuisine, bu, discount, food, setting).length < 10) {
+                    addBlocks();
                 }
             }
-                }
-                else{
-            for(int i = 0; i < cuisineRest.length; i++){
-                for(int j = 0; j < budgetsRest.length; j++){
-                    if(cuisineRest[i][0].equalsIgnoreCase(budgetsRest[j][0])){ 
-                        getResultPanel(cuisineRest[i][0], cuisineRest[i][2], cuisineRest[i][1]);
-                    }
-                }
-            }
-                }
-            }
-            
-            if(slBudget[1] == "60"){
-                if(slStudentDis == 1){
-                    for(int i = 0; i < cuisineRest.length; i++){
-                for(int j = 0; j < budgetsRest1.length; j++){
-                    if(cuisineRest[i][0].equalsIgnoreCase(budgetsRest1[j][0])){ 
-                        for(int k = 0; k < isdiscouted.length; k++){
-                        if(cuisineRest[i][0].equalsIgnoreCase(isdiscouted[k][0])){
-                            getResultPanel(cuisineRest[i][0], cuisineRest[i][2], cuisineRest[i][1]);
-                        }
-                        }
-                    }
-                }
-            }
-                }
-                else{
-            for(int i = 0; i < cuisineRest.length; i++){
-                for(int j = 0; j < budgetsRest1.length; j++){
-                    if(cuisineRest[i][0].equalsIgnoreCase(budgetsRest1[j][0])){ 
-                        getResultPanel(cuisineRest[i][0], cuisineRest[i][2], cuisineRest[i][1]);
-                    }
-                }
-            }
-                }
-            }
-            
-            if(slBudget[2] == "90"){
-                if(slStudentDis == 1){
-                    for(int i = 0; i < cuisineRest.length; i++){
-                for(int j = 0; j < budgetsRest2.length; j++){
-                    if(cuisineRest[i][0].equalsIgnoreCase(budgetsRest2[j][0])){
-                        for(int k = 0; k < isdiscouted.length; k++){
-                        if(cuisineRest[i][0].equalsIgnoreCase(isdiscouted[k][0])){
-                            getResultPanel(cuisineRest[i][0], cuisineRest[i][2], cuisineRest[i][1]);
-                        }
-                        }
-                    }
-                }
-            }
-                }
-                else{
-            for(int i = 0; i < cuisineRest.length; i++){
-                for(int j = 0; j < budgetsRest2.length; j++){
-                    if(cuisineRest[i][0].equalsIgnoreCase(budgetsRest2[j][0])){
-                        getResultPanel(cuisineRest[i][0], cuisineRest[i][2], cuisineRest[i][1]);
-                    }
-                }
-            }
-                }
-            }
-            
-            if(slBudget[0] == null && slBudget[1] == null && slBudget[2] == null){
-                if(slStudentDis == 1){
-                    for(int i = 0; i < cuisineRest.length; i++){
-                for(int j = 0; j < isdiscouted.length; j++){
-                        if(cuisineRest[i][0].equalsIgnoreCase(isdiscouted[j][0])){
-                            getResultPanel(cuisineRest[i][0], cuisineRest[i][2], cuisineRest[i][1]);
-                        }
-                }
-            }
-                }
-                else{
-            for(int i = 0; i < cuisineRest.length; i++){
-                getResultPanel(cuisineRest[i][0], cuisineRest[i][2], cuisineRest[i][1]);
-            }
-            }
-            }
+        });
+
+        panel.add(selectbutton);
+
+        scrollPane = new JScrollPane();
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.setBounds(330, 67, 660, 510);
+        panel.add(scrollPane);
+
+        getInternalFrame();
+
+        JLabel backgroundlayout = new JLabel("");
+        ImageIcon icona = new ImageIcon(getClass().getResource("/resources/TestBackground.png"));
+        Image image = icona.getImage();
+        Image bild = image.getScaledInstance(1002, 608, java.awt.Image.SCALE_SMOOTH);
+        icona = new ImageIcon(bild);
+        backgroundlayout.setIcon(icona);
+        backgroundlayout.setBounds(0, 0, 1002, 608);
+        panel.add(backgroundlayout);
+
+        name = connect.makeList("select RestName from Restaurant ORDER BY RestName");
+        tel = connect.makeList("select Telephone from Restaurant ORDER BY RestName");
+        address = connect.makeList("select Address from Restaurant ORDER BY RestName");
+        weblink = connect.makeList("Select Website from Restaurant ORDER BY RestName");
+
+        for (int i = 0; i < name.length; i++) {
+            getResultPanel(name[i], tel[i], address[i], weblink[i]);
         }
+    }
+
+    private static void getInternalFrame() {
+        internalFrame = new JInternalFrame();
+        internalFrame.getContentPane().setLayout(new BoxLayout(internalFrame.getContentPane(), BoxLayout.Y_AXIS));
+        internalFrame.setEnabled(false);
+        internalFrame.setSize(200, 10000);
+        scrollPane.setViewportView(internalFrame);
+        internalFrame.setVisible(true);
+        internalFrame.setBorder(UIManager.getBorder("ScrollPane.border"));
+    }
+
+    private static void getResultPanel(String name, String tel, String address, String weblink) {
+        ResultPanel resultPanel = new ResultPanel(name, address, tel, weblink);
+
+        resultPanel.addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
+                resultPanel.setCursor(cur1);
+            }
+
+        });
+        internalFrame.getContentPane().add(resultPanel);
+    }
+
+    public void addBlocks() {
+        for (int i = 0; i < 8; i++) {
+            Blocks blocks = new Blocks();
+            internalFrame.getContentPane().add(blocks);
+        }
+    }
 }

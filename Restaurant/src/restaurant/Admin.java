@@ -1,407 +1,399 @@
 package restaurant;
 
-import java.awt.Button;
-import java.awt.CardLayout;
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextPane;
 import java.awt.Font;
 import java.awt.SystemColor;
-import java.awt.Toolkit;
+import javax.swing.JComboBox;
+import javax.swing.JRadioButton;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.border.LineBorder;
+import java.awt.ScrollPane;
+import java.awt.Label;
+import java.awt.Panel;
+import javax.swing.JScrollBar;
+import javax.swing.JLayeredPane;
+
+import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.JTextPane;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.LineBorder;
-import javax.swing.border.SoftBevelBorder;
+import java.awt.font.TextAttribute;
+import java.sql.SQLException;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ButtonModel;
+import javax.swing.JCheckBox;
+import javax.swing.JFormattedTextField;
+import javax.swing.JInternalFrame;
 import javax.swing.JList;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.JScrollPane;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTabbedPane;
+import javax.swing.UIManager;
+import javax.swing.border.EmptyBorder;
+import static restaurant.SQLFilter.*;
+import java.awt.Color;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import static restaurant.Login.adminLogin;
+import static restaurant.MainFrame.address;
+import static restaurant.MainFrame.internalFrame;
+import static restaurant.MainFrame.name;
+import static restaurant.MainFrame.tel;
+import static restaurant.MainFrame.weblink;
 
 public class Admin {
-	Connector connect = new Connector();
 
-	 JFrame rame;
-	private JTextField txtAdminSiteUse;
+    public JFrame frame;
+    public static JInternalFrame internalFrame;
+    private static String[] slBudget = new String[3];
+    public static String[] name, tel, address, weblink;
+    private static JPanel panel;
+    public static JScrollPane scrollPane;
+    private static String cuisine;
+    public static ResultPanel res;
+    public static boolean inUse = false;
 
-	
-	ArrayList<String> text = new ArrayList<String>();
-	private JTextField res;
-	private JTextField address;
-	private JTextField tele;
-	private JTextField website;
-	private JTextField pic;
-	private JTextField budget;
-	private JTextField disc;
+    /**
+     * Create the application.
+     */
+    public static void setCuisine(String string) {
+        cuisine = string;
+    }
 
-	private static JList list_1;
+    public Admin() throws SQLException {
+        initialize();
+        inUse = true;
+    }
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Admin window = new Admin();
-					window.rame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	} 
+    /**
+     * Initialize the contents of the frame.
+     */
+    private void initialize() throws SQLException {
+        frame = new JFrame();
+        frame.setBounds(100, 100, 450, 300);
+        frame.setSize(990, 602);
+        frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.X_AXIS));
+        frame.setUndecorated(true);
 
-	/**
-	 * Create the application.
-	 */
-	public Admin() {
-		initialize();
-	}
+        JPanel panel = new JPanel();
+        frame.getContentPane().add(panel);
+        panel.setLayout(null);
+        panel.setBackground(java.awt.Color.DARK_GRAY);
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		rame = new JFrame();
-		rame.setBackground(SystemColor.desktop);
-		rame.getContentPane().setForeground(SystemColor.desktop);
-		rame.getContentPane().setBackground(Color.WHITE);
-		rame.setSize(1150 , 500);
-		rame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		rame.getContentPane().setLayout(null);
-		
-		txtAdminSiteUse = new JTextField();
-		txtAdminSiteUse.setBounds(0, 0, 2350, 50);
-		txtAdminSiteUse.setFont(new Font("Times New Roman", Font.BOLD, 14));
-		txtAdminSiteUse.setText(" Admin site use with caution");
-		txtAdminSiteUse.setForeground(Color.PINK);
-		txtAdminSiteUse.setBackground(Color.BLACK);
-		rame.getContentPane().add(txtAdminSiteUse);
-		txtAdminSiteUse.setColumns(10);
-		
-		JLabel lblNewLabel = new JLabel("  Administrator: ");
-		lblNewLabel.setBounds(0, 50, 1350, 28);
-		lblNewLabel.setBackground(Color.WHITE);
-		rame.getContentPane().add(lblNewLabel);
-		
-		
-		final JPanel madmin = new JPanel();
-		madmin.setBorder(new LineBorder(new Color(0, 0, 0), 4, true));
-		madmin.setBounds(201, 90, 900, 244);
-		rame.getContentPane().add(madmin);
-		madmin.setLayout(new CardLayout(0, 0));
-		
-		final JPanel add = new JPanel();
-		add.setBackground(SystemColor.info);
-		madmin.add(add, "name_430299286202735");
-		add.setLayout(null);
-		
-		JLabel lblAddNewRestaurant = new JLabel("Add new restaurant");
-		lblAddNewRestaurant.setBounds(8, 7, 166, 24);
-		lblAddNewRestaurant.setFont(new Font("Times New Roman", Font.BOLD, 20));
-		add.add(lblAddNewRestaurant);
-		
-		JLabel lblName = new JLabel("Restaurant name");
-		lblName.setBounds(12, 38, 113, 16);
-		add.add(lblName);
-		
-		JLabel lblAddress = new JLabel("Address");
-		lblAddress.setBounds(131, 38, 82, 16);
-		add.add(lblAddress);
-		
-		JButton btnNewButton_7 = new JButton("+");
-		btnNewButton_7.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JFileChooser chooser = new JFileChooser();
-			    FileNameExtensionFilter filter = new FileNameExtensionFilter(
-			        "JPG & GIF Images", "jpg", "gif" ,"png");
-			    chooser.setFileFilter(filter);
-			    int returnVal = chooser.showSaveDialog(null);
-			    if(returnVal == JFileChooser.APPROVE_OPTION){
-			    	pic.setText(chooser.getSelectedFile().getAbsolutePath());
-			    }
-			}
-		});
-		btnNewButton_7.setBounds(540, 61, 41, 22);
-		add.add(btnNewButton_7);
-		
-		JLabel lblPicture = new JLabel("Picture(file path)");
-		lblPicture.setBounds(445, 38, 95, 16);
-		add.add(lblPicture);
-		
-		JLabel lblNewLabel_1 = new JLabel("Website");
-		lblNewLabel_1.setBounds(343, 38, 60, 16);
-		add.add(lblNewLabel_1);
-		
-		JLabel lblTelephone = new JLabel("Telephone");
-		lblTelephone.setBounds(236, 38, 60, 16);
-		add.add(lblTelephone);
-		
-		JLabel lblStudentDiscount = new JLabel("Student discount");
-		lblStudentDiscount.setBounds(644, 38, 100, 16);
-		add.add(lblStudentDiscount);
-		
-		JLabel lblBudget = new JLabel("Budget");
-		lblBudget.setBounds(591, 38, 50, 16);
-		add.add(lblBudget);
-		
-		JLabel lblCuisine = new JLabel("cuisine");
-		lblCuisine.setBounds(762, 38, 95, 16);
-		add.add(lblCuisine);
-		
-		res = new JTextField();
-		res.setBounds(8, 61, 113, 22);
-		add.add(res);
-		res.setColumns(10);
-		
-		address = new JTextField();
-		address.setBounds(131, 61, 82, 22);
-		add.add(address);
-		address.setColumns(10);
-		
-		tele = new JTextField();
-		tele.setBounds(236, 61, 95, 22);
-		add.add(tele);
-		tele.setColumns(10);
-		
-		website = new JTextField();
-		website.setBounds(343, 61, 90, 22);
-		add.add(website);
-		website.setColumns(10);
-		
-		pic = new JTextField();
-		pic.setBounds(445, 61, 95, 22);
-		add.add(pic);
-		pic.setColumns(10);
-		
-		budget = new JTextField();
-		budget.setBounds(591, 60, 41, 22);
-		add.add(budget);
-		budget.setColumns(10);
-		
-		disc = new JTextField();
-		disc.setBounds(644, 61, 95, 22);
-		add.add(disc);
-		disc.setColumns(10);
-		
-		JLabel lblNewLabel_5 = new JLabel("");
-		lblNewLabel_5.setBounds(461, 195, 95, 0);
-		add.add(lblNewLabel_5);
-		
-		JLabel lblNewLabel_6 = new JLabel("");
-		lblNewLabel_6.setBounds(461, 289, 95, 0);
-		add.add(lblNewLabel_6);
-		
-		JButton btnClear = new JButton("Clear");
-		btnClear.setBounds(564, 195, 78, 25);
-		add.add(btnClear);
-		
-		JButton btnSaveRestaurant = new JButton("Save restaurant");
-		btnSaveRestaurant.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				connect.makeRestaurant(res.getText(), address.getText(), tele.getText(),
-						website.getText(), pic.getText(),
-						budget.getText(), disc.getText(), list_1.getSelectedValuesList());
-			}
-		});
-		btnSaveRestaurant.setBounds(668, 195, 189, 25);
-		add.add(btnSaveRestaurant);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(762, 62, 95, 111);
-		add.add(scrollPane);
-		
-		list_1 = new JList(connect.makeList("select Cuisine from Cuisine_Types"));
-		scrollPane.setViewportView(list_1);
-		
-		final JPanel user = new JPanel();
-		user.setBackground(Color.GREEN);
-		madmin.add(user, "name_430254776220175");
-		
-		JButton btnNewButton_6 = new JButton("New button");
-		user.add(btnNewButton_6);
-		
-		JButton btnNewButton_5 = new JButton("New button");
-		user.add(btnNewButton_5);
-		
-		final JPanel review = new JPanel();
-		review.setBackground(Color.ORANGE);
-		madmin.add(review, "name_428658833133265");
-		
-		final JPanel remo = new JPanel();
-		madmin.add(remo, "name_430310930577694");
-		remo.setLayout(null);
-		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(148, 43, 85, 22);
-		remo.add(comboBox_1);
-		
-		final JPanel admin = new JPanel();
-		admin.setForeground(SystemColor.desktop);
-		admin.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, SystemColor.desktop, null, new Color(0, 0, 0), null));
-		madmin.add(admin, "name_641553752768966");
-		admin.setBackground(SystemColor.control);
-		admin.setLayout(null);
-		
-		JTextPane txtpnEnterNewAdmin = new JTextPane();
-		txtpnEnterNewAdmin.setBounds(3, 5, 152, 22);
-		txtpnEnterNewAdmin.setText("enter new admin name:  ");
-		admin.add(txtpnEnterNewAdmin);
-		
-		final JTextField textField_1 = new JTextField();
-		textField_1.setBounds(170, 5, 136, 22);
-		
-		JTextPane txtpnEnterNewPassword = new JTextPane();
-		txtpnEnterNewPassword.setBounds(3, 42, 152, 22);
-		txtpnEnterNewPassword.setBackground(Color.WHITE);
-		txtpnEnterNewPassword.setText("enter new password:");
-		admin.add(txtpnEnterNewPassword);
-		textField_1.addActionListener(new ActionListener() {
-		
+        final JLabel lblE = new JLabel("Edit");
+        lblE.setForeground(SystemColor.inactiveCaptionBorder);
+        lblE.addMouseListener(new MouseAdapter() {
 
-		public void actionPerformed(ActionEvent e) {
-			String te = textField_1.getText();
-			
-		}
-		});
-		admin.add(textField_1);
-		
-		
-		final JTextField textField_2 = new JTextField();
-		textField_2.setBounds(170, 42, 136, 22);
-		
-		textField_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				 String te1 = textField_2.getText();
-				 
-			}
-		});
-		admin.add(textField_2);
-		
-		
-		JButton btnNewButton_4 = new JButton("Save ");
-		btnNewButton_4.setBackground(SystemColor.controlHighlight);
-		btnNewButton_4.setBounds(377, 200, 79, 24);
-		btnNewButton_4.addActionListener(new ActionListener() {
-			
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (res == null) {
+                    JOptionPane.showMessageDialog(null, "Select a value\nPlease click on a restaurant panel", "alert", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    EditWindow edit = new EditWindow(res);
+                    edit.setVisible(true);
+                }
+            }
+        });
 
-			public void actionPerformed(ActionEvent e) {
-				if(textField_1.getText().length()<4 ||textField_2.getText().length() <4){
-					JOptionPane.showMessageDialog(rame,
-						   "The password and username has to have more than 3 characters", "error",
-						    JOptionPane.ERROR_MESSAGE);
-				}else
-					JOptionPane.showMessageDialog(rame,
-						    "new admin created","successful!!",
-						    JOptionPane.PLAIN_MESSAGE);
-				connect.makeRevie("Review",textField_1.getText(), textField_2.getText());
-			}
-		});
-		admin.add(btnNewButton_4);
-		
-		Button button = new Button("clear");
-		button.setBackground(SystemColor.controlHighlight);
-		button.setBounds(292, 200, 79, 24);
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				textField_1.setText("");
-				textField_2.setText("");
-			}
-			
-				
-			
-		});
-		admin.add(button);
-		
-		
-		JButton btnNewButton_2 = new JButton("Manage Admin");
-		btnNewButton_2.setBounds(0, 91, 200, 50);
-		btnNewButton_2.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		rame.getContentPane().add(btnNewButton_2);
-		btnNewButton_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				madmin.removeAll();
-				madmin.add(admin);
-				madmin.repaint();
-				madmin.revalidate();
-			
-				
-			}
-		});
-		
-		JButton btnNewButton = new JButton("Add restaurang");
-		btnNewButton.setBounds(0, 236, 200, 50);
-		btnNewButton.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				madmin.removeAll();
-				madmin.add(add);
-				madmin.repaint();
-				madmin.revalidate();
-				
-			}
-		});
-		rame.getContentPane().add(btnNewButton);
-		
+        final JLabel lblAdd = new JLabel("Add");
+        lblAdd.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                AddWindow frame = new AddWindow();
+                frame.setVisible(true);
+            }
 
-		JButton btnNewButton_1 = new JButton("Remove restaurang");
-		btnNewButton_1.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		btnNewButton_1.setBounds(0, 284, 200, 50);
-		
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				madmin.removeAll();
-				madmin.add(remo);
-				madmin.repaint();
-				madmin.revalidate();
-			}
-		});
-		rame.getContentPane().add(btnNewButton_1);
-		
-		JButton btnNewButton_3 = new JButton("Remove review");
-		btnNewButton_3.setBounds(0, 187, 200, 50);
-		btnNewButton_3.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		btnNewButton_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				madmin.removeAll();
-				madmin.add(review);
-				madmin.repaint();
-				madmin.revalidate();
-			}
-		});
-		rame.getContentPane().add(btnNewButton_3);
-		
-			
-			JButton btnRemoveUser = new JButton("Remove user");
-			btnRemoveUser.setBounds(0, 140, 200, 50);
-			btnRemoveUser.setFont(new Font("Times New Roman", Font.BOLD, 15));
-			btnRemoveUser.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					madmin.removeAll();
-					madmin.add(user);
-					madmin.repaint();
-					madmin.revalidate();
-				}
-			});
-			
-			rame.getContentPane().add(btnRemoveUser);
-		
-}
+            @Override
+            public void mousePressed(MouseEvent arg0) {
+                lblAdd.setIcon(new ImageIcon(AdminFrame.class.getResource("/resources/Upload to the Cloud Filled-32.png")));
+            }
 
-	private void add(JScrollPane jScrollPane) {
-		// TODO Auto-generated method stub
-		
-	}	
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                lblAdd.setIcon(new ImageIcon(AdminFrame.class.getResource("/resources/Upload to the Cloud-32.png")));
+            }
+        });
+        lblAdd.setForeground(SystemColor.inactiveCaptionBorder);
+        lblAdd.setFont(new Font("Franklin Gothic Heavy", Font.PLAIN, 14));
+        lblAdd.setIcon(new ImageIcon(AdminFrame.class.getResource("/resources/Upload to the Cloud-32.png")));
+        lblAdd.setBounds(910, 87, 66, 40);
+        panel.add(lblAdd);
+
+        JLabel lblDelete = new JLabel("Delete");
+        lblDelete.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (res == null) {
+                    JOptionPane.showMessageDialog(null, "Select a value\nPlease click on a restaurant panel", "alert", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    DeleteWindow delete = new DeleteWindow(res);
+                    delete.setVisible(true);
+                }
+            }
+        });
+        lblDelete.setForeground(SystemColor.inactiveCaptionBorder);
+        lblDelete.setFont(new Font("Franklin Gothic Heavy", Font.PLAIN, 12));
+        lblDelete.setIcon(new ImageIcon(AdminFrame.class.getResource("/resources/Trash-32.png")));
+        lblDelete.setBounds(910, 135, 80, 40);
+        panel.add(lblDelete);
+        lblE.setFont(new Font("Franklin Gothic Heavy", Font.PLAIN, 13));
+        lblE.setIcon(new ImageIcon(AdminFrame.class.getResource("/resources/Edit-32.png")));
+        lblE.setBounds(910, 178, 80, 40);
+        panel.add(lblE);
+
+        final JLabel lblNewLabel = new JLabel("");
+        lblNewLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+                AdminFrame.internalFrame.getContentPane().removeAll();
+                AdminFrame.scrollPane.setViewportView(AdminFrame.internalFrame);
+                for (int i = 0; i < AdminFrame.name.length; i++) {
+                    ResultPanel res = new ResultPanel(AdminFrame.name[i], AdminFrame.address[i], AdminFrame.tel[i], AdminFrame.weblink[i]);
+                    AdminFrame.internalFrame.getContentPane().add(res);
+                }
+            }
+
+            @Override
+            public void mousePressed(MouseEvent arg0) {
+                lblNewLabel.setIcon(new ImageIcon(AdminFrame.class.getResource("/resources/Refresh-50.png")));
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                lblNewLabel.setIcon(new ImageIcon(AdminFrame.class.getResource("/resources/Refresh-32.png")));
+            }
+        });
+
+        JLabel lblInfo = new JLabel("info\r\n\r\n");
+        lblInfo.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                JOptionPane.showMessageDialog(null, "Click on Add to add your restaurant to the DB\nSelect a resturant by clicking on its panel and click\nEdit or Delete", "Info", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+        lblInfo.setFont(new Font("Tahoma", Font.PLAIN, 13));
+        lblInfo.setForeground(Color.WHITE);
+        lblInfo.setIcon(new ImageIcon(AdminFrame.class.getResource("/resources/Attention-32.png")));
+        lblInfo.setBounds(910, 476, 66, 29);
+        panel.add(lblInfo);
+
+        final JLabel lblNewLabel_2 = new JLabel("");
+        lblNewLabel_2.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                adminLogin = false;
+                frame.setVisible(false);
+                frame.dispose();
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                lblNewLabel_2.setIcon(new ImageIcon(AdminFrame.class.getResource("/resources/Close Window-32(1).png")));
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                lblNewLabel_2.setIcon(new ImageIcon(AdminFrame.class.getResource("/resources/Close Window-32.png")));
+            }
+        });
+        lblNewLabel_2.setIcon(new ImageIcon(AdminFrame.class.getResource("/resources/Close Window-32.png")));
+        lblNewLabel_2.setBounds(851, 3, 46, 40);
+        panel.add(lblNewLabel_2);
+        lblNewLabel.setIcon(new ImageIcon(AdminFrame.class.getResource("/resources/Refresh-32.png")));
+        lblNewLabel.setBounds(910, 516, 70, 61);
+        panel.add(lblNewLabel);
+
+        JLabel lblNewLabel_1 = new JLabel("Admin");
+        lblNewLabel_1.setFont(new Font("Stencil", Font.PLAIN, 14));
+        lblNewLabel_1.setIcon(new ImageIcon(AdminFrame.class.getResource("/resources/Manager-32.png")));
+        lblNewLabel_1.setForeground(Color.WHITE);
+        lblNewLabel_1.setBounds(907, 3, 80, 78);
+        panel.add(lblNewLabel_1);
+
+        // Johan Search
+        final JTextField searchbar = new JTextField();
+        searchbar.setBounds(33, 60, 174, 20);
+        searchbar.setText("Enter search terms here");
+        searchbar.setFont(new Font("Arial", Font.ITALIC, 13));
+        searchbar.setBorder(null);
+        panel.add(searchbar);
+        searchbar.setColumns(10);
+
+        searchbar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+                internalFrame.removeAll();
+                getInternalFrame();
+                String userSearch = searchbar.getText();
+
+                String[] strName = SQLSearch.searchRestName(userSearch);
+                String[] strAddress = SQLSearch.searchRestPhone(userSearch);
+                String[] strTel = SQLSearch.searchRestAddress(userSearch);
+                String[] strWebsite = SQLSearch.searchRestWebsite(userSearch);
+                if (strName[0].equals("wrong")) {
+                    JOptionPane.showMessageDialog(frame, "No rerstaurant with this name.");
+                } else {
+                    for (int i = 0; i < strName.length; i++) {
+                        getResultPanel(strName[i], strAddress[i], strTel[i], strWebsite[i]);
+                    }
+                }
+                if (strName.length < 10) {
+                    addBlocks();
+                }
+            }
+        });
+        searchbar.addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                searchbar.setText("");
+            }
+        });
+
+        //HÄR ÄR SEARCHBUTTON SOM SKA LÄGGAS TILL.
+        final JButton searchButton = new JButton("Search");
+        searchButton.setBounds(207, 55, 86, 34);
+        searchButton.addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
+                searchButton.setCursor(cur1);
+            }
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                internalFrame.removeAll();
+                getInternalFrame();
+                String userSearch = searchbar.getText();
+                String[] strName = SQLSearch.searchRestName(userSearch);
+                String[] strAddress = SQLSearch.searchRestPhone(userSearch);
+                String[] strTel = SQLSearch.searchRestAddress(userSearch);
+                String[] strWebsite = SQLSearch.searchRestWebsite(userSearch);
+                if (strName[0].equals("wrong")) {
+                    JOptionPane.showMessageDialog(frame, "No rerstaurant with this name.");
+                } else {
+                    for (int i = 0; i < strName.length; i++) {
+                        getResultPanel(strName[i], strAddress[i], strTel[i], strWebsite[i]);
+                    }
+                }
+
+            }
+        });
+        panel.add(searchButton);
+
+        String[] userOwners = SQLOwners.displayUsers();
+
+        JScrollPane scrollPane_1 = new JScrollPane();
+        scrollPane_1.setBounds(33, 162, 246, 125);
+        panel.add(scrollPane_1);
+
+        final JList list_1 = new JList(userOwners);
+        list_1.addMouseListener(new MouseAdapter() {
+        	public void mouseClicked(MouseEvent e) {
+                    internalFrame.removeAll();
+                    getInternalFrame();
+                    String[][] rest = SQLFilter.SelectOwnerRestaurants(list_1.getSelectedValue().toString());
+                     for (int i = 0; i < rest.length; i++) {
+                        getResultPanel(rest[i][0], rest[i][1], rest[i][2], rest[i][3]);
+                    }
+
+                
+                if (rest.length < 10) {
+                    addBlocks();
+                }
+            }
+        });
+        scrollPane_1.setViewportView(list_1);
+
+        JScrollBar scrollBar = new JScrollBar();
+        scrollPane_1.setRowHeaderView(scrollBar);
+
+        scrollPane = new JScrollPane();
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.setBounds(310, 67, 560, 510);
+        panel.add(scrollPane);
+
+        getInternalFrame();
+
+        JLabel backgroundlayout = new JLabel("");
+        backgroundlayout.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            }
+        });
+        backgroundlayout.setIcon(new ImageIcon(getClass().getResource("/resources/TestBackground.png")));
+        backgroundlayout.setBounds(0, 1, 1032, 600);
+        panel.add(backgroundlayout);
+
+        JTextPane txtpnRefresh = new JTextPane();
+        txtpnRefresh.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        txtpnRefresh.setForeground(Color.WHITE);
+        txtpnRefresh.setEditable(false);
+        txtpnRefresh.setText("Refresh");
+        txtpnRefresh.setBounds(910, 581, 66, 20);
+        txtpnRefresh.setOpaque(false);
+        panel.add(txtpnRefresh);
+
+        name = selectRestName();
+        tel = selectRestTel();
+        address = selectRestAddress();
+        weblink = selectRestWebsite();
+
+        for (int i = 0; i < name.length; i++) {
+            getResultPanel(name[i], tel[i], address[i], weblink[i]);
+        }
+
+    }
+
+    private static void getInternalFrame() {
+        internalFrame = new JInternalFrame("Please login to leave a feedback");
+        internalFrame.getContentPane().setLayout(new BoxLayout(internalFrame.getContentPane(), BoxLayout.Y_AXIS));
+        internalFrame.setEnabled(false);
+        internalFrame.setSize(200, 10000);
+        scrollPane.setViewportView(internalFrame);
+        internalFrame.setVisible(true);
+        internalFrame.setBorder(UIManager.getBorder("ScrollPane.border"));
+    }
+
+    private static void getResultPanel(String name, String tel, String address, String weblink) {
+        final ResultPanel resultPanel = new ResultPanel(name, address, tel, weblink);
+        resultPanel.addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
+                resultPanel.setCursor(cur1);
+            }
+
+        });
+
+        internalFrame.getContentPane().add(resultPanel);
+    }
+
+    public void addBlocks() {
+        for (int i = 0; i < 8; i++) {
+            Blocks blocks = new Blocks();
+            internalFrame.getContentPane().add(blocks);
+        }
+    }
 }

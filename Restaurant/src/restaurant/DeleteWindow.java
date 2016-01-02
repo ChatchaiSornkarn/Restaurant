@@ -95,17 +95,17 @@ public class DeleteWindow extends JFrame {
 		contentPane.add(lblNewLabel_2);
 		
 		textField = new JTextField();
-		textField.setBounds(68, 11, 209, 20);
+		textField.setBounds(85, 11, 209, 20);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
 		textField_1 = new JTextField();
-		textField_1.setBounds(103, 57, 209, 20);
+		textField_1.setBounds(85, 44, 209, 20);
 		contentPane.add(textField_1);
 		textField_1.setColumns(10);
 		
 		textField_2 = new JTextField();
-		textField_2.setBounds(68, 98, 209, 20);
+		textField_2.setBounds(85, 78, 209, 20);
 		contentPane.add(textField_2);
 		textField_2.setColumns(10);
 		
@@ -113,7 +113,7 @@ public class DeleteWindow extends JFrame {
 		txtpnNameAddress.setForeground(SystemColor.inactiveCaptionBorder);
 		txtpnNameAddress.setFont(new Font("Stencil", Font.PLAIN, 14));
 		txtpnNameAddress.setOpaque(false);
-		txtpnNameAddress.setText("Name:\r\n\r\n\r\nAddress :\r\n\r\n\r\nTel:");
+		txtpnNameAddress.setText("Name:\r\n\r\nAddress :\r\n\r\nTel:");
 		txtpnNameAddress.setBackground(SystemColor.control);
 		txtpnNameAddress.setEditable(false);
 		txtpnNameAddress.setBounds(10, 11, 102, 239);
@@ -135,7 +135,7 @@ public class DeleteWindow extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ResultPanel res=new ResultPanel("gf","gf","gf");
+					ResultPanel res=new ResultPanel("gf","gf","gf","gf");
 					EditWindow frame = new EditWindow(res);
 					frame.setVisible(true);
 				} catch (Exception e) {

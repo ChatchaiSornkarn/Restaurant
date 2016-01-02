@@ -1,16 +1,20 @@
 package restaurant;
 
+import java.awt.Image;
 import java.sql.*;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import static restaurant.DBConnection.conn;
-import static restaurant.SQLStringReturn.makeList;
+import java.util.ArrayList;
+import javax.swing.ImageIcon;
+//import restauran.DBConnection;
+import restaurant.Connector;
 
-public class SQLSearch extends SQLFilter {
+public class SQLSearch extends Connector{
     
     private static String[] name;
     private static String[] address;
     private static String[] phone;
+    private static String[] weblink;
 
 	public static String[] searchRestName(String restName){
         
@@ -121,26 +125,88 @@ public class SQLSearch extends SQLFilter {
         
         return phone;
     }  
+        
+       public static ImageIcon[] searchRestImage(String restName){
+            ArrayList<ImageIcon> is = new ArrayList<ImageIcon>();
+            ImageIcon[] im = null;
+        try{
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("Select image  from Restaurant "
+                    + "WHERE RestName Like \"" + restName + "%"
+                    + "\"");
+                    
+                    int rowcount = 0;
+                
+                    
+                    if (!rs.next()) {
+                    
+
+                    }
+                    
+                    
+                     while(rs.next()){
+                      if(rs.getBytes(1) != null ){
+                    byte[] imageBytes = rs.getBytes(1);
+                    ImageIcon  icon = new ImageIcon(imageBytes);
+                    Image image = icon.getImage();
+                    Image bild= image.getScaledInstance(180, 100,  java.awt.Image.SCALE_SMOOTH);
+                    icon = new ImageIcon(bild);
+                    is.add(icon);
+                } else if (rs.getBytes(1)== null) {
+                    ImageIcon  icon = new ImageIcon("\\resources\\FinalBack.png");
+                    Image image = icon.getImage();
+                    Image bild= image.getScaledInstance(180, 100,  java.awt.Image.SCALE_SMOOTH);
+                    icon = new ImageIcon(bild);
+                    is.add(icon);
+
+             
+                    }  
+                     }
+            close(stmt);
+        im = is.toArray(new ImageIcon[is.size()]);
+        
+        } catch(Exception e){
+        System.err.println(e.getMessage());
+        }
+         return im; 
+    }  
 	
-	public static String[][] SelectSearch(String restName){
-        name = makeList("Select RestName from Restaurant "
-                + "WHERE RestName LIKE \"" + restName + "%" + "\" ORDER BY RestName");
+       public static String[] searchRestWebsite(String RestName ){ 
+           
+        try{
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("Select Website  from Restaurant "
+                    + "WHERE Website LIKE \"" + RestName + "%"
+                    + "\"");
+
+            int rowcount = 0;
+                    
+                    if (!rs.next()) {
+                    String[] wrong = new String[]{"wrong"};
+                    return wrong;
+                    }
+                    
+                    if (rs.last()) {
+                    rowcount = rs.getRow();
+                     rs.beforeFirst();
+                    }
+            
+                    weblink = new String[rowcount];
+                    int i = 0;
+                    
+                     while(rs.next()){
+                    weblink[i] = rs.getString("Website");
+                    i++;
+                    }
+            
+            close(stmt);
+        }
+        catch(Exception e){
+        System.err.println(e.getMessage());
+        }
         
-        address = makeList("Select Address from Restaurant "
-                + "WHERE RestName LIKE \"" + restName + "%" +  "\" ORDER BY RestName");
-        
-        phone = makeList("Select Telephone from Restaurant "
-                + "WHERE RestName LIKE \"" + restName + "%" +  "\" ORDER BY RestName");
-        
-        String[][] bugetRest = new String[name.length][3];
-        
-        for(int i = 0; i < name.length; i ++){
-            bugetRest[i][0] = name[i];
-            bugetRest[i][1] = address[i];
-            bugetRest[i][2] = phone[i];
-                }
-        
-        return bugetRest;
-        
-    }
+        return weblink;
+    }  
 }
+	
+

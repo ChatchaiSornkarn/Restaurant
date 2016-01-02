@@ -17,13 +17,13 @@ import static restaurant.DBConnection.conn;
  * @author chatchai
  */
 public class Login {
-
-    boolean adminLogin = false;
-    boolean ownAdmin = false;
+    
+    static boolean adminLogin = false;
+    static boolean ownAdmin = false;
 
     public void AdminLogin(String username, String password, JFrame frame) {
 
-        String sqlLoginVerify = "Select User, Password from Login where User = '" + username + "' and Password = '" + password + "' and User = 'bob' and Password = 'me'";
+        String sqlLoginVerify = "Select User, Password from Login where User = '" + username + "' and Password = '" + password + "' and User = 'Thomas' and Password = 'ok'";
         try {
             Statement stmt = conn.createStatement();
             Statement stmt2 = conn.createStatement();

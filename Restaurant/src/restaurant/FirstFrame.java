@@ -22,15 +22,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFormattedTextField;
 import javax.swing.JPasswordField;
-import javax.swing.SwingUtilities;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import static restaurant.DBConnection.conn;
 import restaurant.MainFrame;
 
 public class FirstFrame {
-
-	public JFrame frame;
+public JFrame frame;
 	public JPasswordField PassLogin;
         public JFormattedTextField UserLogin;
         protected Login login = new Login();
@@ -131,14 +129,7 @@ public class FirstFrame {
 			thread.start();
 			}
                         
-		});
-                
-        //      JLabel searchText = new JLabel("");
-	//	searchText.setIcon(new ImageIcon(getClass().getResource("/resources/ResSearch.png")));
-	//	searchText.setBounds(180, 29, 464, 400);
-	//	panel.add(searchText);
-                
-		
+		});	
 
 		UserLogin = new JFormattedTextField();
 		UserLogin.setText(" Username/Email");
@@ -181,11 +172,15 @@ public class FirstFrame {
 			public  void mouseClicked(MouseEvent e) {
                         username = UserLogin.getText().trim();
                         password = PassLogin.getText().trim();
-                        login.AdminLogin(username, password, frame);
+                        login.AdminLogin(username, password,frame);
                         if(login.adminLogin == true){
                             Admin adminFrame = null;
-                            adminFrame = new Admin();
-                                 adminFrame.rame.setVisible(true);
+                            try {
+                                adminFrame = new Admin();
+                            } catch (SQLException ex) {
+                                Logger.getLogger(FirstFrame.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                                 adminFrame.frame.setVisible(true);
                                  
                         }
                         else if(login.ownAdmin == true){
@@ -265,9 +260,3 @@ public class FirstFrame {
 		panel.add(Background);
         }
 }
-
-	
-   
-        
-        
-

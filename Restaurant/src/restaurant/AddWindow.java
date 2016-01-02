@@ -21,16 +21,15 @@ import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import static restaurant.SQLInsert.*;
-import static restaurant.MainFrame.internalFrame;
 import javax.swing.JCheckBox;
 import javax.swing.JTextArea;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
-import static restaurant.SQLRestaurant.selectCuisine;
+
 
 public class AddWindow extends JFrame {
-
+    SQLInsert sql = new SQLInsert();
+    Connector connect = new Connector();
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
@@ -45,6 +44,7 @@ public class AddWindow extends JFrame {
 	private String name,tel,address;
         JTextField pic;
         private JTextField textField_3;
+        
 
 	/**
 	 * Launch the application.
@@ -90,7 +90,7 @@ public class AddWindow extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
                         //add Restaurant
-                                addRestaurant(textField.getText(), textField_1.getText(), textField_2.getText(), 
+                                sql.addRestaurant(textField.getText(), textField_1.getText(), textField_2.getText(), 
                                         textField_3.getText(), pic.getText(), comboBox_1.getSelectedItem().toString(), 
                                         chckbxNewCheckBox.isSelected(), comboBox.getSelectedItem().toString());
                                 JOptionPane.showMessageDialog(null, "Restaurant is add!");
@@ -120,17 +120,17 @@ public class AddWindow extends JFrame {
 		contentPane.add(lblNewLabel_2);
 		
 		textField = new JTextField();
-		textField.setBounds(68, 11, 209, 20);
+		textField.setBounds(85, 11, 209, 20);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
 		textField_1 = new JTextField();
-		textField_1.setBounds(103, 55, 209, 20);
+		textField_1.setBounds(85, 45, 209, 20);
 		contentPane.add(textField_1);
 		textField_1.setColumns(10);
 		
 		textField_2 = new JTextField();
-		textField_2.setBounds(68, 98, 209, 20);
+		textField_2.setBounds(85, 79, 209, 20);
 		contentPane.add(textField_2);
 		textField_2.setColumns(10);
                 
@@ -149,15 +149,15 @@ public class AddWindow extends JFrame {
 		});
 		
 		textField_3 = new JTextField();
-		textField_3.setBounds(78, 140, 130, 26);
+		textField_3.setBounds(85, 113, 209, 20);
 		contentPane.add(textField_3);
 		textField_3.setColumns(10);
 		
 		pic = new JTextField();
-		pic.setBounds(176, 187, 209, 22);
+		pic.setBounds(85, 147, 209, 22);
 		contentPane.add(pic);
 		pic.setColumns(10);
-		btnNewButton_7.setBounds(397, 187, 41, 22);
+		btnNewButton_7.setBounds(300, 147, 41, 22);
 		contentPane.add(btnNewButton_7);
 		
                 String[] budget = new String[3];
@@ -166,23 +166,18 @@ public class AddWindow extends JFrame {
                 budget[2] = "90";
                 
 		comboBox_1 = new JComboBox(budget);
-		comboBox_1.setBounds(78, 233, 103, 27);
+		comboBox_1.setBounds(85, 182, 103, 27);
 		contentPane.add(comboBox_1);
 		
 		chckbxNewCheckBox = new JCheckBox();
-		chckbxNewCheckBox.setBounds(149, 274, 128, 23);
+		chckbxNewCheckBox.setBounds(85, 225, 128, 23);
 		contentPane.add(chckbxNewCheckBox);
                 
-		//add All to type
-                String[] allcuisine = selectCuisine();
-                String[] allcuisine1 = new String[allcuisine.length+1];
-                allcuisine1[0] = "All";
-                for(int i = 1; i <= allcuisine.length; i++){
-                    allcuisine1[i] = allcuisine[i-1];
-                }
-                
-		comboBox = new JComboBox(allcuisine1);
-		comboBox.setBounds(78, 319, 118, 27);
+		//add all cuisine type
+                String[] allcuisine = connect.makeList("select Cuisine from Cuisine_Types");
+
+		comboBox = new JComboBox(allcuisine);
+		comboBox.setBounds(85, 265, 118, 27);
 		contentPane.add(comboBox);
 		
 		
@@ -190,7 +185,9 @@ public class AddWindow extends JFrame {
 		txtpnNameAddress.setForeground(SystemColor.inactiveCaptionBorder);
 		txtpnNameAddress.setFont(new Font("Stencil", Font.PLAIN, 14));
 		txtpnNameAddress.setOpaque(false);
-		txtpnNameAddress.setText("Name:\r\n\r\n\r\nAddress :\r\n\r\n\r\nTel:\r\n\r\n\r\nWebsite:\r\n\r\n\r\nPicture(file path):\r\n\r\n\r\nBudget:\r\n\r\n\r\nStudentDiscount:\r\n\r\n\r\nCuisine:");
+		txtpnNameAddress.setText("Name:\r\n\r\nAddress :\r\n\r\nTel:\r\n\r\nWebsite:"
+                        + "\r\n\r\nPicture:\r\n\r\nBudget:\r\n\r\nStudent\nDiscount:"
+                        + "\r\n\r\nCuisine:");
 		txtpnNameAddress.setBackground(SystemColor.control);
 		txtpnNameAddress.setEditable(false);
 		txtpnNameAddress.setBounds(7, 11, 157, 363);

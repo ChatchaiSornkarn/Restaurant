@@ -38,7 +38,7 @@ public class Commentsection extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		ResultPanel resultPanel = new ResultPanel((String) null, (String) null, (String) null);
+		ResultPanel resultPanel = new ResultPanel((String) null, (String) null, (String) null, (String) null);
 		resultPanel.setBounds(0, 0, 474, 116);
 		resultPanel.setLayout(null);
 		contentPane.add(resultPanel);

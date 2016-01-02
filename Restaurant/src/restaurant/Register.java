@@ -28,12 +28,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import static restaurant.SQLRegisterStore.*;
+
 /**
  *
  * @author user
  */
-public class Register {
+public class Register extends  Connector{
     public JFrame frame;
     private static String passwordInput;
     private static String usernameInput;
@@ -134,7 +134,7 @@ public class Register {
                                 
                         else if(taken == false){
                     System.out.println(usernameInput + passwordInput);
-                   InsertUserRegister(usernameInput,passwordInput);
+                   makeRevie("Login",usernameInput,passwordInput);
                    frame.dispose();
                    JOptionPane.showMessageDialog(null, "Register Successful");
                     }

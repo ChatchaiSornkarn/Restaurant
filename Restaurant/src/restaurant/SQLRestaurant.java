@@ -256,6 +256,60 @@ public class SQLRestaurant extends SQLStringReturn{
 	}     
 	      
 		return icon; 
-	}
+    }
     
-}
+        
+        public static String[] selectRestWebsite(){
+        try{
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("select Website from Restaurant ORDER BY Website");
+            
+            int rowcount = 0;
+            
+            if (rs.last()) {
+            rowcount = rs.getRow();
+            rs.beforeFirst();
+            }
+            
+            name = new String[rowcount];
+            int i = 0;
+            
+	    while(rs.next()){
+                name[i] = rs.getString("Website");
+                i++;
+            }
+            close(stmt);
+        }
+        catch(Exception e){
+        System.err.println(e.getMessage());
+        }
+        return name;
+    }
+        
+        public static String[] selectRestWebsite(String username, String password){
+        try{
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("select Website from Restaurant "
+                    + "INNER JOIN Login USING (Login_ID) WHERE User = '" + username + "' and Password = '" + password + "' ORDER BY RestName");
+            
+            int rowcount = 0;
+            
+            if (rs.last()) {
+            rowcount = rs.getRow();
+            rs.beforeFirst();
+            }
+            
+            name = new String[rowcount];
+            int i = 0;
+            
+	    while(rs.next()){
+                name[i] = rs.getString("Website");
+                i++;
+            }
+            close(stmt);
+        }
+        catch(Exception e){
+        System.err.println(e.getMessage());
+        }
+        return name;
+    }}
