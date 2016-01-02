@@ -205,7 +205,7 @@ public JFrame frame;
                 register.setText("Click here to register for free");
                 register.setBounds(378, 5, 200, 20);
                 register.setFont(new Font("Arial", Font.PLAIN, 13));
-                register.setForeground(java.awt.Color.blue);
+                register.setForeground(java.awt.Color.WHITE);
                 Font font = register.getFont();
                 Map attributes = font.getAttributes();
                 attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
@@ -215,11 +215,11 @@ public JFrame frame;
                     public void mouseEntered(MouseEvent e){
                         Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
                         register.setCursor(cur1);
-                        register.setForeground(java.awt.Color.cyan);
+                        register.setForeground(java.awt.Color.CYAN);
                     }
                     @Override
                     public void mouseExited(MouseEvent e){
-                        register.setForeground(java.awt.Color.blue);
+                        register.setForeground(java.awt.Color.WHITE);
                     }
                    @Override
 			public void mouseClicked(MouseEvent e) {
