@@ -22,7 +22,9 @@ public class Connector extends DBConnection {
     String user = "team14";
     String pass = "112@Chalmers!!!";
 
-    // A method to read data from database and put that data in an array
+    /**
+     * A method to read Strings from database and put that data in an array
+     */
     public String[] makeList(String a) {
         ArrayList<String> is = new ArrayList<String>();
         String[] array = null;
@@ -77,7 +79,9 @@ public class Connector extends DBConnection {
         }
     }
 
-    // Creating a review method
+    /**
+     * Creating a review method
+     */
     public void makeRevie(String table, String a, String b) {
         try {
             PreparedStatement p;
@@ -145,7 +149,9 @@ public class Connector extends DBConnection {
         return im;
     }
 
-    //login
+    /**
+     * login
+     */
     boolean login(String[] queryusername, String[] querypassword, String username, char[] password) {
         String b = new String(password);
         boolean f = false;

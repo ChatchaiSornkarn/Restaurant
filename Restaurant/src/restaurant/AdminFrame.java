@@ -1,57 +1,26 @@
 package restaurant;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.BoxLayout;
-import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import java.awt.Font;
 import java.awt.SystemColor;
-import javax.swing.JComboBox;
-import javax.swing.JRadioButton;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.border.LineBorder;
-import java.awt.ScrollPane;
-import java.awt.Label;
-import java.awt.Panel;
-import javax.swing.JScrollBar;
-import javax.swing.JLayeredPane;
-
-import java.awt.Component;
 import java.awt.Cursor;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.font.TextAttribute;
 import java.sql.SQLException;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.ButtonModel;
-import javax.swing.JCheckBox;
-import javax.swing.JFormattedTextField;
 import javax.swing.JInternalFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
-import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
-import javax.swing.border.EmptyBorder;
 import static restaurant.SQLFilter.*;
 import java.awt.Color;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import static restaurant.Login.ownAdmin;
-import static restaurant.MainFrame.internalFrame;
 
 public class AdminFrame {
 
@@ -226,78 +195,6 @@ public class AdminFrame {
         lblNewLabel_1.setForeground(Color.WHITE);
         lblNewLabel_1.setBounds(907, 3, 80, 78);
         panel.add(lblNewLabel_1);
-
-        // Johan Search
-        final JTextField searchbar = new JTextField();
-        searchbar.setBounds(33, 60, 174, 20);
-        searchbar.setText("Enter search terms here");
-        searchbar.setFont(new Font("Arial", Font.ITALIC, 13));
-        searchbar.setBorder(null);
-        panel.add(searchbar);
-        searchbar.setColumns(10);
-
-        searchbar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-
-                internalFrame.removeAll();
-                getInternalFrame();
-                String userSearch = searchbar.getText();
-
-                String[] strName = SQLSearch.searchRestName(userSearch);
-                String[] strAddress = SQLSearch.searchRestPhone(userSearch);
-                String[] strTel = SQLSearch.searchRestAddress(userSearch);
-                String[] strWebsite = SQLSearch.searchRestWebsite(userSearch);
-                if (strName[0].equals("wrong")) {
-                    JOptionPane.showMessageDialog(frame, "No rerstaurant with this name.");
-                } else {
-                    for (int i = 0; i < strName.length; i++) {
-                        getResultPanel(strName[i], strAddress[i], strTel[i], strWebsite[i]);
-                    }
-                }
-                if (strName.length < 10) {
-                    addBlocks();
-                }
-            }
-        });
-        searchbar.addMouseListener(new MouseAdapter() {
-
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                searchbar.setText("");
-            }
-        });
-
-        //HÄR ÄR SEARCHBUTTON SOM SKA LÄGGAS TILL.
-        final JButton searchButton = new JButton("Search");
-        searchButton.setBounds(207, 55, 86, 34);
-        searchButton.addMouseListener(new MouseAdapter() {
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
-                searchButton.setCursor(cur1);
-            }
-
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                internalFrame.removeAll();
-                getInternalFrame();
-                String userSearch = searchbar.getText();
-                String[] strName = SQLSearch.searchRestName(userSearch);
-                String[] strAddress = SQLSearch.searchRestPhone(userSearch);
-                String[] strTel = SQLSearch.searchRestAddress(userSearch);
-                String[] strWebsite = SQLSearch.searchRestWebsite(userSearch);
-                if (strName[0].equals("wrong")) {
-                    JOptionPane.showMessageDialog(frame, "No rerstaurant with this name.");
-                } else {
-                    for (int i = 0; i < strName.length; i++) {
-                        getResultPanel(strName[i], strAddress[i], strTel[i], strWebsite[i]);
-                    }
-                }
-
-            }
-        });
-        panel.add(searchButton);
 
         scrollPane = new JScrollPane();
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);

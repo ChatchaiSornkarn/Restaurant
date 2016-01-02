@@ -27,6 +27,10 @@ import javax.swing.JOptionPane;
 import static restaurant.DBConnection.conn;
 import restaurant.MainFrame;
 
+/**
+ * This class is the first frame we will interect with when we launching the program
+ */
+
 public class FirstFrame {
 public JFrame frame;
 	public JPasswordField PassLogin;

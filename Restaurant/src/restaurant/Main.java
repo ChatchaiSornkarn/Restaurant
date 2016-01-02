@@ -16,7 +16,9 @@ import java.sql.SQLException;
 public class Main {
 
     /**
-     * @param args the command line arguments
+     * This is where the program start launching
+     * @param args
+     * @throws java.sql.SQLException
      */
     public static void main(String[] args) throws SQLException {
         DBConnection.dbconnecting();
