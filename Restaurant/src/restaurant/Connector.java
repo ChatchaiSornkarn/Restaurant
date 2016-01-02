@@ -16,6 +16,9 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import static restaurant.DBConnection.conn;
 
+/**
+ * This class contain Method that are useful for filtering
+ */
 public class Connector extends DBConnection {
 
     String url = "jdbc:mysql://kenobi.skip.chalmers.se/Team14_db";

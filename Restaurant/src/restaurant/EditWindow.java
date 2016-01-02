@@ -26,6 +26,10 @@ import static restaurant.SQLRestaurant.selectCuisine;
 import static restaurant.SQLUpdate.*;
 import static restaurant.Connector.*;
 
+/**
+ * Class: This is the Interface frame for deleting the restaurant
+ * @author Obada
+ */
 public class EditWindow extends JFrame {
         
         Connector connect = new Connector();

@@ -8,7 +8,7 @@ package restaurant;
 import java.sql.*;
 
 /**
- *
+ * Class: Connecting to Database which is online
  * @author chatchai
  */
 public class DBConnection {

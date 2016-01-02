@@ -2,8 +2,6 @@ package restaurant;
 
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
-import javax.swing.SwingUtilities;
-
 import java.awt.SystemColor;
 import java.awt.Font;
 import javax.swing.JLabel;
@@ -18,24 +16,25 @@ import static restaurant.SQLRestaurant.getIcon;
 import javax.swing.BoxLayout;
 import static restaurant.SQLRating.getRating;
 
+/**
+ * Class: Display panel of the restaurant
+ * @author obada
+ */
 public class ResultPanel extends JPanel {
 
     public ResultPanel res = this;
     protected String name;
     protected String address;
     protected String tel;
-    public int rating;//code this Chachai and code it fast :D == I am done 
+    public int rating;
     protected String weblink;
 
     /**
-     * Create the panel.
+     * Create the panel
      *
      * @param name
      * @param address
      * @param tel
-     */
-    /**
-     * @wbp.parser.constructor
      */
     public ResultPanel(String name, String address, String tel, String weblink) {
         addFocusListener(new FocusAdapter() {
@@ -52,7 +51,7 @@ public class ResultPanel extends JPanel {
             }
 
             @Override
-            public void mouseExited(MouseEvent e) {//the light up stuff
+            public void mouseExited(MouseEvent e) {
 
             }
 
@@ -62,6 +61,7 @@ public class ResultPanel extends JPanel {
                 Admin.res = res;
             }
         });
+        
         this.name = name;
         this.address = address;
         this.tel = tel;
@@ -133,8 +133,11 @@ public class ResultPanel extends JPanel {
                 lblFeedback.setIcon(new ImageIcon(ResultPanel.class.getResource("/resources/1449436231_icon-23-star.png")));
             }
 
+            //which restaurant are being press 
             public void mouseClicked(MouseEvent e) {
-      if (AdminFrame.inUse == true) {
+                Runnable run = new Runnable() {
+                    public void run() {
+                        if (AdminFrame.inUse == true) {
                             AdminFrame.res = res;
                             AdminFrame.internalFrame.getContentPane().removeAll();
                             AdminFrame.internalFrame.getContentPane().add(new SResultPanel(res));
@@ -146,17 +149,23 @@ public class ResultPanel extends JPanel {
                             MainFrame.internalFrame.getContentPane().removeAll();
                             MainFrame.internalFrame.getContentPane().add(new SResultPanel(res));
                         }
+                    }
+
+                };
+                Thread thread = new Thread(run);
+                thread.start();
             }
         });
 
         JSeparator separator = new JSeparator();
         add(separator, BorderLayout.SOUTH);
         
+        
         JPanel panel = new JPanel();
         add(panel, BorderLayout.NORTH);
         panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
         
-        
+        // star
         if(rating==0){
         	for(int i=0; i<4; i++){
         		JLabel label = new JLabel();
@@ -185,6 +194,9 @@ public class ResultPanel extends JPanel {
         }     
     }
 
+    /**
+     * when reuse panel 
+     */
     public ResultPanel(ResultPanel resultpanel) {
         this.name = resultpanel.name;
         this.address = resultpanel.address;

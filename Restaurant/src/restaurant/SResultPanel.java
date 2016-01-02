@@ -1,28 +1,19 @@
 package restaurant;
 
-import java.awt.Cursor;
 import javax.swing.JTextPane;
-import javax.swing.SwingUtilities;
-
 import java.awt.SystemColor;
 import java.awt.Font;
 import javax.swing.JLabel;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JSeparator;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import javax.swing.Icon;
 import static restaurant.SQLRestaurant.getIcon;
 import javax.swing.JButton;
-import java.lang.String;
 import javax.swing.text.StyledDocument;
 import static restaurant.AdminFrame.internalFrame;
-import static restaurant.AdminFrame.name;
 import static restaurant.SQLRating.addRating;
 
 public class SResultPanel extends ResultPanel {

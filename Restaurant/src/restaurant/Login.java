@@ -13,8 +13,8 @@ import javax.swing.JOptionPane;
 import static restaurant.DBConnection.conn;
 
 /**
- *
- * @author chatchai
+ * Class: Login function
+ * @author Merchad
  */
 public class Login {
     

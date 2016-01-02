@@ -19,7 +19,6 @@ public class SQLDelete extends SQLInsert{
      public static void deleteRestaurant(String a, String b, String c){
         
         try {
-            
 	    PreparedStatement p = conn.prepareStatement("DELETE FROM Restaurant WHERE RestName = ? and Address = ? and Telephone = ?");
 	    p.setString(1, a);
 	    p.setString(2, b);

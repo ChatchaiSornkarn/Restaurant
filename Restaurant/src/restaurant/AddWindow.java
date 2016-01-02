@@ -1,10 +1,7 @@
 package restaurant;
 
-import java.awt.BorderLayout;
 import java.awt.Cursor;
-
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -22,11 +19,13 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.JCheckBox;
-import javax.swing.JTextArea;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
-
+/**
+ * Class: This is the Interface frame for adding the restaurant
+ * @author Obada
+ */
 public class AddWindow extends JFrame {
     SQLInsert sql = new SQLInsert();
     Connector connect = new Connector();
@@ -179,8 +178,7 @@ public class AddWindow extends JFrame {
 		comboBox = new JComboBox(allcuisine);
 		comboBox.setBounds(85, 265, 118, 27);
 		contentPane.add(comboBox);
-		
-		
+	
 		JTextPane txtpnNameAddress = new JTextPane();
 		txtpnNameAddress.setForeground(SystemColor.inactiveCaptionBorder);
 		txtpnNameAddress.setFont(new Font("Stencil", Font.PLAIN, 14));

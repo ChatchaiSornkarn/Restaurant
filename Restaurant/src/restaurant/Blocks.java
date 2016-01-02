@@ -3,6 +3,10 @@ package restaurant;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 
+/**
+ * Class: Adding emty panel
+ * @author Obada
+ */
 public class Blocks extends JPanel {
 
 	/**

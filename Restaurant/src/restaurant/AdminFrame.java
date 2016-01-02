@@ -18,10 +18,14 @@ import javax.swing.JInternalFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
-import static restaurant.SQLFilter.*;
 import java.awt.Color;
 import static restaurant.Login.ownAdmin;
+import static restaurant.SQLRestaurant.*;
 
+/**
+ * Class: This is a frame including function for owner/register admin
+ * @author
+ */
 public class AdminFrame {
 
     public JFrame frame;
@@ -52,6 +56,7 @@ public class AdminFrame {
      * Initialize the contents of the frame.
      */
     private void initialize() throws SQLException {
+        // created frame
         frame = new JFrame();
         frame.setBounds(100, 100, 450, 300);
         frame.setSize(990, 602);
@@ -60,11 +65,13 @@ public class AdminFrame {
         frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.X_AXIS));
         frame.setUndecorated(true);
 
+        //Panel on the frame
         JPanel panel = new JPanel();
         frame.getContentPane().add(panel);
         panel.setLayout(null);
         panel.setBackground(java.awt.Color.DARK_GRAY);
-
+        
+        // Edit restaurant button
         final JLabel lblE = new JLabel("Edit");
         lblE.setForeground(SystemColor.inactiveCaptionBorder);
         lblE.addMouseListener(new MouseAdapter() {
@@ -80,6 +87,7 @@ public class AdminFrame {
             }
         });
 
+        // Add Restaurant button
         final JLabel lblAdd = new JLabel("Add");
         lblAdd.addMouseListener(new MouseAdapter() {
             @Override
@@ -104,6 +112,7 @@ public class AdminFrame {
         lblAdd.setBounds(910, 87, 66, 40);
         panel.add(lblAdd);
 
+        // Delete restaurant button
         JLabel lblDelete = new JLabel("Delete");
         lblDelete.addMouseListener(new MouseAdapter() {
             @Override
@@ -126,6 +135,7 @@ public class AdminFrame {
         lblE.setBounds(910, 178, 80, 40);
         panel.add(lblE);
 
+        //Refresh button
         final JLabel lblNewLabel = new JLabel("");
         lblNewLabel.addMouseListener(new MouseAdapter() {
             @Override
@@ -150,6 +160,7 @@ public class AdminFrame {
             }
         });
 
+        //help button
         JLabel lblInfo = new JLabel("info\r\n\r\n");
         lblInfo.addMouseListener(new MouseAdapter() {
             @Override
@@ -163,6 +174,7 @@ public class AdminFrame {
         lblInfo.setBounds(910, 476, 66, 29);
         panel.add(lblInfo);
 
+        //close window button: for opened window
         final JLabel lblNewLabel_2 = new JLabel("");
         lblNewLabel_2.addMouseListener(new MouseAdapter() {
             @Override
@@ -196,14 +208,17 @@ public class AdminFrame {
         lblNewLabel_1.setBounds(907, 3, 80, 78);
         panel.add(lblNewLabel_1);
 
+        //Scroll bar for restaurant display
         scrollPane = new JScrollPane();
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setBounds(310, 67, 560, 510);
         panel.add(scrollPane);
 
+        //Display for panel include restaurant
         getInternalFrame();
 
+        //Background Picture
         JLabel backgroundlayout = new JLabel("");
         backgroundlayout.addMouseListener(new MouseAdapter() {
             @Override
@@ -223,6 +238,7 @@ public class AdminFrame {
         txtpnRefresh.setOpaque(false);
         panel.add(txtpnRefresh);
 
+        //restaurant to be display on panel
         name = selectRestName(FirstFrame.username, FirstFrame.password);
         tel = selectRestTel(FirstFrame.username, FirstFrame.password);
         address = selectRestAddress(FirstFrame.username, FirstFrame.password);
@@ -237,6 +253,9 @@ public class AdminFrame {
 
     }
 
+    /**
+     * Refleshing the whole panel
+     */
     public static void getInternalFrame() {
         internalFrame = new JInternalFrame("Please login to leave a feedback");
         internalFrame.getContentPane().setLayout(new BoxLayout(internalFrame.getContentPane(), BoxLayout.Y_AXIS));
@@ -246,7 +265,14 @@ public class AdminFrame {
         internalFrame.setVisible(true);
         internalFrame.setBorder(UIManager.getBorder("ScrollPane.border"));
     }
-
+    
+    /**
+     * This Method get restaurant panel get the class ResultPanel
+     * @param name
+     * @param tel
+     * @param address
+     * @param weblink 
+     */
     private static void getResultPanel(String name, String tel, String address, String weblink) {
         final ResultPanel resultPanel = new ResultPanel(name, address, tel, weblink);
         resultPanel.addMouseListener(new MouseAdapter() {
@@ -262,6 +288,10 @@ public class AdminFrame {
         internalFrame.getContentPane().add(resultPanel);
     }
 
+    /**
+     * Add the emty block. 
+     * Fixing the bug.
+     */
     public void addBlocks() {
         for (int i = 0; i < 8; i++) {
             Blocks blocks = new Blocks();

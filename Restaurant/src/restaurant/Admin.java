@@ -1,17 +1,12 @@
 package restaurant;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.BoxLayout;
-import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import java.awt.Font;
 import java.awt.SystemColor;
-import javax.swing.JComboBox;
-import javax.swing.JRadioButton;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
@@ -19,43 +14,23 @@ import java.awt.event.MouseEvent;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-import javax.swing.border.LineBorder;
-import java.awt.ScrollPane;
-import java.awt.Label;
-import java.awt.Panel;
 import javax.swing.JScrollBar;
-import javax.swing.JLayeredPane;
-
-import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.font.TextAttribute;
 import java.sql.SQLException;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.ButtonModel;
-import javax.swing.JCheckBox;
-import javax.swing.JFormattedTextField;
 import javax.swing.JInternalFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
-import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
-import javax.swing.border.EmptyBorder;
-import static restaurant.SQLFilter.*;
+import static restaurant.SQLRestaurant.*;
 import java.awt.Color;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import static restaurant.Login.adminLogin;
-import static restaurant.MainFrame.address;
-import static restaurant.MainFrame.internalFrame;
-import static restaurant.MainFrame.name;
-import static restaurant.MainFrame.tel;
-import static restaurant.MainFrame.weblink;
 
+/**
+ * Class: This is a frame including function for super admin
+ * @author
+ */
 public class Admin {
 
     public JFrame frame;
@@ -84,6 +59,7 @@ public class Admin {
      * Initialize the contents of the frame.
      */
     private void initialize() throws SQLException {
+        // created frame
         frame = new JFrame();
         frame.setBounds(100, 100, 450, 300);
         frame.setSize(990, 602);
@@ -92,11 +68,13 @@ public class Admin {
         frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.X_AXIS));
         frame.setUndecorated(true);
 
+        //Panel on the frame
         JPanel panel = new JPanel();
         frame.getContentPane().add(panel);
         panel.setLayout(null);
         panel.setBackground(java.awt.Color.DARK_GRAY);
 
+        // Edit restaurant button
         final JLabel lblE = new JLabel("Edit");
         lblE.setForeground(SystemColor.inactiveCaptionBorder);
         lblE.addMouseListener(new MouseAdapter() {
@@ -112,6 +90,7 @@ public class Admin {
             }
         });
 
+        // Add Restaurant button
         final JLabel lblAdd = new JLabel("Add");
         lblAdd.addMouseListener(new MouseAdapter() {
             @Override
@@ -136,6 +115,7 @@ public class Admin {
         lblAdd.setBounds(910, 87, 66, 40);
         panel.add(lblAdd);
 
+        // Delete restaurant button
         JLabel lblDelete = new JLabel("Delete");
         lblDelete.addMouseListener(new MouseAdapter() {
             @Override
@@ -158,6 +138,7 @@ public class Admin {
         lblE.setBounds(910, 178, 80, 40);
         panel.add(lblE);
 
+        // refresh button
         final JLabel lblNewLabel = new JLabel("");
         lblNewLabel.addMouseListener(new MouseAdapter() {
             @Override
@@ -182,6 +163,7 @@ public class Admin {
             }
         });
 
+        //help button
         JLabel lblInfo = new JLabel("info\r\n\r\n");
         lblInfo.addMouseListener(new MouseAdapter() {
             @Override
@@ -228,7 +210,7 @@ public class Admin {
         lblNewLabel_1.setBounds(907, 3, 80, 78);
         panel.add(lblNewLabel_1);
 
-        // Johan Search
+        //Search bar
         final JTextField searchbar = new JTextField();
         searchbar.setBounds(33, 60, 174, 20);
         searchbar.setText("Enter search terms here");
@@ -236,7 +218,6 @@ public class Admin {
         searchbar.setBorder(null);
         panel.add(searchbar);
         searchbar.setColumns(10);
-
         searchbar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
@@ -268,7 +249,7 @@ public class Admin {
             }
         });
 
-        //HÄR ÄR SEARCHBUTTON SOM SKA LÄGGAS TILL.
+        //SEARCHBUTTON
         final JButton searchButton = new JButton("Search");
         searchButton.setBounds(207, 55, 86, 34);
         searchButton.addMouseListener(new MouseAdapter() {
@@ -300,12 +281,15 @@ public class Admin {
         });
         panel.add(searchButton);
 
+        //Get all User that are register 
         String[] userOwners = SQLOwners.displayUsers();
 
+        //Scroll for user to display
         JScrollPane scrollPane_1 = new JScrollPane();
         scrollPane_1.setBounds(33, 162, 246, 125);
         panel.add(scrollPane_1);
-
+        
+        //Display restaurant that owner own when owner is click
         final JList list_1 = new JList(userOwners);
         list_1.addMouseListener(new MouseAdapter() {
         	public void mouseClicked(MouseEvent e) {
@@ -327,21 +311,24 @@ public class Admin {
         JScrollBar scrollBar = new JScrollBar();
         scrollPane_1.setRowHeaderView(scrollBar);
 
+        //Scroll bar for restaurant display
         scrollPane = new JScrollPane();
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setBounds(310, 67, 560, 510);
         panel.add(scrollPane);
 
+        //Display for panel include restaurant
         getInternalFrame();
 
+        //Background Picture
         JLabel backgroundlayout = new JLabel("");
         backgroundlayout.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
             }
         });
-        backgroundlayout.setIcon(new ImageIcon(getClass().getResource("/resources/BackgroundFinal.png")));
+        backgroundlayout.setIcon(new ImageIcon(getClass().getResource("/resources/TestBackground.png")));
         backgroundlayout.setBounds(0, 1, 1032, 600);
         panel.add(backgroundlayout);
 
@@ -354,6 +341,7 @@ public class Admin {
         txtpnRefresh.setOpaque(false);
         panel.add(txtpnRefresh);
 
+        //restaurant to be display on panel
         name = selectRestName();
         tel = selectRestTel();
         address = selectRestAddress();
@@ -365,6 +353,9 @@ public class Admin {
 
     }
 
+    /**
+     * Refleshing the whole panel
+     */
     private static void getInternalFrame() {
         internalFrame = new JInternalFrame("Please login to leave a feedback");
         internalFrame.getContentPane().setLayout(new BoxLayout(internalFrame.getContentPane(), BoxLayout.Y_AXIS));
@@ -375,6 +366,13 @@ public class Admin {
         internalFrame.setBorder(UIManager.getBorder("ScrollPane.border"));
     }
 
+    /**
+     * This Method get restaurant panel get the class ResultPanel
+     * @param name
+     * @param tel
+     * @param address
+     * @param weblink 
+     */
     private static void getResultPanel(String name, String tel, String address, String weblink) {
         final ResultPanel resultPanel = new ResultPanel(name, address, tel, weblink);
         resultPanel.addMouseListener(new MouseAdapter() {
@@ -390,6 +388,10 @@ public class Admin {
         internalFrame.getContentPane().add(resultPanel);
     }
 
+    /**
+     * Add the emty block. 
+     * Fixing the bug.
+     */
     public void addBlocks() {
         for (int i = 0; i < 8; i++) {
             Blocks blocks = new Blocks();
