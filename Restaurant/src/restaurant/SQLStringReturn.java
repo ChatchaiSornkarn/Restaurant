@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author chatchai
+ * @author Merchad
  */
 public class SQLStringReturn extends DBConnection{
     

@@ -1,24 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package restaurant;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import static restaurant.DBConnection.conn;
-import static restaurant.FirstFrame.username;
-
 /**
- *
+ * Class: for the star that are showing inside restaurant
  * @author chatchai
  */
 public class SQLRating extends SQLInsert {
 
+    /**
+     * Add the rating that are being rate to the restaurant
+     * @param rating
+     * @param name 
+     */
     public static void addRating(int rating, String name) {
         try {
             System.out.println(name);
@@ -43,6 +40,11 @@ public class SQLRating extends SQLInsert {
         }
     }
 
+    /**
+     * Get the everange rating for the restaurant to be display
+     * @param name
+     * @return everange restaurant
+     */
     public static int getRating(String name) {
         int averageRating = 0;
 

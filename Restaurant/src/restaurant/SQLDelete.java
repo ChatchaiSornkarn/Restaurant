@@ -11,7 +11,7 @@ import java.sql.Statement;
 import static restaurant.DBConnection.conn;
 
 /**
- *
+ * Class: Delete restaurant
  * @author chatchai
  */
 public class SQLDelete extends SQLInsert{

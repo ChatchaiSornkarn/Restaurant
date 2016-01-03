@@ -11,8 +11,8 @@ import java.sql.Statement;
 import static restaurant.DBConnection.conn;
 
 /**
- *
- * @author user
+ * Class: Register to become user
+ * @author Chiara
  */
 public class SQLRegisterStore extends SQLStringReturn {
     
