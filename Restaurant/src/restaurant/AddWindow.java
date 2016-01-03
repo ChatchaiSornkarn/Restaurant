@@ -1,6 +1,7 @@
 package restaurant;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Cursor;
 
 import java.awt.EventQueue;
@@ -31,19 +32,22 @@ public class AddWindow extends JFrame {
     SQLInsert sql = new SQLInsert();
     Connector connect = new Connector();
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JLabel lblNewLabel_1;
-	private JLabel lblNewLabel_2;
-	private JLabel lblNewLabel_3;
+	private JTextField textname;
+	private JTextField textaddress;
+	private JTextField texttel;
+        private JTextField textweb;
+
+	private JLabel exitbutton;
+	private JLabel addbutton;
         
-        JComboBox comboBox_1;
-        JCheckBox chckbxNewCheckBox;
-        JComboBox comboBox;
-	private String name,tel,address;
+        private String name,tel,address;
+        
+        JComboBox boxbudget;
+        JCheckBox studentbox;
+        JComboBox cuisinebox;
+	
         JTextField pic;
-        private JTextField textField_3;
+        
         
 
 	/**
@@ -68,46 +72,47 @@ public class AddWindow extends JFrame {
 	public AddWindow() {
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 469, 380);
+		setBounds(240, 130, 250, 510);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+                contentPane.setBackground(Color.DARK_GRAY);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		lblNewLabel_3 = new JLabel("Add");
-		lblNewLabel_3.setForeground(SystemColor.window);
-		lblNewLabel_3.setFont(new Font("Impact", Font.PLAIN, 14));
-		lblNewLabel_3.setIcon(new ImageIcon(AddWindow.class.getResource("/resources/Checked-32.png")));
-		lblNewLabel_3.setBounds(371, 330, 92, 44);
-                lblNewLabel_3.addMouseListener(new MouseAdapter() {
+		addbutton = new JLabel("Add");
+		addbutton.setForeground(SystemColor.window);
+		addbutton.setFont(new Font("Arial", Font.BOLD, 14));
+		addbutton.setIcon(new ImageIcon(AddWindow.class.getResource("/resources/Checked-32.png")));
+		addbutton.setBounds(180, 75, 92, 44);
+                addbutton.addMouseListener(new MouseAdapter() {
                     
                         @Override
                         public void mouseEntered(MouseEvent e){
                             Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
-                            lblNewLabel_3.setCursor(cur1);
+                            addbutton.setCursor(cur1);
                         }
                         
 			@Override
 			public void mouseClicked(MouseEvent e) {
                         //add Restaurant
-                                sql.addRestaurant(textField.getText(), textField_1.getText(), textField_2.getText(), 
-                                        textField_3.getText(), pic.getText(), comboBox_1.getSelectedItem().toString(), 
-                                        chckbxNewCheckBox.isSelected(), comboBox.getSelectedItem().toString());
+                                sql.addRestaurant(textname.getText(), textaddress.getText(), texttel.getText(), 
+                                        textweb.getText(), pic.getText(), boxbudget.getSelectedItem().toString(), 
+                                        studentbox.isSelected(), cuisinebox.getSelectedItem().toString());
                                 JOptionPane.showMessageDialog(null, "Restaurant is add!");
 			}
 		});
                 
-		contentPane.add(lblNewLabel_3);
+		contentPane.add(addbutton);
 		
-		lblNewLabel_2 = new JLabel("");
-		lblNewLabel_2.addMouseListener(new MouseAdapter() {
+		exitbutton = new JLabel("");
+		exitbutton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
-				lblNewLabel_2.setIcon(new ImageIcon(AddWindow.class.getResource("/resources/closeButtonHover.png")));
+				exitbutton.setIcon(new ImageIcon(AddWindow.class.getResource("/resources/closeButtonHover.png")));
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblNewLabel_2.setIcon(new ImageIcon(AddWindow.class.getResource("/resources/closeButton.png")));
+				exitbutton.setIcon(new ImageIcon(AddWindow.class.getResource("/resources/closeButton.png")));
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -115,24 +120,24 @@ public class AddWindow extends JFrame {
 				dispose();
 			}
 		});
-		lblNewLabel_2.setIcon(new ImageIcon(AddWindow.class.getResource("/resources/closeButton.png")));
-		lblNewLabel_2.setBounds(437, 6, 26, 30);
-		contentPane.add(lblNewLabel_2);
+		exitbutton.setIcon(new ImageIcon(AddWindow.class.getResource("/resources/closeButton.png")));
+		exitbutton.setBounds(220,0, 30, 30);
+		contentPane.add(exitbutton);
 		
-		textField = new JTextField();
-		textField.setBounds(85, 11, 209, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		textname = new JTextField();
+		textname.setBounds(10, 30, 209, 20);
+		contentPane.add(textname);
+		textname.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(85, 45, 209, 20);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		textaddress = new JTextField();
+		textaddress.setBounds(10, 75, 209, 20);
+		contentPane.add(textaddress);
+		textaddress.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(85, 79, 209, 20);
-		contentPane.add(textField_2);
-		textField_2.setColumns(10);
+		texttel = new JTextField();
+		texttel.setBounds(10, 120, 209, 20);
+		contentPane.add(texttel);
+		texttel.setColumns(10);
                 
                 JButton btnNewButton_7 = new JButton("+");
 		btnNewButton_7.addActionListener(new ActionListener() {
@@ -148,16 +153,16 @@ public class AddWindow extends JFrame {
 			}
 		});
 		
-		textField_3 = new JTextField();
-		textField_3.setBounds(85, 113, 209, 20);
-		contentPane.add(textField_3);
-		textField_3.setColumns(10);
+		textweb = new JTextField();
+		textweb.setBounds(10, 165, 209, 20);
+		contentPane.add(textweb);
+		textweb.setColumns(10);
 		
 		pic = new JTextField();
-		pic.setBounds(85, 147, 209, 22);
+		pic.setBounds(10,210, 165, 22);
 		contentPane.add(pic);
 		pic.setColumns(10);
-		btnNewButton_7.setBounds(300, 147, 41, 22);
+		btnNewButton_7.setBounds(180, 210, 30, 22);
 		contentPane.add(btnNewButton_7);
 		
                 String[] budget = new String[3];
@@ -165,37 +170,35 @@ public class AddWindow extends JFrame {
                 budget[1] = "60";
                 budget[2] = "90";
                 
-		comboBox_1 = new JComboBox(budget);
-		comboBox_1.setBounds(85, 182, 103, 27);
-		contentPane.add(comboBox_1);
+		boxbudget = new JComboBox(budget);
+		boxbudget.setBounds(10, 255, 103, 20);
+		contentPane.add(boxbudget);
 		
-		chckbxNewCheckBox = new JCheckBox();
-		chckbxNewCheckBox.setBounds(85, 225, 128, 23);
-		contentPane.add(chckbxNewCheckBox);
+		studentbox = new JCheckBox();
+		studentbox.setBounds(8,190, 128, 23);
+                studentbox.setOpaque(false);
+		contentPane.add(studentbox);
                 
 		//add all cuisine type
                 String[] allcuisine = connect.makeList("select Cuisine from Cuisine_Types");
 
-		comboBox = new JComboBox(allcuisine);
-		comboBox.setBounds(85, 265, 118, 27);
-		contentPane.add(comboBox);
-		
-		
+		cuisinebox = new JComboBox(allcuisine);
+		cuisinebox.setBounds(10, 375, 118, 20);
+		contentPane.add(cuisinebox);
+
+                
 		JTextPane txtpnNameAddress = new JTextPane();
 		txtpnNameAddress.setForeground(SystemColor.inactiveCaptionBorder);
-		txtpnNameAddress.setFont(new Font("Stencil", Font.PLAIN, 14));
+		txtpnNameAddress.setFont(new Font("Arial", Font.PLAIN, 12));
 		txtpnNameAddress.setOpaque(false);
-		txtpnNameAddress.setText("Name:\r\n\r\nAddress :\r\n\r\nTel:\r\n\r\nWebsite:"
-                        + "\r\n\r\nPicture:\r\n\r\nBudget:\r\n\r\nStudent\nDiscount:"
-                        + "\r\n\r\nCuisine:");
+		txtpnNameAddress.setText("Name:\r\n\r\n\nAddress :\r\n\n\r\nTel:\r\n\n\r\nWebsite:"
+                        + "\r\n\n\r\nPicture:\r\n\n\r\nBudget:\r\n\n\r\nStudent Discount:"
+                        + "\r\n\r\nCuisine:\r\n\r\n\nFood Type:");
 		txtpnNameAddress.setBackground(SystemColor.control);
 		txtpnNameAddress.setEditable(false);
-		txtpnNameAddress.setBounds(7, 11, 157, 363);
+		txtpnNameAddress.setBounds(7, 11, 157, 500);
 		contentPane.add(txtpnNameAddress);
 		
-		JLabel lblNewLabel = new JLabel();
-		lblNewLabel.setIcon(new ImageIcon(AddWindow.class.getResource("/resources/TestBackground.png")));
-		lblNewLabel.setBounds(-330, 0, 999, 432);
-		contentPane.add(lblNewLabel);
 	}
 }
+
