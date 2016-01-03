@@ -39,13 +39,15 @@ import javax.swing.event.ChangeListener;
 import static restaurant.FirstFrame.password;
 import static restaurant.FirstFrame.username;
 
+/**
+ * This class is the frame for client which is the core program
+ */
+
 public class MainFrame {
 
     public JFrame frame;
     public static JInternalFrame internalFrame;
-
     public static String[] name, tel, address, weblink;
-    //private static JPanel panel;
     public static JScrollPane scrollPane;
     private static int slStudentDis;
     Connector connect = new Connector();
@@ -56,7 +58,6 @@ public class MainFrame {
 
     /**
      * Create the application.
-     *
      * @throws java.sql.SQLException
      */
     public MainFrame() throws SQLException {
@@ -67,6 +68,7 @@ public class MainFrame {
      * Initialize the contents of the frame.
      */
     private void initialize() throws SQLException {
+        // created frame
         frame = new JFrame();
         frame.setBounds(100, 100, 450, 300);
         frame.setSize(1002, 600);
@@ -76,11 +78,13 @@ public class MainFrame {
         frame.setResizable(false);
         frame.setUndecorated(true);
 
+        //Panel on the frame
         JPanel panel = new JPanel();
         frame.getContentPane().add(panel);
         panel.setLayout(null);
         panel.setBackground(java.awt.Color.DARK_GRAY);
 
+        //Exit button
         final JLabel ExitTool = new JLabel("");
         ExitTool.setBounds(967, 1, 40, 40);
         ExitTool.addMouseListener(new MouseAdapter() {
@@ -105,6 +109,7 @@ public class MainFrame {
         ExitTool.setIcon(new ImageIcon(getClass().getResource("/resources/closeButton.png")));
         panel.add(ExitTool);
 
+        //Login textfield on top
         UserLogin = new JFormattedTextField();
         UserLogin.setText(" Username/Email");
         UserLogin.setBackground(Color.BLACK);
@@ -118,6 +123,7 @@ public class MainFrame {
         });
         panel.add(UserLogin);
 
+        //Login textfield on top
         PassLogin = new JPasswordField();
         PassLogin.setBounds(142, 6, 128, 20);
         PassLogin.setBackground(Color.BLACK);
@@ -130,7 +136,8 @@ public class MainFrame {
             }
         });
         panel.add(PassLogin);
-
+        
+        //Login enter button on top
         final JButton EnterLogin = new JButton("Enter");
         EnterLogin.setBounds(280, 4, 89, 23);
         panel.add(EnterLogin);
@@ -169,7 +176,7 @@ public class MainFrame {
 
         });
 
-        /*REGISTER FUNCTIONALITY, JUST COPY AND PASTE TO MAINFRAME OF UPDATED PROGRAM*/
+        //REGISTER FUNCTIONALITY
         final JLabel register = new JLabel();
         register.setText("Click here to register for free");
         register.setBounds(378, 5, 200, 20);
@@ -177,7 +184,6 @@ public class MainFrame {
         register.setForeground(java.awt.Color.WHITE);
         Font font = register.getFont();
         Map attributes = font.getAttributes();
-
         attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
         register.setFont(font.deriveFont(attributes));
         register.addMouseListener(new MouseAdapter() {
@@ -205,7 +211,8 @@ public class MainFrame {
             }
         });
         panel.add(register);
-        // Search
+        
+        //Search
         final JTextField searchbar = new JTextField();
         searchbar.setBounds(53, 70, 178, 20);
         searchbar.setText("Enter search terms here");
@@ -213,7 +220,6 @@ public class MainFrame {
         searchbar.setBorder(null);
         panel.add(searchbar);
         searchbar.setColumns(10);
-
         searchbar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
@@ -247,9 +253,11 @@ public class MainFrame {
                 searchbar.setText("");
             }
         });
-        //HÄR ÄR SEARCHBUTTON SOM SKA LÄGGAS TILL.
+        
+        //SEARCHBUTTON
         final JButton searchButton = new JButton("Search");
-        searchButton.setBounds(240,70, 86, 20);
+        searchButton.setBounds(235, 75, 90, 20);
+        searchButton.setBorderPainted(false);
         searchButton.addMouseListener(new MouseAdapter() {
 
             @Override
@@ -282,6 +290,7 @@ public class MainFrame {
         });
         panel.add(searchButton);
 
+        //Text label: SELECT THE CUISINE, FOOD & Environment!!!
         JTextPane txtpnPleaseSelectThe = new JTextPane();
         txtpnPleaseSelectThe.setEditable(false);
         txtpnPleaseSelectThe.setOpaque(false);
@@ -291,14 +300,13 @@ public class MainFrame {
         txtpnPleaseSelectThe.setBounds(50, 107, 318, 20);
         panel.add(txtpnPleaseSelectThe);
 
-        //add All to type
+        //Looking for cuisine function
         String[] allcuisine = connect.makeList("select Cuisine from Cuisine_Types");
         String[] allcuisine1 = new String[allcuisine.length + 1];
         allcuisine1[0] = "All";
         for (int i = 1; i <= allcuisine.length; i++) {
             allcuisine1[i] = allcuisine[i - 1];
         }
-
         final JComboBox cuisinecomboBox = new JComboBox(allcuisine1);
         cuisinecomboBox.setBounds(53, 135, 178, 20);
         cuisinecomboBox.setFont(new Font("Arial", Font.PLAIN, 13));
@@ -326,7 +334,6 @@ public class MainFrame {
         for (int i = 1; i <= allsetting.length; i++) {
             allsetting1[i] = allsetting[i - 1];
         }
-
         final JComboBox settingcomboBox = new JComboBox(allsetting1);
         settingcomboBox.setBounds(53,250, 178, 20);
         settingcomboBox.setFont(new Font("Arial", Font.PLAIN, 13));
@@ -339,6 +346,7 @@ public class MainFrame {
         });
         panel.add(settingcomboBox);
 
+        //Looking for type of food function
         String[] allfood = connect.makeList("select Food from Food_Type");
         String[] allfood1 = new String[allfood.length + 1];
         allfood1[0] = "All";
@@ -367,6 +375,7 @@ public class MainFrame {
         });
         panel.add(foodcomboBox);
 
+        //Looking for budget function
         JTextPane txtpnSelectBudget = new JTextPane();
         txtpnSelectBudget.setOpaque(false);
         txtpnSelectBudget.setEditable(false);
@@ -399,7 +408,6 @@ public class MainFrame {
         budget2.setBounds(208, 312, 30, 22);
         panel.add(budget2);
         budget2.setColumns(10);
-
         slider.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
                 budget2.setText(String.valueOf(slider.getValue()));
@@ -407,10 +415,9 @@ public class MainFrame {
         });
         slider.setBounds(47, 315, 155, 26);
         slider.setPaintTicks(true);
-
         panel.add(slider);
 
-        //STUDENT DISCOUNT CHECKBOX
+        //STUDENT DISCOUNT CHECKBOX Function
         final JCheckBox sudentDis = new JCheckBox("Student discount");
         sudentDis.setBounds(50, 340, 159, 23);
         sudentDis.setOpaque(false);
@@ -423,7 +430,6 @@ public class MainFrame {
                 sudentDis.setCursor(cur1);
             }
 
-            // fix
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (sudentDis.isSelected()) {
@@ -434,10 +440,11 @@ public class MainFrame {
             }
         });
         panel.add(sudentDis);
+        
+        // Select button to confirm the filtering
         final JButton selectbutton = new JButton("Select");
         selectbutton.setBounds(53, 390, 272, 29);
         selectbutton.addMouseListener(new MouseAdapter() {
-
             @Override
             public void mouseEntered(MouseEvent e) {
                 Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
@@ -464,17 +471,19 @@ public class MainFrame {
                 }
             }
         });
-
         panel.add(selectbutton);
 
+        //Scroll bar for restaurant display
         scrollPane = new JScrollPane();
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setBounds(330, 67, 660, 510);
         panel.add(scrollPane);
 
+        //Display for panel include restaurant
         getInternalFrame();
 
+        //Background Picture
         JLabel backgroundlayout = new JLabel("");
         ImageIcon icona = new ImageIcon(getClass().getResource("/resources/BackgroundFinal.png"));
         Image image = icona.getImage();
@@ -483,17 +492,21 @@ public class MainFrame {
         backgroundlayout.setIcon(icona);
         backgroundlayout.setBounds(0, 0, 1002, 608);
         panel.add(backgroundlayout);
-
+        
+        //restaurant to be display on panel
         name = connect.makeList("select RestName from Restaurant ORDER BY RestName");
         tel = connect.makeList("select Telephone from Restaurant ORDER BY RestName");
         address = connect.makeList("select Address from Restaurant ORDER BY RestName");
         weblink = connect.makeList("Select Website from Restaurant ORDER BY RestName");
-
         for (int i = 0; i < name.length; i++) {
             getResultPanel(name[i], tel[i], address[i], weblink[i]);
         }
+        
     }
-
+    
+    /**
+     * Refleshing the whole panel
+     */
     private static void getInternalFrame() {
         internalFrame = new JInternalFrame();
         internalFrame.getContentPane().setLayout(new BoxLayout(internalFrame.getContentPane(), BoxLayout.Y_AXIS));
@@ -504,6 +517,13 @@ public class MainFrame {
         internalFrame.setBorder(UIManager.getBorder("ScrollPane.border"));
     }
 
+    /**
+     * This Method get restaurant panel get the class ResultPanel
+     * @param name
+     * @param tel
+     * @param address
+     * @param weblink 
+     */
     private static void getResultPanel(String name, String tel, String address, String weblink) {
         ResultPanel resultPanel = new ResultPanel(name, address, tel, weblink);
 
@@ -519,6 +539,10 @@ public class MainFrame {
         internalFrame.getContentPane().add(resultPanel);
     }
 
+    /**
+     * Add the emty block. 
+     * Fixing the bug.
+     */
     public void addBlocks() {
         for (int i = 0; i < 8; i++) {
             Blocks blocks = new Blocks();
