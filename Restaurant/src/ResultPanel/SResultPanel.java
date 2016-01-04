@@ -1,29 +1,18 @@
 package ResultPanel;
 
-import ResultPanel.Review;
-import ResultPanel.Blocks;
-import ResultPanel.ResultPanel;
 import SQL.SQLReview;
-import java.awt.Cursor;
 import javax.swing.JTextPane;
-import javax.swing.SwingUtilities;
-
 import java.awt.SystemColor;
 import java.awt.Font;
 import javax.swing.JLabel;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JSeparator;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import javax.swing.Icon;
 import static SQL.SQLRestaurant.getIcon;
 import javax.swing.JButton;
-import java.lang.String;
 import javax.swing.text.StyledDocument;
 import Frame.Admin;
 import Frame.AdminFrame;
@@ -31,9 +20,12 @@ import Frame.FirstFrame;
 import Frame.Login;
 import Frame.MainFrame;
 import static Frame.AdminFrame.internalFrame;
-import static Frame.AdminFrame.name;
 import static SQL.SQLRating.addRating;
 
+/**
+ * Class: Display restaurant that has been click
+ * @author
+ */
 public class SResultPanel extends ResultPanel {
 
     int selected;
@@ -48,7 +40,6 @@ public class SResultPanel extends ResultPanel {
     public SResultPanel(ResultPanel resultpanel) {//to construct the result out of the original one
         super(resultpanel.name, resultpanel.address, resultpanel.tel, resultpanel.weblink);
         selected = 0;
-        setSize(542, 352);
         setLayout(null);
         create();
     }
@@ -76,7 +67,7 @@ public class SResultPanel extends ResultPanel {
             }
         });
 
-        onestar.setBounds(0, 66, 31, 26);
+        onestar.setBounds(10, 88, 31, 26);
         add(onestar);
 
         final JLabel twostars = new JLabel("");
@@ -102,7 +93,7 @@ public class SResultPanel extends ResultPanel {
             }
         });
 
-        twostars.setBounds(31, 66, 31, 26);
+        twostars.setBounds(41, 88, 31, 26);
         add(twostars);
 
         final JLabel threestars = new JLabel("");
@@ -129,7 +120,7 @@ public class SResultPanel extends ResultPanel {
             }
         });
 
-        threestars.setBounds(62, 66, 31, 26);
+        threestars.setBounds(72, 88, 31, 26);
         add(threestars);
 
         final JLabel fourstars = new JLabel("");
@@ -158,11 +149,11 @@ public class SResultPanel extends ResultPanel {
             }
         });
 
-        fourstars.setBounds(93, 66, 31, 26);
+        fourstars.setBounds(103, 88, 31, 26);
         add(fourstars);
 
         JButton commentButton = new JButton("Enter");
-        commentButton.setBounds(400, 350, 120, 50);
+        commentButton.setBounds(300, 147, 69, 25);
         add(commentButton);
         commentButton.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent e) {
@@ -188,7 +179,7 @@ public class SResultPanel extends ResultPanel {
         add(textPane_1);
 
         JSeparator separator = new JSeparator();
-        separator.setBounds(0, 128, 542, 2);
+        separator.setBounds(0, 128, 642, 2);
         add(separator);
 
         JTextPane txtpnLeaveAComment = new JTextPane();
@@ -207,11 +198,11 @@ public class SResultPanel extends ResultPanel {
         //small rest pic
         JLabel lblewLabel = new JLabel("");
         lblewLabel.setIcon(getIcon("Select image from Restaurant where RestName = \"" + name + "\""));
-        lblewLabel.setBounds(300, 0, 180, 100);
+        lblewLabel.setBounds(300, 10, 800, 100);
         add(lblewLabel);
 
         JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setBounds(10, 182, 498, 170);
+        scrollPane.setBounds(10, 182, 620, 300);
         add(scrollPane);
 
         JTextPane commentSection = new JTextPane();
@@ -225,7 +216,7 @@ public class SResultPanel extends ResultPanel {
         }
         scrollPane.setViewportView(commentSection);
 
-        JLabel lblNewLabel = new JLabel("Home");
+        JLabel lblNewLabel = new JLabel("");
         lblNewLabel.addMouseListener(new MouseAdapter() {
 
             @Override
@@ -276,13 +267,8 @@ public class SResultPanel extends ResultPanel {
             }
         });
         lblNewLabel.setIcon(new ImageIcon(SResultPanel.class.getResource("/resources/Home-32.png")));
-        lblNewLabel.setBounds(501, 0, 31, 45);
+        lblNewLabel.setBounds(600, 0, 45, 45);
         add(lblNewLabel);
-
-        JLabel lblNewLabel_1 = new JLabel("HOME");
-        lblNewLabel_1.setFont(new Font("Arial Black", Font.PLAIN, 12));
-        lblNewLabel_1.setBounds(500, 41, 42, 28);
-        add(lblNewLabel_1);
 
     }
 

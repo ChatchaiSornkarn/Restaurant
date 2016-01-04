@@ -2,8 +2,6 @@ package ResultPanel;
 
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
-import javax.swing.SwingUtilities;
-
 import java.awt.SystemColor;
 import java.awt.Font;
 import javax.swing.JLabel;
@@ -21,13 +19,17 @@ import Frame.AdminFrame;
 import Frame.MainFrame;
 import static SQL.SQLRating.getRating;
 
+/**
+ * Class: Display panel of the restaurant
+ * @author
+ */
 public class ResultPanel extends JPanel {
 
     public ResultPanel res = this;
     public String name;
     public String address;
     public String tel;
-    public int rating;//code this Chachai and code it fast :D == I am done 
+    public int rating;
     protected String weblink;
 
     /**

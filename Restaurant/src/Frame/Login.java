@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 import static DBConnection.DBConnection.conn;
 
 /**
- *
+ * Class: Login function 
  * @author chatchai
  */
 public class Login {

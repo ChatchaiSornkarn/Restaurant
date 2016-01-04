@@ -80,7 +80,9 @@ public Client(String host){
 
   private void connectToServer()throws IOException{
 	  showMessage("Attempting connection....\n");
+	  end.setEnabled(false);
 	  connection = new Socket(InetAddress.getByName(serverIP),6789);
+	  end.setEnabled(true);
 	  showMessage("Connected to: "+connection.getInetAddress().getHostName()+"\n");
   }
   
@@ -93,18 +95,18 @@ private void setStreams()throws IOException{
 
 //while chatting with server
  
-private void whileChatting() throws IOException{
+private void whileChatting(){
 	buttonOn(true);
 	ableToType(true);
 	do{
-
 		try {
 			message = (String) input.readObject();
 			showMessage("\n"+message);
-		}catch(ClassNotFoundException classnotfoundException){
+		}catch(ClassNotFoundException | IOException classnotfoundException){
 			showMessage("\n I dont know what kinda object is that");
+			break;
 		}
-	}while(!message.equals("SERVER - END"));
+	}while(!message.equals("SERVER _ End"));
 }
 
 //close the streams and sockets
@@ -160,10 +162,17 @@ private void buttonOn(final boolean tof){
 			end.setEnabled(tof);
 		}
 	});
+	
 }
 
 
-
+public static void main(String [] args){
+	Client client = new Client("127.0.0.1");
+	client.setDefaultCloseOperation(EXIT_ON_CLOSE);
+	client.setVisible(true);
+	client.startRunning();
+	
+}
 
 
 
