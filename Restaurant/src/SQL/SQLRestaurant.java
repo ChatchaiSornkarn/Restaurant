@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package SQL;
 
 import java.awt.Image;
@@ -14,7 +9,7 @@ import static Connection.DBConnection.conn;
  * Class: This class contain Method for displaying restaurant
  * @author chatchai
  */
-public class SQLRestaurant extends SQLStringReturn {
+public class SQLRestaurant extends SQLOwners {
 
     private static String[] name;
     private static String[] cuisine;

@@ -39,9 +39,9 @@ public class SResultPanel extends ResultPanel {
     Login login = new Login();
 
     /**
-     * Create the panel.
+     * Create the panel. To construct the result out of the original one
      */
-    public SResultPanel(ResultPanel resultpanel) {//to construct the result out of the original one
+    public SResultPanel(ResultPanel resultpanel) {
         super(resultpanel.name, resultpanel.address, resultpanel.tel, resultpanel.weblink);
         selected = 0;
         setLayout(null);
