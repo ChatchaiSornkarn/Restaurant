@@ -1,5 +1,6 @@
 package Frame;
 
+import DBConnection.Client;
 import ResultPanel.Blocks;
 import ResultPanel.ResultPanel;
 import java.awt.BorderLayout;
@@ -99,7 +100,19 @@ public class AdminFrame {
         frame.getContentPane().add(panel);
         panel.setLayout(null);
         panel.setBackground(java.awt.Color.DARK_GRAY);
-       
+        
+        JLabel chat = new JLabel("Chat");
+        chat.setForeground(Color.WHITE);
+        chat.setFont(new Font("Arial", Font.PLAIN, 14));
+        chat.setIcon(new ImageIcon(AdminFrame.class.getResource("/resources/1448825257_sms_chat_text_bubble.png")));
+        chat.setBounds(910, 431, 80, 34);
+        chat.addMouseListener(new MouseAdapter(){
+            public void MouseCliced(MouseEvent arg0){
+                Client client = new Client("129.16.231.62");
+            }
+        });
+        panel.add(chat);
+        
 
         final JLabel lblE = new JLabel("Edit");
         lblE.setForeground(SystemColor.inactiveCaptionBorder);
@@ -135,7 +148,7 @@ public class AdminFrame {
             }
         });
         lblAdd.setForeground(SystemColor.inactiveCaptionBorder);
-        lblAdd.setFont(new Font("Franklin Gothic Heavy", Font.PLAIN, 14));
+        lblAdd.setFont(new Font("Arial", Font.PLAIN, 14));
         lblAdd.setIcon(new ImageIcon(AdminFrame.class.getResource("/resources/Upload to the Cloud-32.png")));
         lblAdd.setBounds(910, 87, 66, 40);
         panel.add(lblAdd);
@@ -153,11 +166,11 @@ public class AdminFrame {
             }
         });
         lblDelete.setForeground(SystemColor.inactiveCaptionBorder);
-        lblDelete.setFont(new Font("Franklin Gothic Heavy", Font.PLAIN, 12));
+        lblDelete.setFont(new Font("Arial", Font.PLAIN, 14));
         lblDelete.setIcon(new ImageIcon(AdminFrame.class.getResource("/resources/Trash-32.png")));
         lblDelete.setBounds(910, 135, 80, 40);
         panel.add(lblDelete);
-        lblE.setFont(new Font("Franklin Gothic Heavy", Font.PLAIN, 13));
+        lblE.setFont(new Font("Arial", Font.PLAIN, 14));
         lblE.setIcon(new ImageIcon(AdminFrame.class.getResource("/resources/Edit-32.png")));
         lblE.setBounds(910, 178, 80, 40);
         panel.add(lblE);
@@ -186,14 +199,14 @@ public class AdminFrame {
             }
         });
 
-        JLabel lblInfo = new JLabel("info\r\n\r\n");
+        JLabel lblInfo = new JLabel("Info\r\n\r\n");
         lblInfo.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 JOptionPane.showMessageDialog(null, "Click on Add to add your restaurant to the DB\nSelect a resturant by clicking on its panel and click\nEdit or Delete", "Info", JOptionPane.INFORMATION_MESSAGE);
             }
         });
-        lblInfo.setFont(new Font("Tahoma", Font.PLAIN, 13));
+        lblInfo.setFont(new Font("Arial", Font.PLAIN, 14));
         lblInfo.setForeground(Color.WHITE);
         lblInfo.setIcon(new ImageIcon(AdminFrame.class.getResource("/resources/Attention-32.png")));
         lblInfo.setBounds(910, 476, 66, 29);
@@ -219,17 +232,17 @@ public class AdminFrame {
             }
         });
         lblNewLabel_2.setIcon(new ImageIcon(AdminFrame.class.getResource("/resources/Close Window-32.png")));
-        lblNewLabel_2.setBounds(851, 3, 46, 40);
+        lblNewLabel_2.setBounds(867, 0, 46, 40);
         panel.add(lblNewLabel_2);
         lblNewLabel.setIcon(new ImageIcon(AdminFrame.class.getResource("/resources/Refresh-32.png")));
-        lblNewLabel.setBounds(910, 516, 70, 61);
+        lblNewLabel.setBounds(920, 516, 70, 61);
         panel.add(lblNewLabel);
 
         JLabel lblNewLabel_1 = new JLabel("Admin");
-        lblNewLabel_1.setFont(new Font("Stencil", Font.PLAIN, 14));
+        lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 14));
         lblNewLabel_1.setIcon(new ImageIcon(AdminFrame.class.getResource("/resources/Manager-32.png")));
         lblNewLabel_1.setForeground(Color.WHITE);
-        lblNewLabel_1.setBounds(907, 3, 80, 78);
+        lblNewLabel_1.setBounds(903, 1, 80, 78);
         panel.add(lblNewLabel_1);
 
         scrollPane = new JScrollPane();
@@ -251,11 +264,11 @@ public class AdminFrame {
         panel.add(backgroundlayout);
 
         JTextPane txtpnRefresh = new JTextPane();
-        txtpnRefresh.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        txtpnRefresh.setFont(new Font("Arial", Font.PLAIN, 14));
         txtpnRefresh.setForeground(Color.WHITE);
         txtpnRefresh.setEditable(false);
         txtpnRefresh.setText("Refresh");
-        txtpnRefresh.setBounds(910, 581, 66, 20);
+        txtpnRefresh.setBounds(918, 565, 66, 20);
         txtpnRefresh.setOpaque(false);
         panel.add(txtpnRefresh);
 

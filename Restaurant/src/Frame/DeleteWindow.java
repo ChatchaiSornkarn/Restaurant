@@ -1,6 +1,7 @@
 package Frame;
 
 import ResultPanel.ResultPanel;
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.EventQueue;
 
@@ -19,7 +20,7 @@ import javax.swing.JOptionPane;
 import static SQL.SQLDelete.*;
 
 /**
- * Class: This is the Interface frame for deleting the restaurant
+ * Class: This is the Interface frame for deleting the restauran
  * @author Obada
  */
 public class DeleteWindow extends JFrame {
@@ -29,8 +30,8 @@ public class DeleteWindow extends JFrame {
     private JTextField textField_1;
     private JTextField textField_2;
     private JLabel lblNewLabel_1;
-    private JLabel lblNewLabel_2;
-    private JLabel lblNewLabel_3;
+    private JLabel exitbutton;
+    private JLabel deletebutton;
     private String name, tel, address;
 
     /**
@@ -54,23 +55,24 @@ public class DeleteWindow extends JFrame {
     public void initialize() {
         setUndecorated(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 364, 191);
+        setBounds(240, 130, 250, 190);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        contentPane.setBackground(Color.DARK_GRAY);
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        lblNewLabel_3 = new JLabel("Delete");
-        lblNewLabel_3.setForeground(SystemColor.window);
-        lblNewLabel_3.setFont(new Font("Impact", Font.PLAIN, 14));
-        lblNewLabel_3.setIcon(new ImageIcon(DeleteWindow.class.getResource("/resources/Cancel-32.png")));
-        lblNewLabel_3.setBounds(217, 137, 111, 46);
-        lblNewLabel_3.addMouseListener(new MouseAdapter() {
+        deletebutton = new JLabel("Delete");
+        deletebutton.setForeground(SystemColor.window);
+        deletebutton.setFont(new Font("Arial", Font.PLAIN, 14));
+        deletebutton.setIcon(new ImageIcon(DeleteWindow.class.getResource("/resources/Cancel-32.png")));
+        deletebutton.setBounds(170,150, 92, 44);
+        deletebutton.addMouseListener(new MouseAdapter() {
 
             @Override
             public void mouseEntered(MouseEvent e) {
                 Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
-                lblNewLabel_3.setCursor(cur1);
+                deletebutton.setCursor(cur1);
             }
 
             @Override
@@ -80,18 +82,18 @@ public class DeleteWindow extends JFrame {
                 JOptionPane.showMessageDialog(null, "Delete Success!");
             }
         });
-        contentPane.add(lblNewLabel_3);
+        contentPane.add(deletebutton);
 
-        lblNewLabel_2 = new JLabel("");
-        lblNewLabel_2.addMouseListener(new MouseAdapter() {
+        exitbutton = new JLabel("");
+        exitbutton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent arg0) {
-                lblNewLabel_2.setIcon(new ImageIcon(AddWindow.class.getResource("/resources/closeButtonHover.png")));
+                exitbutton.setIcon(new ImageIcon(AddWindow.class.getResource("/resources/closeButtonHover.png")));
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                lblNewLabel_2.setIcon(new ImageIcon(AddWindow.class.getResource("/resources/closeButton.png")));
+                exitbutton.setIcon(new ImageIcon(AddWindow.class.getResource("/resources/closeButton.png")));
             }
 
             @Override
@@ -100,43 +102,35 @@ public class DeleteWindow extends JFrame {
                 dispose();
             }
         });
-        lblNewLabel_2.setIcon(new ImageIcon(AddWindow.class.getResource("/resources/closeButton.png")));
-        lblNewLabel_2.setBounds(328, 0, 26, 30);
-        contentPane.add(lblNewLabel_2);
+        exitbutton.setIcon(new ImageIcon(AddWindow.class.getResource("/resources/closeButton.png")));
+        exitbutton.setBounds(220, 0, 30, 30);
+        contentPane.add(exitbutton);
 
         textField = new JTextField();
-        textField.setBounds(85, 11, 209, 20);
+        textField.setBounds(10, 33, 209, 20);
         contentPane.add(textField);
         textField.setColumns(10);
 
         textField_1 = new JTextField();
-        textField_1.setBounds(85, 44, 209, 20);
+        textField_1.setBounds(10, 75, 209, 20);
         contentPane.add(textField_1);
         textField_1.setColumns(10);
 
         textField_2 = new JTextField();
-        textField_2.setBounds(85, 78, 209, 20);
+        textField_2.setBounds(10, 120, 209, 20);
         contentPane.add(textField_2);
         textField_2.setColumns(10);
 
         JTextPane txtpnNameAddress = new JTextPane();
         txtpnNameAddress.setForeground(SystemColor.inactiveCaptionBorder);
-        txtpnNameAddress.setFont(new Font("Stencil", Font.PLAIN, 14));
+        txtpnNameAddress.setFont(new Font("Arial", Font.PLAIN, 12));
         txtpnNameAddress.setOpaque(false);
-        txtpnNameAddress.setText("Name:\r\n\r\nAddress :\r\n\r\nTel:");
+        txtpnNameAddress.setText("Name:\r\n\r\n\nAddress :\r\n\n\r\nTel:");
         txtpnNameAddress.setBackground(SystemColor.control);
         txtpnNameAddress.setEditable(false);
         txtpnNameAddress.setBounds(10, 11, 102, 239);
         contentPane.add(txtpnNameAddress);
 
-        JLabel lblNewLabel = new JLabel("New label");
-        lblNewLabel.setIcon(new ImageIcon(AddWindow.class.getResource("/resources/TestBackground.png")));
-        lblNewLabel.setBounds(-476, -25, 845, 403);
-        contentPane.add(lblNewLabel);
-
-        lblNewLabel_1 = new JLabel("New label");
-        lblNewLabel_1.setBounds(282, 153, 46, 14);
-        contentPane.add(lblNewLabel_1);
     }
 
     /**
