@@ -6,10 +6,15 @@ import java.sql.Statement;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static DBConnection.DBConnection.conn;
-
+/**
+ * This class is for getting the reviews from the database.
+ */
 public class SQLReview extends SQLStringReturn {
     private static String[] Review;
-    
+    /**
+    * This method gets the restaurant name and returns the reviews
+    * connected to this restaurant.
+    */
     public static String[] displayReview(String RestName) {
         
         String sqlDisplayReview = "Select Review from Review where RestName = '"+RestName+"'";
