@@ -21,6 +21,7 @@ import Frame.Login;
 import Frame.MainFrame;
 import static Frame.AdminFrame.internalFrame;
 import static SQL.SQLRating.addRating;
+import java.awt.Color;
 
 /**
  * Class: Display restaurant that has been click
@@ -266,6 +267,13 @@ public class SResultPanel extends ResultPanel {
                 }
             }
         });
+        
+        JLabel homelabel = new JLabel("Home");
+        homelabel.setFont(new Font("Arial", Font.BOLD, 12));
+        homelabel.setForeground(Color.BLACK);
+        homelabel.setBounds(600, 35, 60, 20);
+        add(homelabel);
+        
         lblNewLabel.setIcon(new ImageIcon(SResultPanel.class.getResource("/resources/Home-32.png")));
         lblNewLabel.setBounds(600, 0, 45, 45);
         add(lblNewLabel);
