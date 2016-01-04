@@ -56,6 +56,7 @@ import java.awt.event.KeyEvent;
 import static Frame.Login.ownAdmin;
 import static Frame.MainFrame.internalFrame;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 public class AdminFrame {
 
@@ -110,7 +111,7 @@ public class AdminFrame {
                 Runnable run = new Runnable(){
                   public void run(){
                        Client client = new Client("127.0.0.1");
-                client.setDefaultCloseOperation(EXIT_ON_CLOSE);
+                client.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
                 client.setVisible(true);
                 client.startRunning();
                   }  
