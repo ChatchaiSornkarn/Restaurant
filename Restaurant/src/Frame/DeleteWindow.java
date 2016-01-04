@@ -1,5 +1,6 @@
-package restaurant;
+package Frame;
 
+import ResultPanel.ResultPanel;
 import java.awt.Cursor;
 import java.awt.EventQueue;
 
@@ -15,7 +16,7 @@ import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JOptionPane;
-import static restaurant.SQLDelete.*;
+import static SQL.SQLDelete.*;
 
 /**
  * Class: This is the Interface frame for deleting the restaurant

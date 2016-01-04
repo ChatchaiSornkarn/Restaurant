@@ -1,4 +1,4 @@
-package restaurant;
+package DBConnection;
 
 import java.awt.Image;
 import java.io.File;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
-import static restaurant.DBConnection.conn;
+import static DBConnection.DBConnection.conn;
 
 public class Connector extends DBConnection {
 
@@ -146,7 +146,7 @@ public class Connector extends DBConnection {
     }
 
     //login
-    boolean login(String[] queryusername, String[] querypassword, String username, char[] password) {
+    public boolean login(String[] queryusername, String[] querypassword, String username, char[] password) {
         String b = new String(password);
         boolean f = false;
         for (int i = 0; i < queryusername.length; i++) {
@@ -216,7 +216,7 @@ public class Connector extends DBConnection {
 
     }
 
-    String[] cuisine(String cuisine) {
+    public String[] cuisine(String cuisine) {
         String[] array;
         String b = "";
         String a = "";
@@ -233,7 +233,7 @@ public class Connector extends DBConnection {
         return array;
     }
     
-    String[] setting(String setting) {
+    public String[] setting(String setting) {
         String[] array;
         String b = "";
         String a = "";
@@ -249,7 +249,7 @@ public class Connector extends DBConnection {
         return array;
     }
 
-    String[] food(String food) {
+    public String[] food(String food) {
         String[] array;
         String b = "";
         String a = "";
@@ -266,7 +266,7 @@ public class Connector extends DBConnection {
         return array;
     }
 
-    String sd(int a) {
+    public String sd(int a) {
         String discount = "";
         if (a == 1) {
             discount = " and StudentDiscount = \"1\"";
@@ -274,7 +274,7 @@ public class Connector extends DBConnection {
         return discount;
     }
 
-    String[] restFilter(String[] cuisine, int b, String sd, String[] food,String[] setting ) {
+    public String[] restFilter(String[] cuisine, int b, String sd, String[] food,String[] setting ) {
         String[] a = makeList("SELECT Restaurant.RestName FROM Restaurant, Budget"
                 + cuisine[0] + food[0] + setting[0]
                 + "where Restaurant.Budget_ID = Budget.Budget_ID and Budget.BudgetRange <= '" + b + "'"
@@ -282,7 +282,7 @@ public class Connector extends DBConnection {
         return a;
     }
 
-    String[] addFilter(String[] cuisine, int b, String sd, String[] food,String[] setting) {
+    public String[] addFilter(String[] cuisine, int b, String sd, String[] food,String[] setting) {
         String[] a = makeList("SELECT Address FROM Restaurant, Budget"
                 + cuisine[0] + food[0] + setting[0]
                 + "where Restaurant.Budget_ID = Budget.Budget_ID and Budget.BudgetRange <= '" + b + "'"
@@ -290,7 +290,7 @@ public class Connector extends DBConnection {
         return a;
     }
 
-    String[] telFilter(String[] cuisine, int b, String sd, String[] food,String[] setting) {
+    public String[] telFilter(String[] cuisine, int b, String sd, String[] food,String[] setting) {
         String[] a = makeList("SELECT Telephone FROM Restaurant, Budget"
                 + cuisine[0] + food[0] + setting[0]
                 + "where Restaurant.Budget_ID = Budget.Budget_ID and Budget.BudgetRange <= '" + b + "'"
@@ -298,7 +298,7 @@ public class Connector extends DBConnection {
         return a;
     }
 
-    String[] webFilter(String[] cuisine, int b, String sd, String[] food,String[] setting) {
+    public String[] webFilter(String[] cuisine, int b, String sd, String[] food,String[] setting) {
         String[] a = makeList("SELECT Website FROM Restaurant, Budget"
                 + cuisine[0] + food[0] + setting[0]
                 + "where Restaurant.Budget_ID = Budget.Budget_ID and Budget.BudgetRange <= '" + b + "'"
@@ -306,7 +306,7 @@ public class Connector extends DBConnection {
         return a;
     }
     
-    ImageIcon[] imFilter(String[] cuisine, int b, String sd, String[] food, String[] setting) {
+    public ImageIcon[] imFilter(String[] cuisine, int b, String sd, String[] food, String[] setting) {
         ImageIcon[] a = makeIcon("SELECT image FROM Restaurant, Budget"
                 + cuisine[0] + food[0] + setting[0]
                 + "where Restaurant.Budget_ID = Budget.Budget_ID and Budget.BudgetRange <= '" + b + "'"

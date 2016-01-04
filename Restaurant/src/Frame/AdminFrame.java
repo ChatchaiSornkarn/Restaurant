@@ -1,5 +1,7 @@
-package restaurant;
+package Frame;
 
+import ResultPanel.Blocks;
+import ResultPanel.ResultPanel;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -46,12 +48,12 @@ import javax.swing.JPasswordField;
 import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
-import static restaurant.SQLFilter.*;
+import static SQL.SQLFilter.*;
 import java.awt.Color;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import static restaurant.Login.ownAdmin;
-import static restaurant.MainFrame.internalFrame;
+import static Frame.Login.ownAdmin;
+import static Frame.MainFrame.internalFrame;
 
 public class AdminFrame {
 

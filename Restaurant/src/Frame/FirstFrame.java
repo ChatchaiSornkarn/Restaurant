@@ -1,4 +1,4 @@
-package restaurant;
+package Frame;
 
 import java.awt.Color;
 import java.awt.Cursor;

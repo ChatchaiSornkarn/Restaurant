@@ -1,4 +1,4 @@
-package restaurant;
+package SQL;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,8 +12,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import static restaurant.DBConnection.conn;
-import static restaurant.FirstFrame.username;
+import DBConnection.Connector;
+import static DBConnection.DBConnection.conn;
+import static Frame.FirstFrame.username;
 
 /**
  * Class: This class is for adding the restaurant

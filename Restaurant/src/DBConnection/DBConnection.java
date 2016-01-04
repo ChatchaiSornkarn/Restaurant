@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package restaurant;
+package DBConnection;
 
 import java.sql.*;
 
@@ -17,7 +17,7 @@ public class DBConnection {
     private static final String user = "team14";
     private static final String pass = "112@Chalmers!!!";
 
-    static Connection conn;
+    public static Connection conn;
     
     public void DBConnection() {
         

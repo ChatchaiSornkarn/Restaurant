@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package restaurant;
+package Frame;
 
+import DBConnection.Connector;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;

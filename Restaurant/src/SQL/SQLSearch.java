@@ -1,4 +1,4 @@
-package restaurant;
+package SQL;
 
 import java.awt.Image;
 import java.sql.*;
@@ -7,7 +7,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 //import restauran.DBConnection;
-import restaurant.Connector;
+import DBConnection.Connector;
+import DBConnection.Connector;
 
 public class SQLSearch extends Connector{
     

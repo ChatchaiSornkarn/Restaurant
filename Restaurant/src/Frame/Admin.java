@@ -1,17 +1,17 @@
-package restaurant;
+package Frame;
 
-import java.awt.EventQueue;
-
+import ResultPanel.Blocks;
+import ResultPanel.ResultPanel;
+import SQL.SQLOwners;
+import SQL.SQLSearch;
+import SQL.SQLFilter;
 import javax.swing.JFrame;
 import javax.swing.BoxLayout;
-import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import java.awt.Font;
 import java.awt.SystemColor;
-import javax.swing.JComboBox;
-import javax.swing.JRadioButton;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
@@ -19,42 +19,20 @@ import java.awt.event.MouseEvent;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-import javax.swing.border.LineBorder;
-import java.awt.ScrollPane;
-import java.awt.Label;
-import java.awt.Panel;
 import javax.swing.JScrollBar;
-import javax.swing.JLayeredPane;
-
-import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.font.TextAttribute;
 import java.sql.SQLException;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.ButtonModel;
-import javax.swing.JCheckBox;
-import javax.swing.JFormattedTextField;
 import javax.swing.JInternalFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
-import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
-import javax.swing.border.EmptyBorder;
-import static restaurant.SQLFilter.*;
+import static SQL.SQLFilter.*;
 import java.awt.Color;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import static restaurant.Login.adminLogin;
-import static restaurant.MainFrame.address;
-import static restaurant.MainFrame.internalFrame;
-import static restaurant.MainFrame.name;
-import static restaurant.MainFrame.tel;
-import static restaurant.MainFrame.weblink;
+
+import static Frame.Login.adminLogin;
+
 
 public class Admin {
 

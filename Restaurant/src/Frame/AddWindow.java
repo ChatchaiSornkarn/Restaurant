@@ -1,5 +1,7 @@
-package restaurant;
+package Frame;
 
+import DBConnection.Connector;
+import SQL.SQLInsert;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;

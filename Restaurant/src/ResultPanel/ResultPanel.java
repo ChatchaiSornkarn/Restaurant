@@ -1,4 +1,4 @@
-package restaurant;
+package ResultPanel;
 
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
@@ -14,16 +14,19 @@ import java.awt.event.FocusEvent;
 import javax.swing.JSeparator;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import static restaurant.SQLRestaurant.getIcon;
+import static SQL.SQLRestaurant.getIcon;
 import javax.swing.BoxLayout;
-import static restaurant.SQLRating.getRating;
+import Frame.Admin;
+import Frame.AdminFrame;
+import Frame.MainFrame;
+import static SQL.SQLRating.getRating;
 
 public class ResultPanel extends JPanel {
 
     public ResultPanel res = this;
-    protected String name;
-    protected String address;
-    protected String tel;
+    public String name;
+    public String address;
+    public String tel;
     public int rating;//code this Chachai and code it fast :D == I am done 
     protected String weblink;
 

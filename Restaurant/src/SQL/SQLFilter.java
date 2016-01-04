@@ -1,10 +1,10 @@
-package restaurant;
+package SQL;
 
 import java.sql.*;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import static restaurant.DBConnection.conn;
-import static restaurant.SQLStringReturn.makeList;
+import static DBConnection.DBConnection.conn;
+import static SQL.SQLStringReturn.makeList;
 
 /**
  * Class: This class is for when you are trying to display for the restaurant thats owner admin own 

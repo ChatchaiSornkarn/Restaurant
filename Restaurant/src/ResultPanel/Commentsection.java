@@ -1,5 +1,6 @@
-package restaurant;
+package ResultPanel;
 
+import ResultPanel.ResultPanel;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import javax.swing.JFrame;

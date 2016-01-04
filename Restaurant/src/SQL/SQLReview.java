@@ -1,11 +1,11 @@
-package restaurant;
+package SQL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import static restaurant.DBConnection.conn;
+import static DBConnection.DBConnection.conn;
 
 public class SQLReview extends SQLStringReturn {
     private static String[] Review;

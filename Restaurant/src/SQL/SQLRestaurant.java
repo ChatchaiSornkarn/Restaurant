@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package restaurant;
+package SQL;
 
 import java.awt.Image;
 import java.sql.*;
 import javax.swing.ImageIcon;
-import static restaurant.DBConnection.conn;
+import static DBConnection.DBConnection.conn;
 
 /**
  * Class: This class contain Method for displaying restaurant

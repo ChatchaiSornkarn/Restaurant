@@ -1,5 +1,7 @@
-package restaurant;
+package Frame;
 
+import ResultPanel.ResultPanel;
+import DBConnection.Connector;
 import java.awt.Cursor;
 import java.awt.EventQueue;
 
@@ -22,9 +24,9 @@ import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import static restaurant.SQLRestaurant.selectCuisine;
-import static restaurant.SQLUpdate.*;
-import static restaurant.Connector.*;
+import static SQL.SQLRestaurant.selectCuisine;
+import static SQL.SQLUpdate.*;
+import static DBConnection.Connector.*;
 
 public class EditWindow extends JFrame {
         

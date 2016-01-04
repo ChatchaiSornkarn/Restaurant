@@ -1,9 +1,9 @@
 
-package restaurant;
+package ResultPanel;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import static restaurant.DBConnection.conn;
+import static DBConnection.DBConnection.conn;
 
 
 public class Review {

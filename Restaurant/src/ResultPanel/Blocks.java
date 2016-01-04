@@ -1,4 +1,4 @@
-package restaurant;
+package ResultPanel;
 
 import javax.swing.JPanel;
 import java.awt.BorderLayout;

@@ -1,5 +1,9 @@
-package restaurant;
+package Frame;
 
+import ResultPanel.Blocks;
+import ResultPanel.ResultPanel;
+import DBConnection.Connector;
+import SQL.SQLSearch;
 import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.BoxLayout;
@@ -36,8 +40,8 @@ import javax.swing.JSlider;
 import javax.swing.UIManager;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import static restaurant.FirstFrame.password;
-import static restaurant.FirstFrame.username;
+import static Frame.FirstFrame.password;
+import static Frame.FirstFrame.username;
 
 /**
  * This class is the frame for client which is the core program

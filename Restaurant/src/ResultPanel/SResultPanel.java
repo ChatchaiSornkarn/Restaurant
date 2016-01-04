@@ -1,5 +1,9 @@
-package restaurant;
+package ResultPanel;
 
+import ResultPanel.Review;
+import ResultPanel.Blocks;
+import ResultPanel.ResultPanel;
+import SQL.SQLReview;
 import java.awt.Cursor;
 import javax.swing.JTextPane;
 import javax.swing.SwingUtilities;
@@ -17,13 +21,18 @@ import javax.swing.JScrollPane;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.Icon;
-import static restaurant.SQLRestaurant.getIcon;
+import static SQL.SQLRestaurant.getIcon;
 import javax.swing.JButton;
 import java.lang.String;
 import javax.swing.text.StyledDocument;
-import static restaurant.AdminFrame.internalFrame;
-import static restaurant.AdminFrame.name;
-import static restaurant.SQLRating.addRating;
+import Frame.Admin;
+import Frame.AdminFrame;
+import Frame.FirstFrame;
+import Frame.Login;
+import Frame.MainFrame;
+import static Frame.AdminFrame.internalFrame;
+import static Frame.AdminFrame.name;
+import static SQL.SQLRating.addRating;
 
 public class SResultPanel extends ResultPanel {
 

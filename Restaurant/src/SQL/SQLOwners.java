@@ -1,9 +1,9 @@
-package restaurant;
+package SQL;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import static restaurant.DBConnection.conn;
+import static DBConnection.DBConnection.conn;
 
 public class SQLOwners extends SQLStringReturn {
 
