@@ -55,6 +55,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import static Frame.Login.ownAdmin;
 import static Frame.MainFrame.internalFrame;
+import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
 public class AdminFrame {
 
@@ -93,26 +94,32 @@ public class AdminFrame {
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.X_AXIS));
         frame.setUndecorated(true);
-        
-        
 
         JPanel panel = new JPanel();
         frame.getContentPane().add(panel);
         panel.setLayout(null);
         panel.setBackground(java.awt.Color.DARK_GRAY);
-        
+
         JLabel chat = new JLabel("Chat");
         chat.setForeground(Color.WHITE);
         chat.setFont(new Font("Arial", Font.PLAIN, 14));
         chat.setIcon(new ImageIcon(AdminFrame.class.getResource("/resources/1448825257_sms_chat_text_bubble.png")));
         chat.setBounds(910, 431, 80, 34);
-        chat.addMouseListener(new MouseAdapter(){
-            public void MouseCliced(MouseEvent arg0){
-                Client client = new Client("129.16.231.62");
+        chat.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent arg0) {
+                Runnable run = new Runnable(){
+                  public void run(){
+                       Client client = new Client("127.0.0.1");
+                client.setDefaultCloseOperation(EXIT_ON_CLOSE);
+                client.setVisible(true);
+                client.startRunning();
+                  }  
+                };
+                Thread thread = new Thread(run);
+                thread.start();
             }
         });
         panel.add(chat);
-        
 
         final JLabel lblE = new JLabel("Edit");
         lblE.setForeground(SystemColor.inactiveCaptionBorder);
