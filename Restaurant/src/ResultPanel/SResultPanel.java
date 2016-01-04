@@ -21,6 +21,7 @@ import Frame.Login;
 import Frame.MainFrame;
 import static Frame.AdminFrame.internalFrame;
 import static SQL.SQLRating.addRating;
+import javax.swing.JOptionPane;
 
 /**
  * Class: Display restaurant that has been click
@@ -158,7 +159,8 @@ public class SResultPanel extends ResultPanel {
         commentButton.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent e) {
                 Review.insertReview(name, FirstFrame.username, userComment.getText());
-
+                userComment.setText("");
+                JOptionPane.showMessageDialog(null, "Comment Successful!");
             }
         });
 

@@ -23,7 +23,7 @@ public class Login {
 
     public void AdminLogin(String username, String password, JFrame frame) {
 
-        String sqlLoginVerify = "Select User, Password from Login where User = '" + username + "' and Password = '" + password + "' and User = 'Thomas' and Password = 'ok'";
+        String sqlLoginVerify = "Select User, Password from Login where User = '" + username + "' and Password = '" + password + "' and User = 'Super' and Password = 'admin'";
         try {
             Statement stmt = conn.createStatement();
             Statement stmt2 = conn.createStatement();
