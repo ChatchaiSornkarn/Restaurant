@@ -165,7 +165,7 @@ public class SResultPanel extends ResultPanel {
         JTextPane textPane = new JTextPane();
         textPane.setBounds(10, 0, 62, 128);
         textPane.setText("Name:\r\nAddress:\r\nTel:\r\nWebsite:"); // 
-        textPane.setFont(new Font("Lucida Handwriting", Font.PLAIN, 14));
+        textPane.setFont(new Font("Arial", Font.PLAIN, 14));
         textPane.setEditable(false);
         textPane.setBackground(SystemColor.menu);
         add(textPane);
@@ -173,7 +173,7 @@ public class SResultPanel extends ResultPanel {
         JTextPane textPane_1 = new JTextPane();
         textPane_1.setBounds(62, 0, 286, 128);
         textPane_1.setText("     " + name + "\r\n     " + address + "\r\n     " + tel +"\n     " +weblink); // added 2 extra spaces to each line so ":" could fit
-        textPane_1.setFont(new Font("Lucida Handwriting", Font.PLAIN, 14));
+        textPane_1.setFont(new Font("Arial", Font.PLAIN, 14));
         textPane_1.setEditable(false);
         textPane_1.setBackground(SystemColor.menu);
         add(textPane_1);
@@ -198,7 +198,7 @@ public class SResultPanel extends ResultPanel {
         //small rest pic
         JLabel lblewLabel = new JLabel("");
         lblewLabel.setIcon(getIcon("Select image from Restaurant where RestName = \"" + name + "\""));
-        lblewLabel.setBounds(300, 10, 800, 100);
+        lblewLabel.setBounds(375, 10, 600, 100);
         add(lblewLabel);
 
         JScrollPane scrollPane = new JScrollPane();
