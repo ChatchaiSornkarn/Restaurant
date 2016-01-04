@@ -9,14 +9,18 @@ import javax.swing.ImageIcon;
 //import restauran.DBConnection;
 import DBConnection.Connector;
 import DBConnection.Connector;
-
+/**
+ * This class is used for getting information from the database.
+ */
 public class SQLSearch extends Connector{
     
     private static String[] name;
     private static String[] address;
     private static String[] phone;
     private static String[] weblink;
-
+/**
+ * This method takes the restaurant name and returns the same from the database .
+ */
 	public static String[] searchRestName(String restName){
         
         try{
@@ -53,7 +57,9 @@ public class SQLSearch extends Connector{
         
         return name;
     }  
-	
+/**
+ * This method takes the restaurant name and returns the address from the database .
+ */
 	public static String[] searchRestAddress(String RestName){
 
         try{
@@ -90,6 +96,10 @@ public class SQLSearch extends Connector{
         
         return address;
     }  
+/**
+ * This method takes the restaurant name and returns the telephone number
+ * from the database .
+ */
 	public static String[] searchRestPhone(String RestName ){ 
            
         try{
@@ -126,7 +136,10 @@ public class SQLSearch extends Connector{
         
         return phone;
     }  
-        
+ /**
+ * This method takes the restaurant name and returns the image
+ * from the database .
+ */
        public static ImageIcon[] searchRestImage(String restName){
             ArrayList<ImageIcon> is = new ArrayList<ImageIcon>();
             ImageIcon[] im = null;
@@ -137,14 +150,8 @@ public class SQLSearch extends Connector{
                     + "\"");
                     
                     int rowcount = 0;
-                
-                    
                     if (!rs.next()) {
-                    
-
                     }
-                    
-                    
                      while(rs.next()){
                       if(rs.getBytes(1) != null ){
                     byte[] imageBytes = rs.getBytes(1);
@@ -171,7 +178,10 @@ public class SQLSearch extends Connector{
         }
          return im; 
     }  
-	
+/**
+ * This method takes the restaurant name and returns the website address
+ * from the database .
+ */
        public static String[] searchRestWebsite(String RestName ){ 
            
         try{

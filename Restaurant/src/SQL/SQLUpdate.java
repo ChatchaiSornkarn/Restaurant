@@ -18,7 +18,11 @@ import static DBConnection.DBConnection.conn;
 
 /**
  *
- * @author chatchai
+ *This class consists of two parts. The first part has methods that
+ * are used to get information from the database into the editing
+ * JTextfields and Comboboxes in the editingwindow. The other part 
+ * consists of methods that updates the information in the database
+ * according to the changes made in the same window.  
  */
 public class SQLUpdate extends SQLInsert{
     private static String webSite;
@@ -29,6 +33,10 @@ public class SQLUpdate extends SQLInsert{
     private static int cuisineId;
     private static boolean studentDiscount;
     
+  /**
+ *This method gets information from the database into the editing
+ * JTextfields and Comboboxes in the editingwindow.
+ */
     public static String getBudgetRange(String restName) {
          try{
             Statement stmt = conn.createStatement();
@@ -51,6 +59,10 @@ public class SQLUpdate extends SQLInsert{
 
         return budgetRange;
     }
+    /**
+ *This method gets information from the database into the editing
+ * JTextfields and Comboboxes in the editingwindow.
+ */
      public static String getCuisine(String restName) {
          try{
             Statement stmt = conn.createStatement();
@@ -74,7 +86,10 @@ public class SQLUpdate extends SQLInsert{
 
         return cuisine;
     }
-     
+     /**
+ *This method gets information from the database into the editing
+ * JTextfields and Comboboxes in the editingwindow.
+ */
     public static boolean getStudentDiscount(String restName) {
          try{
             Statement stmt = conn.createStatement();
@@ -101,7 +116,10 @@ public class SQLUpdate extends SQLInsert{
         
         return studentDiscount;
     }
-    
+    /**
+ *This method gets information from the database into the editing
+ * JTextfields and Comboboxes in the editingwindow.
+ */
     public static String getWebadress(String restName){
         
         try{
@@ -126,7 +144,13 @@ public class SQLUpdate extends SQLInsert{
         
         return webSite;
     }
-    
+    /**
+ * This method updates the information in the database
+ * according to the changes made in the same editingwindows JTextFields and
+ * Comboboxes. A=Restaurant name, B= Address c= telephone d= website f= image 
+ * g= student discount. Oldname is the input to locate the restaurant that is 
+ * going to be edited.
+ */
      public static void editRestaurant(String a, String b, String c, String d, String f, int g, String oldName){
         
         try {
@@ -155,6 +179,13 @@ public class SQLUpdate extends SQLInsert{
 		}     
         
     }
+     /**
+ * This method updates the information in the database
+ * according to the changes made in the same editingwindows JTextFields and
+ * Comboboxes. A=Restaurant name, B= Address c= telephone d= website f= image 
+ * g= student discount. Oldname is the input to locate the restaurant that is 
+ * going to be edited.
+ */
      public static void editRestaurant(String a, String b, String c, String d, int g, int budget, String oldName  ){
         
         try {
@@ -176,6 +207,11 @@ public class SQLUpdate extends SQLInsert{
 		}     
         
     }
+     /**
+ * This method updates the information in the database
+ * according to the changes made in the same editingwindows JTextFields and
+ * Comboboxes. 
+ */
      public static void editRestaurant(int cuisineId, int restId){
         
         try {
@@ -191,6 +227,11 @@ public class SQLUpdate extends SQLInsert{
 		}     
         
     }
+     /**
+ * This method updates the information in the database
+ * according to the changes made in the same editingwindows JTextFields and
+ * Comboboxes. 
+ */
       public static void editRestaurantFoodType(int foodTypeId, int restId){
         
         try {
@@ -206,6 +247,9 @@ public class SQLUpdate extends SQLInsert{
 		}     
         
     }
+ /**
+ * This method gets the restaurant id according to the restaurant name provided.
+ */
      public static int getRestId(String oldName) {
          try{
             Statement stmt = conn.createStatement();
@@ -228,6 +272,9 @@ public class SQLUpdate extends SQLInsert{
         
         return restId;
     }
+ /**
+ * This method gets the cuisine id according to the restaurant name provided.
+ */
      public static int getCuisineId(String oldName) {
          try{
             Statement stmt = conn.createStatement();
@@ -250,6 +297,9 @@ public class SQLUpdate extends SQLInsert{
         
         return cuisineId;
     }
+  /**
+ * This method gets the food type id according to the restaurant name provided.
+ */
       public static String getFoodType(String restName) {
          try{
             Statement stmt = conn.createStatement();
