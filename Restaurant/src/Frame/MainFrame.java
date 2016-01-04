@@ -260,7 +260,7 @@ public class MainFrame {
         
         //SEARCHBUTTON
         final JButton searchButton = new JButton("Search");
-        searchButton.setBounds(235, 75, 90, 20);
+        searchButton.setBounds(235, 70, 90, 20);
         searchButton.setBorderPainted(false);
         searchButton.addMouseListener(new MouseAdapter() {
 

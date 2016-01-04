@@ -39,11 +39,12 @@ public class Register extends Connector {
         frame = new JFrame();
         frame.setBounds(400, 400, 500, 500);
         frame.setSize(500, 500);
+        frame.setBackground(Color.YELLOW);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setResizable(false);
-        frame.setUndecorated(true);
-        frame.setBackground(new Color(0, 0, 0, 0));
+        frame.setUndecorated(false);
+      //  frame.setBackground(new Color(0, 0, 0, 0));
 
         //Login textfield on top
         final JTextField username = new JTextField("Desired Username");
@@ -159,9 +160,9 @@ public class Register extends Connector {
         frame.add(ExitTool);
 
         JLabel registerbackground = new JLabel("");
-        registerbackground.setIcon(new ImageIcon(getClass().getResource("/resources/Register.png")));
         registerbackground.setBounds(0, 0, 315, 315);
         registerbackground.setSize(400, 400);
+        registerbackground.setBackground(Color.DARK_GRAY);
         frame.add(registerbackground);
 
     }
