@@ -5,8 +5,14 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import static DBConnection.DBConnection.conn;
 
-
+/**
+ * This class is for inserting reviews to the database.
+ */
 public class Review {
+     /**
+ * This method takes the restaurant name, user name and review
+ * and adds it to the database connected to the right restaurant.
+ */
     public static void insertReview(String RestName,String username, String review) {
         
         
