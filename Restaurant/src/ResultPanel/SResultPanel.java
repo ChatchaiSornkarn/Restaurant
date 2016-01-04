@@ -33,6 +33,7 @@ public class SResultPanel extends ResultPanel {
     int selected;
     String comment;
     JTextField userComment;
+    JLabel lblNewLabel;
     FirstFrame FF = new FirstFrame();
     Login login = new Login();
 
@@ -158,10 +159,54 @@ public class SResultPanel extends ResultPanel {
         commentButton.setBounds(300, 147, 69, 25);
         add(commentButton);
         commentButton.addMouseListener(new MouseAdapter() {
-            public void mouseEntered(MouseEvent e) {
+            public void mouseClicked(MouseEvent e) {
                 Review.insertReview(name, FirstFrame.username, userComment.getText());
                 userComment.setText("");
                 JOptionPane.showMessageDialog(null, "Comment Successful!");
+                               if (AdminFrame.inUse == true) {
+                    AdminFrame.internalFrame.getContentPane().removeAll();
+                    AdminFrame.scrollPane.setViewportView(AdminFrame.internalFrame);
+                    for (int i = 0; i < AdminFrame.name.length; i++) {
+                        ResultPanel res = new ResultPanel(AdminFrame.name[i], AdminFrame.address[i], AdminFrame.tel[i], AdminFrame.weblink[i]);
+                        AdminFrame.internalFrame.getContentPane().add(res);
+                    }
+                    // Add invinsible block
+                    if (AdminFrame.name.length < 10) {
+                        for (int i = 0; i < 8; i++) {
+                            Blocks blocks = new Blocks();
+                            AdminFrame.internalFrame.getContentPane().add(blocks);
+                        }
+                    }
+                } else if (Admin.inUse == true) {
+                    Admin.internalFrame.getContentPane().removeAll();
+                    Admin.scrollPane.setViewportView(Admin.internalFrame);
+                    for (int i = 0; i < Admin.name.length; i++) {
+                        ResultPanel res = new ResultPanel(Admin.name[i], Admin.address[i], Admin.tel[i], Admin.weblink[i]);
+                        Admin.internalFrame.getContentPane().add(res);
+                    }
+                    //Add invinsible block
+                    if (Admin.name.length < 10) {
+                        for (int i = 0; i < 8; i++) {
+                            Blocks blocks = new Blocks();
+                            Admin.internalFrame.getContentPane().add(blocks);
+                        }
+                    }
+                } else {
+                    MainFrame.internalFrame.getContentPane().removeAll();
+                    MainFrame.scrollPane.setViewportView(MainFrame.internalFrame);
+                    for (int i = 0; i < MainFrame.name.length; i++) {
+                        ResultPanel res = new ResultPanel(MainFrame.name[i], MainFrame.address[i], MainFrame.tel[i], MainFrame.weblink[i]);
+                        MainFrame.internalFrame.getContentPane().add(res);
+                    }
+                    // Add invinsible block
+                    if (MainFrame.name.length < 10) {
+                        for (int i = 0; i < 8; i++) {
+                            Blocks blocks = new Blocks();
+                            MainFrame.internalFrame.getContentPane().add(blocks);
+                        }
+                    }
+                }
+                
             }
         });
 
@@ -219,7 +264,7 @@ public class SResultPanel extends ResultPanel {
         }
         scrollPane.setViewportView(commentSection);
 
-        JLabel lblNewLabel = new JLabel("");
+        lblNewLabel = new JLabel("");
         lblNewLabel.addMouseListener(new MouseAdapter() {
 
             @Override
