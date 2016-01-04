@@ -1,7 +1,7 @@
 package Frame;
 
-import ResultPanel.ResultPanel;
 import DBConnection.Connector;
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.EventQueue;
 
@@ -27,27 +27,33 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import static SQL.SQLRestaurant.selectCuisine;
 import static SQL.SQLUpdate.*;
 import static DBConnection.Connector.*;
+import ResultPanel.ResultPanel;
 
+/**
+ * Class: This is the Interface frame for deleting the restaurant
+ * @author Obada
+ */
 public class EditWindow extends JFrame {
         
         Connector connect = new Connector();
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-        private JTextField textField_3;
+	private JTextField textname;
+	private JTextField textaddress;
+	private JTextField texttel;
+        private JTextField textweb;
         private String oldName;
         private int restId;
         private int cuisineId;
 	private JLabel lblNewLabel_1;
-	private JLabel lblNewLabel_2;
-	private JLabel lblNewLabel_3;
+	private JLabel closebutton;
+	private JLabel editbutton;
         private String name,tel,address;
-        private JCheckBox chckbxNewCheckBox;
+        private JCheckBox studentbox;
         private int studentDiscount;
-        private JComboBox comboBox;
-        private JComboBox comboBox_1;
-        private JComboBox comboBox_2;
+        private JComboBox cuisinebox;
+        private JComboBox boxbudget;
+        private JComboBox foodtypebox;
+        private JComboBox environmentbox;
         private JTextField pic;
         
 	
@@ -56,15 +62,15 @@ public class EditWindow extends JFrame {
 	 */
     public EditWindow(ResultPanel res){
     	initialize();
-    	textField.setText(res.name);
-    	textField_1.setText(res.address);
-    	textField_2.setText(res.tel);
-        textField_3.setText(getWebadress(res.name));
-        pic.setText("Cange if you want new picture");
-        chckbxNewCheckBox.setSelected(getStudentDiscount(res.name));
-        comboBox_1.setSelectedItem(getBudgetRange(res.name));
-        comboBox.setSelectedItem(getCuisine(res.name));
-        comboBox_2.setSelectedItem(getFoodType(res.name));
+    	textname.setText(res.name);
+    	textaddress.setText(res.address);
+    	texttel.setText(res.tel);
+        textweb.setText(getWebadress(res.name));
+        pic.setText("Cange to new picture");
+        studentbox.setSelected(getStudentDiscount(res.name));
+        boxbudget.setSelectedItem(getBudgetRange(res.name));
+        cuisinebox.setSelectedItem(getCuisine(res.name));
+        foodtypebox.setSelectedItem(getFoodType(res.name));
         oldName = res.name; 
         restId = getRestId(oldName);
         cuisineId = getCuisineId(res.name);
@@ -78,58 +84,59 @@ public class EditWindow extends JFrame {
 	public void initialize(){
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 360, 400);
+		setBounds(240, 130, 250, 510);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+                contentPane.setBackground(Color.DARK_GRAY);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		lblNewLabel_3 = new JLabel("Edit");
-		lblNewLabel_3.setForeground(SystemColor.window);
-		lblNewLabel_3.setFont(new Font("Impact", Font.PLAIN, 14));
-		lblNewLabel_3.setIcon(new ImageIcon(EditWindow.class.getResource("/resources/Edit-32.png")));
-		lblNewLabel_3.setBounds(240, 350, 111, 60);
+		editbutton = new JLabel("Edit");
+		editbutton.setForeground(SystemColor.window);
+		editbutton.setFont(new Font("Arial", Font.PLAIN, 14));
+		editbutton.setIcon(new ImageIcon(EditWindow.class.getResource("/resources/Edit-32.png")));
+		editbutton.setBounds(180, 465, 92, 44);
                 
-                lblNewLabel_3.addMouseListener(new MouseAdapter() {
+                editbutton.addMouseListener(new MouseAdapter() {
                     
                         @Override
                         public void mouseEntered(MouseEvent e){
                             Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
-                            lblNewLabel_3.setCursor(cur1);
+                            editbutton.setCursor(cur1);
                         }
                         
 			@Override
 			public void mouseClicked(MouseEvent e) {
                         //edit Restaurant
-                            if(chckbxNewCheckBox.isSelected() == true) {studentDiscount = 1;}
-                            if(chckbxNewCheckBox.isSelected() == false) {studentDiscount = 0;}
+                            if(studentbox.isSelected() == true) {studentDiscount = 1;}
+                            if(studentbox.isSelected() == false) {studentDiscount = 0;}
                             if(pic.getText().charAt(0) == '/' ){
-                                editRestaurant(textField.getText(), textField_1.getText(), textField_2.getText(), 
-                                        textField_3.getText(), pic.getText(), studentDiscount,  oldName);
-                                editRestaurant(comboBox.getSelectedIndex(),  restId);
-                                editRestaurantFoodType(comboBox_2.getSelectedIndex(),  restId);
+                                editRestaurant(textname.getText(), textaddress.getText(), texttel.getText(), 
+                                        textweb.getText(), pic.getText(), studentDiscount,  oldName);
+                                editRestaurant(cuisinebox.getSelectedIndex(),  restId);
+                                editRestaurantFoodType(foodtypebox.getSelectedIndex(),  restId);
                                 JOptionPane.showMessageDialog(null, "Edit Success!");
                             }
                             else {
-                                editRestaurant(textField.getText(), textField_1.getText(), textField_2.getText(), 
-                                        textField_3.getText(), studentDiscount, comboBox_1.getSelectedIndex()+1, oldName);
-                                editRestaurant(comboBox.getSelectedIndex(),  restId);
-                                editRestaurantFoodType(comboBox_2.getSelectedIndex(),  restId);
+                                editRestaurant(textname.getText(), textaddress.getText(), texttel.getText(), 
+                                        textweb.getText(), studentDiscount, boxbudget.getSelectedIndex()+1, oldName);
+                                editRestaurant(cuisinebox.getSelectedIndex(),  restId);
+                                editRestaurantFoodType(foodtypebox.getSelectedIndex(),  restId);
                                 JOptionPane.showMessageDialog(null, "Edit Success!");
                             }
 			}
 		});
-		contentPane.add(lblNewLabel_3);
+		contentPane.add(editbutton);
 		
-		lblNewLabel_2 = new JLabel("");
-		lblNewLabel_2.addMouseListener(new MouseAdapter() {
+		closebutton = new JLabel("");
+		closebutton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
-				lblNewLabel_2.setIcon(new ImageIcon(AddWindow.class.getResource("/resources/closeButtonHover.png")));
+				closebutton.setIcon(new ImageIcon(AddWindow.class.getResource("/resources/closeButtonHover.png")));
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblNewLabel_2.setIcon(new ImageIcon(AddWindow.class.getResource("/resources/closeButton.png")));
+				closebutton.setIcon(new ImageIcon(AddWindow.class.getResource("/resources/closeButton.png")));
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -137,33 +144,33 @@ public class EditWindow extends JFrame {
 				dispose();
 			}
 		});
-		lblNewLabel_2.setIcon(new ImageIcon(AddWindow.class.getResource("/resources/closeButton.png")));
-		lblNewLabel_2.setBounds(328, 0, 26, 30);
-		contentPane.add(lblNewLabel_2);
+		closebutton.setIcon(new ImageIcon(AddWindow.class.getResource("/resources/closeButton.png")));
+		closebutton.setBounds(220, 0, 30, 30);
+		contentPane.add(closebutton);
 		
-		textField = new JTextField();
-		textField.setBounds(85, 11, 209, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		textname = new JTextField();
+		textname.setBounds(10, 30, 209, 20);
+		contentPane.add(textname);
+		textname.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(85, 45, 209, 20);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		textaddress = new JTextField();
+		textaddress.setBounds(10, 75, 209, 20);
+		contentPane.add(textaddress);
+		textaddress.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(85, 79, 209, 20);
-		contentPane.add(textField_2);
-		textField_2.setColumns(10);
+		texttel = new JTextField();
+		texttel.setBounds(10, 120, 209, 20);
+		contentPane.add(texttel);
+		texttel.setColumns(10);
                 
-                textField_3 = new JTextField();
-		textField_3.setBounds(85, 113, 209, 20);
-		contentPane.add(textField_3);
-		textField_3.setColumns(10);
+                textweb = new JTextField();
+		textweb.setBounds(10, 165, 209, 20);
+		contentPane.add(textweb);
+		textweb.setColumns(10);
 		
                                 
-                JButton btnNewButton_7 = new JButton("+");
-		btnNewButton_7.addActionListener(new ActionListener() {
+                JButton addimage = new JButton("+");
+		addimage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFileChooser chooser = new JFileChooser();
 			    FileNameExtensionFilter filter = new FileNameExtensionFilter(
@@ -177,24 +184,25 @@ public class EditWindow extends JFrame {
 		});
 		
 		pic = new JTextField();
-		pic.setBounds(85, 147, 209, 20);
+		pic.setBounds(10, 210, 165, 22);
 		contentPane.add(pic);
 		pic.setColumns(10);
-		btnNewButton_7.setBounds(300, 147, 41, 22);
-		contentPane.add(btnNewButton_7);
+		addimage.setBounds(180, 210, 30, 22);
+		contentPane.add(addimage);
                 
-                chckbxNewCheckBox = new JCheckBox();
-		chckbxNewCheckBox.setBounds(85, 182, 128, 23);
-		contentPane.add(chckbxNewCheckBox);
+                studentbox = new JCheckBox();
+		studentbox.setBounds(8, 295, 128, 23);
+                studentbox.setOpaque(false);
+		contentPane.add(studentbox);
 		
                 String[] budget = new String[3];
                 budget[0] = "30";
                 budget[1] = "60";
                 budget[2] = "90";
                 
-		comboBox_1 = new JComboBox(budget);
-		comboBox_1.setBounds(85, 232, 209, 20);
-		contentPane.add(comboBox_1);
+		boxbudget = new JComboBox(budget);
+		boxbudget.setBounds(10, 255, 103, 20);
+		contentPane.add(boxbudget);
 		
                 
 ////		add All to type
@@ -205,9 +213,9 @@ public class EditWindow extends JFrame {
                     allcuisine1[i] = allcuisine[i-1];
                 }
                 
-		comboBox = new JComboBox(allcuisine1);
-		comboBox.setBounds(85, 267, 209, 20);
-		contentPane.add(comboBox);
+		cuisinebox = new JComboBox(allcuisine1);
+		cuisinebox.setBounds(10, 330, 118, 20);
+		contentPane.add(cuisinebox);
                 
                 String[] allFoodType = connect.makeList("select Food from Food_Type");
                 String[] allFoodType1 = new String[allFoodType.length+1];
@@ -216,30 +224,28 @@ public class EditWindow extends JFrame {
                     allFoodType1[i] = allFoodType[i-1];
                 }
                 
-                comboBox_2 = new JComboBox(allFoodType1);
-		comboBox_2.setBounds(85, 302, 209, 20);
-		contentPane.add(comboBox_2);
+                foodtypebox = new JComboBox(allFoodType1);
+		foodtypebox.setBounds(10, 375, 118, 20);
+		contentPane.add(foodtypebox);
+                
+                String[] allenvironment = connect.makeList("select Setting from Setting");
+                
+                environmentbox = new JComboBox(allenvironment);
+                environmentbox.setBounds(10, 420, 118, 20);
+                contentPane.add(environmentbox);
                 
 		JTextPane txtpnNameAddress = new JTextPane();
 		txtpnNameAddress.setForeground(SystemColor.inactiveCaptionBorder);
-		txtpnNameAddress.setFont(new Font("Stencil", Font.PLAIN, 14));
+		txtpnNameAddress.setFont(new Font("Arial", Font.PLAIN, 12));
 		txtpnNameAddress.setOpaque(false);
-		txtpnNameAddress.setText("Name:\r\n\r\nAddress:\r\n\r\nTel:\r\n\r\n"+
-                        "Website:\r\n\r\nImage:\r\n\r\nStudent\nDiscount:\r\n\r\nBudget:"
-                        + "\r\n\r\nCuisine:\r\n\r\nFood Type:");
+		txtpnNameAddress.setText("Name:\r\n\r\n\nAddress :\r\n\n\r\nTel:\r\n\n\r\nWebsite:"
+                        + "\r\n\n\r\nPicture:\r\n\n\r\nBudget:\r\n\n\r\nStudent Discount:"
+                        + "\r\n\r\nCuisine:\r\n\r\n\nFood Type:\r\n\r\n\nEnvironment");
 		txtpnNameAddress.setBackground(SystemColor.control);
 		txtpnNameAddress.setEditable(false);
-		txtpnNameAddress.setBounds(10, 11, 102, 350);
+		txtpnNameAddress.setBounds(7, 11, 157, 500);
 		contentPane.add(txtpnNameAddress);
-		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon(AddWindow.class.getResource("/resources/TestBackground.png")));
-		lblNewLabel.setBounds(-476, -25, 845, 425);
-		contentPane.add(lblNewLabel);
-		
-//		lblNewLabel_1 = new JLabel("New label");
-//		lblNewLabel_1.setBounds(282, 153, 46, 14);
-//		contentPane.add(lblNewLabel_1);
+             
 
 	}
         

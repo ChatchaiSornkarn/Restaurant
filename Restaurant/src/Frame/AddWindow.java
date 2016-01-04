@@ -47,6 +47,8 @@ public class AddWindow extends JFrame {
         JComboBox boxbudget;
         JCheckBox studentbox;
         JComboBox cuisinebox;
+        JComboBox foodtypebox;
+        JComboBox environmentbox;
 	
         JTextField pic;
         
@@ -85,7 +87,7 @@ public class AddWindow extends JFrame {
 		addbutton.setForeground(SystemColor.window);
 		addbutton.setFont(new Font("Arial", Font.BOLD, 14));
 		addbutton.setIcon(new ImageIcon(AddWindow.class.getResource("/resources/Checked-32.png")));
-		addbutton.setBounds(180, 75, 92, 44);
+		addbutton.setBounds(180, 465, 92, 44);
                 addbutton.addMouseListener(new MouseAdapter() {
                     
                         @Override
@@ -123,7 +125,7 @@ public class AddWindow extends JFrame {
 			}
 		});
 		exitbutton.setIcon(new ImageIcon(AddWindow.class.getResource("/resources/closeButton.png")));
-		exitbutton.setBounds(220,0, 30, 30);
+                	exitbutton.setBounds(220,0, 30, 30);
 		contentPane.add(exitbutton);
 		
 		textname = new JTextField();
@@ -141,8 +143,14 @@ public class AddWindow extends JFrame {
 		contentPane.add(texttel);
 		texttel.setColumns(10);
                 
-                JButton btnNewButton_7 = new JButton("+");
-		btnNewButton_7.addActionListener(new ActionListener() {
+                		textweb = new JTextField();
+		textweb.setBounds(10, 165, 209, 20);
+		contentPane.add(textweb);
+		textweb.setColumns(10);
+		
+                
+                JButton addimage = new JButton("+");
+		addimage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFileChooser chooser = new JFileChooser();
 			    FileNameExtensionFilter filter = new FileNameExtensionFilter(
@@ -155,17 +163,12 @@ public class AddWindow extends JFrame {
 			}
 		});
 		
-		textweb = new JTextField();
-		textweb.setBounds(10, 165, 209, 20);
-		contentPane.add(textweb);
-		textweb.setColumns(10);
-		
 		pic = new JTextField();
 		pic.setBounds(10,210, 165, 22);
 		contentPane.add(pic);
 		pic.setColumns(10);
-		btnNewButton_7.setBounds(180, 210, 30, 22);
-		contentPane.add(btnNewButton_7);
+		addimage.setBounds(180, 210, 30, 22);
+		contentPane.add(addimage);
 		
                 String[] budget = new String[3];
                 budget[0] = "30";
@@ -177,7 +180,7 @@ public class AddWindow extends JFrame {
 		contentPane.add(boxbudget);
 		
 		studentbox = new JCheckBox();
-		studentbox.setBounds(8,190, 128, 23);
+		studentbox.setBounds(8,295, 128, 23);
                 studentbox.setOpaque(false);
 		contentPane.add(studentbox);
                 
@@ -185,9 +188,21 @@ public class AddWindow extends JFrame {
                 String[] allcuisine = connect.makeList("select Cuisine from Cuisine_Types");
 
 		cuisinebox = new JComboBox(allcuisine);
-		cuisinebox.setBounds(10, 375, 118, 20);
+		cuisinebox.setBounds(10, 330, 118, 20);
 		contentPane.add(cuisinebox);
-
+                
+                //add all food type
+                String[] allfoodtype = connect.makeList("select Food from Food_Type");
+                
+                foodtypebox = new JComboBox(allfoodtype);
+                foodtypebox.setBounds(10, 375, 118, 20);
+                contentPane.add(foodtypebox);
+                
+                String[] allenvironment = connect.makeList("select Setting from Setting");
+                
+                environmentbox = new JComboBox(allenvironment);
+                environmentbox.setBounds(10, 420, 118, 20);
+                contentPane.add(environmentbox);
                 
 		JTextPane txtpnNameAddress = new JTextPane();
 		txtpnNameAddress.setForeground(SystemColor.inactiveCaptionBorder);
@@ -195,7 +210,7 @@ public class AddWindow extends JFrame {
 		txtpnNameAddress.setOpaque(false);
 		txtpnNameAddress.setText("Name:\r\n\r\n\nAddress :\r\n\n\r\nTel:\r\n\n\r\nWebsite:"
                         + "\r\n\n\r\nPicture:\r\n\n\r\nBudget:\r\n\n\r\nStudent Discount:"
-                        + "\r\n\r\nCuisine:\r\n\r\n\nFood Type:");
+                        + "\r\n\r\nCuisine:\r\n\r\n\nFood Type:\r\n\r\n\nEnvironment");
 		txtpnNameAddress.setBackground(SystemColor.control);
 		txtpnNameAddress.setEditable(false);
 		txtpnNameAddress.setBounds(7, 11, 157, 500);
