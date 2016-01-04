@@ -10,11 +10,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import static DBConnection.DBConnection.conn;
+import static Connection.DBConnection.conn;
 
 /**
  * Class: Login function 
- * @author chatchai
+ * @author Merchad
  */
 public class Login {
     
@@ -30,7 +30,6 @@ public class Login {
             ResultSet rs = stmt.executeQuery(sqlLoginVerify);
             ResultSet r = stmt2.executeQuery("Select User, Password from Login where User = '"+username+"' and Password = '"+password+"'");
                         
-
             if (rs.next()) {
                 JOptionPane.showMessageDialog(null, "Super Login Successful!");
                 this.adminLogin = true;

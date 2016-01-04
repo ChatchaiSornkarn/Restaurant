@@ -5,9 +5,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import static DBConnection.DBConnection.conn;
+import static Connection.DBConnection.conn;
 /**
  * This class is for getting the reviews from the database.
+ * @author Merchad
  */
 public class SQLReview extends SQLStringReturn {
     private static String[] Review;

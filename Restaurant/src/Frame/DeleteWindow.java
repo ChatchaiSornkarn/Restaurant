@@ -3,8 +3,6 @@ package Frame;
 import ResultPanel.ResultPanel;
 import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -20,8 +18,8 @@ import javax.swing.JOptionPane;
 import static SQL.SQLDelete.*;
 
 /**
- * Class: This is the Interface frame for deleting the restauran
- * @author Obada
+ * Class: This is the Interface frame for deleting the restaurant
+ * @author Obada 70%, Chiara 30%
  */
 public class DeleteWindow extends JFrame {
 
@@ -51,7 +49,6 @@ public class DeleteWindow extends JFrame {
     /**
      * Initialize the contents of the frame.
      */
-    
     public void initialize() {
         setUndecorated(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -62,11 +59,12 @@ public class DeleteWindow extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
+        //button delete restaurant on click
         deletebutton = new JLabel("Delete");
         deletebutton.setForeground(SystemColor.window);
         deletebutton.setFont(new Font("Arial", Font.PLAIN, 14));
         deletebutton.setIcon(new ImageIcon(DeleteWindow.class.getResource("/resources/Cancel-32.png")));
-        deletebutton.setBounds(170,150, 92, 44);
+        deletebutton.setBounds(170, 150, 92, 44);
         deletebutton.addMouseListener(new MouseAdapter() {
 
             @Override
@@ -84,6 +82,7 @@ public class DeleteWindow extends JFrame {
         });
         contentPane.add(deletebutton);
 
+        //exit window
         exitbutton = new JLabel("");
         exitbutton.addMouseListener(new MouseAdapter() {
             @Override
@@ -130,24 +129,6 @@ public class DeleteWindow extends JFrame {
         txtpnNameAddress.setEditable(false);
         txtpnNameAddress.setBounds(10, 11, 102, 239);
         contentPane.add(txtpnNameAddress);
-
-    }
-
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    ResultPanel res = new ResultPanel("gf", "gf", "gf", "gf");
-                    EditWindow frame = new EditWindow(res);
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
     }
 
 }

@@ -5,16 +5,14 @@
  */
 package SQL;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import DBConnection.DBConnection;
+import Connection.DBConnection;
 
 /**
- *
- * @author Merchad
+ * This class contain Method for displaying restaurant
  */
 public class SQLStringReturn extends DBConnection{
     

@@ -3,11 +3,11 @@ package ResultPanel;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import static DBConnection.DBConnection.conn;
+import static Connection.DBConnection.conn;
 
 /**
  * Class: insert restaurant review to database
- * @author chatchai
+ * @author Merchad
  */
 public class Review {
 

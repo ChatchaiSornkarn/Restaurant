@@ -3,6 +3,10 @@ package ResultPanel;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 
+/**
+ * Class: A method to create empty panels
+ * @author Obada
+ */
 public class Blocks extends JPanel {
 
 	/**

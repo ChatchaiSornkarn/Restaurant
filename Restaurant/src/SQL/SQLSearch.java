@@ -7,10 +7,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 //import restauran.DBConnection;
-import DBConnection.Connector;
-import DBConnection.Connector;
 /**
  * This class is used for getting information from the database.
+ * @author Johan
  */
 public class SQLSearch extends Connector{
     

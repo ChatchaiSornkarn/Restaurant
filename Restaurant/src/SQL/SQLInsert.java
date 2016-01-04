@@ -3,23 +3,17 @@ package SQL;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import DBConnection.Connector;
-import static DBConnection.DBConnection.conn;
+import static Connection.DBConnection.conn;
 import static Frame.FirstFrame.username;
 
 /**
  * Class: This class is for adding the restaurant
- *
- * @author
+ * @author Chatchai 50%, Saif 50%
  */
 public class SQLInsert extends Connector {
 

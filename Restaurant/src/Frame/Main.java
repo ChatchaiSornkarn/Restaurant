@@ -5,7 +5,7 @@
  */
 package Frame;
 
-import DBConnection.DBConnection;
+import Connection.DBConnection;
 import java.sql.SQLException;
 
 

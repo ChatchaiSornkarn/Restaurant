@@ -2,7 +2,7 @@ package Frame;
 
 import ResultPanel.Blocks;
 import ResultPanel.ResultPanel;
-import DBConnection.Connector;
+import SQL.Connector;
 import SQL.SQLSearch;
 import java.awt.Color;
 import javax.swing.JFrame;
@@ -45,6 +45,7 @@ import static Frame.FirstFrame.username;
 
 /**
  * This class is the frame for client which is the core program
+ * @author Obada 20%, Chiara 20%, Merchad 20%, Chatchai 20%, Johan 20%, Saif 20%
  */
 
 public class MainFrame {

@@ -26,7 +26,8 @@ import javax.swing.JOptionPane;
 
 /**
  * Class: Display restaurant that has been click
- * @author
+ *
+ * @author Obada 60%, Merchad 30%, Chatchai 10%
  */
 public class SResultPanel extends ResultPanel {
 
@@ -163,7 +164,7 @@ public class SResultPanel extends ResultPanel {
                 Review.insertReview(name, FirstFrame.username, userComment.getText());
                 userComment.setText("");
                 JOptionPane.showMessageDialog(null, "Comment Successful!");
-                               if (AdminFrame.inUse == true) {
+                if (AdminFrame.inUse == true) {
                     AdminFrame.internalFrame.getContentPane().removeAll();
                     AdminFrame.scrollPane.setViewportView(AdminFrame.internalFrame);
                     for (int i = 0; i < AdminFrame.name.length; i++) {
@@ -206,7 +207,7 @@ public class SResultPanel extends ResultPanel {
                         }
                     }
                 }
-                
+
             }
         });
 
@@ -220,7 +221,7 @@ public class SResultPanel extends ResultPanel {
 
         JTextPane textPane_1 = new JTextPane();
         textPane_1.setBounds(62, 0, 286, 128);
-        textPane_1.setText("     " + name + "\r\n     " + address + "\r\n     " + tel +"\n     " +weblink); // added 2 extra spaces to each line so ":" could fit
+        textPane_1.setText("     " + name + "\r\n     " + address + "\r\n     " + tel + "\n     " + weblink); // added 2 extra spaces to each line so ":" could fit
         textPane_1.setFont(new Font("Arial", Font.PLAIN, 14));
         textPane_1.setEditable(false);
         textPane_1.setBackground(SystemColor.menu);
@@ -237,7 +238,8 @@ public class SResultPanel extends ResultPanel {
         txtpnLeaveAComment.setBounds(0, 139, 62, 34);
         add(txtpnLeaveAComment);
 
-        userComment = new JTextField();  //the comment will be here
+        //the comment will be here
+        userComment = new JTextField(); 
         userComment.setBounds(62, 147, 240, 26);
         add(userComment);
         userComment.setColumns(10);
@@ -314,19 +316,22 @@ public class SResultPanel extends ResultPanel {
                 }
             }
         });
-        
+
         JLabel homelabel = new JLabel("Home");
         homelabel.setFont(new Font("Arial", Font.BOLD, 12));
         homelabel.setForeground(Color.BLACK);
         homelabel.setBounds(600, 35, 60, 20);
         add(homelabel);
-        
+
         lblNewLabel.setIcon(new ImageIcon(SResultPanel.class.getResource("/resources/Home-32.png")));
         lblNewLabel.setBounds(600, 0, 45, 45);
         add(lblNewLabel);
 
     }
 
+    /**
+     * Add the emty block. Fixing the bug.
+     */
     public void addBlocks() {
         for (int i = 0; i < 8; i++) {
             Blocks blocks = new Blocks();

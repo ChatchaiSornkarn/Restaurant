@@ -1,13 +1,9 @@
 package Frame;
 
-import DBConnection.Connector;
+import SQL.Connector;
 import SQL.SQLInsert;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
-
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -25,11 +21,13 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.JCheckBox;
-import javax.swing.JTextArea;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
-
+/**
+ * 
+ * @author Obada 40%, Chiara 40%, Chatchai 10%, Johan 10%
+ */
 public class AddWindow extends JFrame {
     SQLInsert sql = new SQLInsert();
     Connector connect = new Connector();
@@ -51,26 +49,8 @@ public class AddWindow extends JFrame {
         JComboBox environmentbox;
 	
         JTextField pic;
-        
-        
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AddWindow frame = new AddWindow();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
+     
+        /**
 	 * Create the frame.
 	 */
 	public AddWindow() {
@@ -83,13 +63,13 @@ public class AddWindow extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+                //button add restaurant on click
 		addbutton = new JLabel("Add");
 		addbutton.setForeground(SystemColor.window);
 		addbutton.setFont(new Font("Arial", Font.BOLD, 14));
 		addbutton.setIcon(new ImageIcon(AddWindow.class.getResource("/resources/Checked-32.png")));
 		addbutton.setBounds(180, 465, 92, 44);
                 addbutton.addMouseListener(new MouseAdapter() {
-                    
                         @Override
                         public void mouseEntered(MouseEvent e){
                             Cursor cur1 = new Cursor(Cursor.HAND_CURSOR);
@@ -108,6 +88,7 @@ public class AddWindow extends JFrame {
                 
 		contentPane.add(addbutton);
 		
+                //exit from the window
 		exitbutton = new JLabel("");
 		exitbutton.addMouseListener(new MouseAdapter() {
 			@Override
@@ -148,7 +129,7 @@ public class AddWindow extends JFrame {
 		contentPane.add(textweb);
 		textweb.setColumns(10);
 		
-                
+                // add picture
                 JButton addimage = new JButton("+");
 		addimage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

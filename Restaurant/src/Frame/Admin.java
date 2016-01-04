@@ -30,13 +30,11 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import static SQL.SQLRestaurant.*;
 import java.awt.Color;
-import static Frame.AdminFrame.internalFrame;
-import static Frame.AdminFrame.scrollPane;
 import static Frame.Login.adminLogin;
 
 /**
  * Class: This is a frame including function for super admin
- * @author
+ * @author Chatchai 30%, Merchad 20%, Chiara 20%, Obada 20%, Johan 10%
  */
 public class Admin {
 
@@ -295,19 +293,18 @@ public class Admin {
         JScrollPane scrollPane_1 = new JScrollPane();
         scrollPane_1.setBounds(55, 110, 246, 115);
         panel.add(scrollPane_1);
-        
+
         //Display restaurant that owner own when owner is click
         final JList list_1 = new JList(userOwners);
         list_1.addMouseListener(new MouseAdapter() {
-        	public void mouseClicked(MouseEvent e) {
-                    internalFrame.removeAll();
-                    getInternalFrame();
-                    String[][] rest = SQLFilter.SelectOwnerRestaurants(list_1.getSelectedValue().toString());
-                     for (int i = 0; i < rest.length; i++) {
-                        getResultPanel(rest[i][0], rest[i][1], rest[i][2], rest[i][3]);
-                    }
+            public void mouseClicked(MouseEvent e) {
+                internalFrame.removeAll();
+                getInternalFrame();
+                String[][] rest = SQLFilter.SelectOwnerRestaurants(list_1.getSelectedValue().toString());
+                for (int i = 0; i < rest.length; i++) {
+                    getResultPanel(rest[i][0], rest[i][1], rest[i][2], rest[i][3]);
+                }
 
-                
                 if (rest.length < 10) {
                     addBlocks();
                 }
@@ -348,7 +345,7 @@ public class Admin {
         txtpnRefresh.setOpaque(false);
         panel.add(txtpnRefresh);
 
-       name = selectRestName(FirstFrame.username, FirstFrame.password);
+        name = selectRestName(FirstFrame.username, FirstFrame.password);
         tel = selectRestTel(FirstFrame.username, FirstFrame.password);
         address = selectRestAddress(FirstFrame.username, FirstFrame.password);
         weblink = selectRestWebsite(FirstFrame.username, FirstFrame.password);
@@ -362,6 +359,9 @@ public class Admin {
 
     }
 
+    /**
+     * Refleshing the whole panel
+     */
     public static void getInternalFrame() {
         internalFrame = new JInternalFrame("Please login to leave a feedback");
         internalFrame.getContentPane().setLayout(new BoxLayout(internalFrame.getContentPane(), BoxLayout.Y_AXIS));
@@ -372,6 +372,13 @@ public class Admin {
         internalFrame.setBorder(UIManager.getBorder("ScrollPane.border"));
     }
 
+    /**
+     * This Method get restaurant panel get the class ResultPanel
+     * @param name
+     * @param tel
+     * @param address
+     * @param weblink 
+     */
     private static void getResultPanel(String name, String tel, String address, String weblink) {
         final ResultPanel resultPanel = new ResultPanel(name, address, tel, weblink);
         resultPanel.addMouseListener(new MouseAdapter() {
@@ -387,6 +394,9 @@ public class Admin {
         internalFrame.getContentPane().add(resultPanel);
     }
 
+    /**
+     * Add the emty block. Fixing the bug.
+     */
     public void addBlocks() {
         for (int i = 0; i < 8; i++) {
             Blocks blocks = new Blocks();

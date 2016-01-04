@@ -21,7 +21,7 @@ import static SQL.SQLRating.getRating;
 
 /**
  * Class: Display panel of the restaurant
- * @author
+ * @author Obada
  */
 public class ResultPanel extends JPanel {
 
@@ -34,7 +34,6 @@ public class ResultPanel extends JPanel {
 
     /**
      * Create the panel.
-     *
      * @param name
      * @param address
      * @param tel
@@ -190,6 +189,10 @@ public class ResultPanel extends JPanel {
         }     
     }
 
+    /**
+     * reuse panel with already existed information
+     * @param resultpanel 
+     */
     public ResultPanel(ResultPanel resultpanel) {
         this.name = resultpanel.name;
         this.address = resultpanel.address;

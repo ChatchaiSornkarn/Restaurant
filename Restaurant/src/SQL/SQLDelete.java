@@ -1,9 +1,7 @@
 package SQL;
 
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import static DBConnection.DBConnection.conn;
+import static Connection.DBConnection.conn;
 
 /**
  * Class: Delete restaurant

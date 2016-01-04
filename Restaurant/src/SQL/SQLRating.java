@@ -4,7 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
-import static DBConnection.DBConnection.conn;
+import static Connection.DBConnection.conn;
 /**
  * Class: for the star that are showing inside restaurant
  * @author chatchai

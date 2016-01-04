@@ -3,7 +3,7 @@ package SQL;
 import java.sql.*;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import static DBConnection.DBConnection.conn;
+import static Connection.DBConnection.conn;
 import static SQL.SQLStringReturn.makeList;
 
 /**

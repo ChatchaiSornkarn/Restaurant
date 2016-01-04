@@ -3,9 +3,11 @@ package SQL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import static DBConnection.DBConnection.conn;
+import static Connection.DBConnection.conn;
+
 /**
  * This class is to get all user names from the database.
+ * @author Merchad
  */
 public class SQLOwners extends SQLStringReturn {
 

@@ -1,5 +1,6 @@
-package DBConnection;
+package SQL;
 
+import Connection.DBConnection;
 import java.awt.Image;
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,8 +15,12 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
-import static DBConnection.DBConnection.conn;
+import static Connection.DBConnection.conn;
 
+/**
+ * Class: Contains useful SQl methods such as for filtering
+ * @author Saif
+ */
 public class Connector extends DBConnection {
 
     String url = "jdbc:mysql://kenobi.skip.chalmers.se/Team14_db";

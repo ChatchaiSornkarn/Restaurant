@@ -8,11 +8,10 @@ package SQL;
 import java.awt.Image;
 import java.sql.*;
 import javax.swing.ImageIcon;
-import static DBConnection.DBConnection.conn;
+import static Connection.DBConnection.conn;
 
 /**
  * Class: This class contain Method for displaying restaurant
- *
  * @author chatchai
  */
 public class SQLRestaurant extends SQLStringReturn {
