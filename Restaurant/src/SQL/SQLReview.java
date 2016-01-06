@@ -10,7 +10,7 @@ import static Connection.DBConnection.conn;
  * This class is for getting the reviews from the database.
  * @author Merchad
  */
-public class SQLReview extends SQLStringReturn {
+public class SQLReview extends Connection.DBConnection {
     private static String[] Review;
     /**
     * This method gets the restaurant name and returns the reviews

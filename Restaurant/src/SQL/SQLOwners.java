@@ -9,7 +9,7 @@ import static Connection.DBConnection.conn;
  * This class is to get all user names from the database.
  * @author Merchad
  */
-public class SQLOwners extends SQLStringReturn {
+public class SQLOwners extends Connection.DBConnection{
 
     private static String[] userOwners;
 
