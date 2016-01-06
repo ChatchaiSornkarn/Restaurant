@@ -186,7 +186,7 @@ public class SQLSearch extends Connector{
         try{
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("Select Website  from Restaurant "
-                    + "WHERE Website LIKE \"" + RestName + "%"
+                    + "WHERE RestName LIKE \"" + RestName + "%"
                     + "\"");
 
             int rowcount = 0;
